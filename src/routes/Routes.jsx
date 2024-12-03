@@ -1,9 +1,14 @@
 import App from "../App";
 
 import { BrowserRouter, Routes, Route } from "react-router";
-import Layout from "../Layout/Layout";
+
+import Layout from '../layout/Layout';
+
 import Booking from "../pages/Booking/Booking";
 import Details from "../pages/Details/Details";
+
+
+
 
 export const NavigateTo = {
   Home: "/",

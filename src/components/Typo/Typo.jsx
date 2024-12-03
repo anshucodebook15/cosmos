@@ -115,18 +115,18 @@ export const Typo_Smallfont = ({
   );
 };
 
-const Typo = ({ v = "body1", fs, fw, fc, text }) => {
-  return (
-    <div className="Typo">
-      <Typography
-        sx={{ fontSize: `${fs}`, fontWeight: `${fw}`, color: `${fc}` }}
-        variant={v}
-        color="initial"
-      >
-        {text}
-      </Typography>
-    </div>
-  );
-};
+// const Typo = ({ v = "body1", fs, fw, fc, text }) => {
+//   return (
+//     <div className="Typo">
+//       <Typography
+//         sx={{ fontSize: `${fs}`, fontWeight: `${fw}`, color: `${fc}` }}
+//         variant={v}
+//         color="initial"
+//       >
+//         {text}
+//       </Typography>
+//     </div>
+//   );
+// };
 
-export default Typo;
+// export default Typo;

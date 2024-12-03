@@ -9,9 +9,7 @@ const Layout = ({ imguri }) => {
     return (
         <div className="layout">
             <Glassmorph uri={imguri} />
-
             <Navbar />
-
             <div className="content">
                 <Outlet />
             </div>

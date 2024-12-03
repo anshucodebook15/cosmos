@@ -28,9 +28,9 @@ export default function Breadcrumb() {
           >
             <Typo_Subtitle text='Event In Ajmer' />
           </Link>
-          <Typography sx={{ color: 'text.primary' }}>
+          
             <Typo_Subtitle text='Paradox & Milind' />
-          </Typography>
+        
         </Breadcrumbs>
       </Box>
     </div>
