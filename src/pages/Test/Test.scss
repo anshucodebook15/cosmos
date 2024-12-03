@@ -1,0 +1,30 @@
+.Test {
+  color: black;
+
+  @media only screen and (max-width: 600px) {
+  }
+}
+
+// BookBtn
+.Bookbtn {
+  @media only screen and (max-width: 600px) {
+  }
+}
+
+// HeadingBar
+.Bookbtn {
+  @media only screen and (max-width: 600px) {
+  }
+}
+
+.glassmorph {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  background-image: linear-gradient(to top, #000b1b8a 0%, #d43f8c57 100%);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9.5px);
+  -webkit-backdrop-filter: blur(9.5px);
+  border: 1px solid rgba(205, 114, 114, 0.42);
+}

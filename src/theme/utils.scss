@@ -1,0 +1,120 @@
+.bod {
+  border: 1px solid #000;
+}
+
+/* flex */
+.flx {
+  display: flex;
+}
+
+.flxdc {
+  flex-direction: column;
+}
+.flxw {
+  flex-wrap: wrap;
+}
+.jcc {
+  justify-content: center;
+}
+
+.aic {
+  align-items: center;
+}
+
+.jcsb {
+  justify-content: space-between;
+}
+
+.jcse {
+  justify-content: space-evenly;
+}
+
+.jcsa {
+  justify-content: space-around;
+}
+
+/* display class */
+.dn {
+  display: none;
+}
+
+.db {
+  display: block;
+}
+
+// Text Class
+.tdn {
+  text-decoration: none !important;
+}
+
+.tdu {
+  text-decoration: underline;
+}
+
+// Text Align Class
+
+.tac {
+  text-align: center !important;
+}
+
+.tae {
+  text-align: end;
+}
+
+.tar {
+  text-align: right;
+}
+
+.tal {
+  text-align: left;
+}
+
+.taj {
+  text-align: justify;
+}
+
+// List Class
+
+.lstn {
+  list-style-type: none;
+}
+
+// Cursor Class
+
+.cp {
+  cursor: pointer;
+}
+
+// Div specific class
+
+.ofh {
+  overflow: hidden;
+}
+
+// Position class
+.posrel {
+  position: relative;
+}
+
+.posab {
+  position: absolute;
+}
+
+// z-index class
+.z-100 {
+  z-index: 100;
+}
+
+// Spacer
+
+.spacer-1 {
+  padding: 1rem;
+}
+.spacer-2 {
+  padding: 2rem;
+}
+
+// floatclass
+.floatright {
+  float: right;
+}
