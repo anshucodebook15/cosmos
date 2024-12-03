@@ -48,7 +48,7 @@ const Landing = () => {
           <NavLink to={NavigateTo.Detail}>Event Details</NavLink>
         </button>
 
-        
+
       </Container>
     </div>
   );
