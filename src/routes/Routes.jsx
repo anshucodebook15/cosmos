@@ -21,8 +21,8 @@ export const AppRoute = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout />}>
             <Route index path="/" element={<App />} />
+          <Route element={<Layout />}>
             <Route path="detail" element={<Details />} />
             <Route path="booking" element={<Booking />} />
           </Route>

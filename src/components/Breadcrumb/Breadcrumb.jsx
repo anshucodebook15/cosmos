@@ -28,9 +28,9 @@ export default function Breadcrumb() {
           >
             <Typo_Subtitle text='Event In Ajmer' />
           </Link>
-          
-            <Typo_Subtitle text='Paradox & Milind' />
-        
+
+          <Typo_Subtitle text='Paradox & Milind' />
+
         </Breadcrumbs>
       </Box>
     </div>

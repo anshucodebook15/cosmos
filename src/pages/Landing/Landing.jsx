@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 import { Typo_Heading } from "../../components/Typo/Typo";
 import { NavLink } from "react-router";
 import { NavigateTo } from "../../routes/Routes";
+import { discoglob, stars } from "../../assets";
 
 const HeadingBar = ({ title, caption, cityicon }) => {
   return (
@@ -45,6 +46,9 @@ const Landing = () => {
         <button>
           <NavLink to={NavigateTo.Detail}>Event Details</NavLink>
         </button>
+
+
+        <img src={discoglob} alt="" />
       </Container>
     </div>
   );
