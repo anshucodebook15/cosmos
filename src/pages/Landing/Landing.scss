@@ -1,11 +1,37 @@
-.Landing {
-  color: var(--gs-100);
-
-  @media only screen and (max-width: 600px) {
-  }
+.landing{
+  font-family: "League Spartan", sans-serif;
 }
 
+.doc-logo {
+  width: 160px; 
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
 
-.retst{
-  width: 15rem !important;
+.para-logo{
+  width: 280px;
+  margin-top: 0 !important;
+}
+
+.spacing{
+  margin-top: 3rem !important; 
+}
+
+.btn{
+  padding: 8px 24px;
+  border-radius: 50px;
+}
+
+.globe-img {
+  animation: spin 3.8s ease-in-out infinite alternate; 
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(-5deg);  
+  }
+  to {
+    transform: rotate(5deg);  
+  }
 }
