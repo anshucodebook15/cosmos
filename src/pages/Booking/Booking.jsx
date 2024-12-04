@@ -30,6 +30,7 @@ import { NavLink } from "react-router";
 import { NavigateTo } from "../../routes/Routes";
 import Glassmorph from "../../components/Glassmorph/Glassmorph";
 import { seats } from "../../json/cosmosdata";
+import CheckoutBar from "../../components/CheckoutBar/CheckoutBar";
 
 const formatPrice = (price) => {
   let total = price;
@@ -49,7 +50,7 @@ const calculateTotal = (price, quantity) => {
   }).format(total);
 };
 
-const TotalCheckoutPrice = () => {};
+const TotalCheckoutPrice = () => { };
 
 const TicketView = ({
   id,
@@ -182,10 +183,6 @@ const Booking = () => {
     });
   };
 
-  // let testd = calculateTotal(5, 1000);
-
-  // console.log(testd);
-
   const handleMoreTicket = (sign, area) => {
     console.log("Btn Click");
 
@@ -312,6 +309,9 @@ const Booking = () => {
           </Grid>
         </Box>
       </Container>
+
+
+      <CheckoutBar />
     </div>
   );
 };
