@@ -13,7 +13,7 @@ const Navbar = () => {
     <div className="Navbar">
       <Container maxWidth="lg">
         <Box sx={{ padding: 2 }}>
-          <Grid container alignItems={"center"}>
+          <Grid container alignItems={'baseline'}>
             <Grid size={6}>
               <img src={logo} alt="" className="logo" />
             </Grid>

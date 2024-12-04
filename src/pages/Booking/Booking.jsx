@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import "./Booking.scss";
 
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid2";
@@ -11,9 +12,16 @@ import {
   Typo_Subheading,
   Typo_Subtitle,
 } from "../../components/Typo/Typo";
-import { Box, Stack } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Stack,
+  Typography,
+} from "@mui/material";
 import IconTitle from "../../components/IconTitle/IconTitle";
-import { calender, clock, map, ticket } from "../../assets";
+import { calender, clock, concertbg, map, ticket } from "../../assets";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
 import { appcol } from "../../theme/apptheme";
@@ -21,8 +29,200 @@ import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import { NavLink } from "react-router";
 import { NavigateTo } from "../../routes/Routes";
 import Glassmorph from "../../components/Glassmorph/Glassmorph";
+import { seats } from "../../json/cosmosdata";
+
+const formatPrice = (price) => {
+  let total = price;
+
+  let formatNum = total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
+  console.log(formatNum);
+
+  return formatNum;
+};
+
+const calculateTotal = (price, quantity) => {
+  const total = price * quantity;
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+  }).format(total);
+};
+
+const TotalCheckoutPrice = () => {};
+
+const TicketView = ({
+  id,
+  state = 0,
+  club,
+  price,
+  details,
+  ticketfn,
+  subTicket,
+  addTicket,
+  quantity,
+}) => {
+  return (
+    <>
+      <Box sx={{ padding: 2, bgcolor: "white", borderBottom: 1 }}>
+        <Stack justifyContent={"space-between"} direction={"row"}>
+          <Box sx={{ paddingRight: 2 }}>
+            <Box
+              sx={{ borderBottom: 1, paddingBottom: 0.4, marginBottom: 0.4 }}
+            >
+              <Typography
+                variant="body1"
+                sx={{
+                  fontSize: 16,
+                  fontFamily: "jost",
+                  fontWeight: 500,
+                  color: appcol.font_col_dark_blue,
+                  background: "#eee",
+                  paddingInline: 1,
+                }}
+              >
+                {club}
+              </Typography>
+            </Box>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: 16,
+                fontFamily: "jost",
+                fontWeight: 600,
+                color: appcol.font_col_dark_blue,
+              }}
+            >
+              ₹ {formatPrice(price)}
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: 14,
+                fontFamily: "jost",
+                fontWeight: 400,
+                color: appcol.font_col_dark_blue,
+              }}
+            >
+              Mobile ticket |{" "}
+              <Link sx={{ textDecoration: "none", fontWeight: 500 }}>
+                Valid for only 1 Person
+              </Link>
+            </Typography>
+
+            <Box sx={{ paddingBlock: 0.2 }}>
+              <button className="defaultBtn">Details</button>
+            </Box>
+          </Box>
+
+          <Box>
+            {state > 0 ? (
+              <>
+                <Box className="counterBtn">
+                  <Stack
+                    direction={"row"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                  >
+                    <button
+                      className="defaultBtn  counterTabsBtn"
+                      onClick={subTicket}
+                      disabled={state > 0 ? false : true}
+                    >
+                      -
+                    </button>
+                    <button className="defaultBtn  counterTabsBtn">
+                      {state}
+                    </button>
+                    <button
+                      className="defaultBtn  counterTabsBtn"
+                      onClick={addTicket}
+                    >
+                      +
+                    </button>
+                  </Stack>
+                </Box>
+
+                <Box sx={{ textAlign: "center", paddingBlock: 0.8 }}>
+                  <Typo_Subtitle
+                    text={calculateTotal(price, quantity)}
+                    fc={appcol.font_col_dark_blue}
+                    fw="600"
+                  />
+                </Box>
+              </>
+            ) : (
+              <Box>
+                <button className="defaultBtn addbtn" onClick={ticketfn}>
+                  Add
+                </button>
+              </Box>
+            )}
+          </Box>
+        </Stack>
+      </Box>
+    </>
+  );
+};
 
 const Booking = () => {
+  const [ticketCount, setTicketCount] = useState({
+    Diamond: 0,
+    Fanpit: 0,
+    Gold: 0,
+    Silver: 0,
+  });
+  const [totalTicketPrice, setTotalTicketPrice] = useState(0);
+
+  const handleTicketCount = (ticketdata) => {
+    // Write Steps to handle Ticket State
+    setTicketCount({
+      ...ticketCount,
+      [ticketdata.area]: ticketCount[ticketdata.area] + 1,
+    });
+  };
+
+  // let testd = calculateTotal(5, 1000);
+
+  // console.log(testd);
+
+  const handleMoreTicket = (sign, area) => {
+    console.log("Btn Click");
+
+    if (sign === "+") {
+      console.log("Add click");
+
+      setTicketCount({
+        ...ticketCount,
+        [area]: ticketCount[area] + 1,
+      });
+    } else if (sign === "-" && ticketCount[area] > 0) {
+      setTicketCount({
+        ...ticketCount,
+        [area]: ticketCount[area] - 1,
+      });
+
+      console.log("sub click");
+    }
+
+    // if (sign === '+') {
+    //   setTicketCount({
+    //     ...ticketCount,
+    //     [ticketCount.area]: ticketCount[ticketCount.area] + 1,
+    //   });
+    // } else if (sign === '-' && ticketCount[area] > 0) {
+
+    //   setTicketCount({
+    //     ...ticketCount,
+    //     [ticketCount.area]: ticketCount[ticketCount.area] - 1,
+    //   });
+    // }
+
+    console.log(sign, area);
+  };
+
+  console.log(ticketCount);
+
   return (
     <div className="Details">
       <Glassmorph
@@ -32,32 +232,24 @@ const Booking = () => {
       />
 
       <Container maxWidth="lg">
-        <Breadcrumb />
+        {/* <Breadcrumb /> */}
 
         <Box sx={{ paddingBlock: "1rem" }}>
           <Grid container spacing={2}>
             <Grid size={12}>
               <Box
                 sx={{
-                  padding: {
-                    lg: "3rem",
-                  },
-                  background: "white",
+                  // padding: {
+                  //   lg: "3rem",
+                  // },
+                  // background: "white",
                   borderRadius: "10px",
                   margin: "1rem",
                 }}
               >
-
-
-
                 {/*Poster & Tickect Slection Grid */}
                 <Box sx={{ marginBottom: "2.8rem" }}>
-                  <Grid
-                    container
-                    spacing={0}
-                    justifyContent={"space-between"}
-                    
-                  >
+                  <Grid container spacing={0} justifyContent={"space-between"}>
                     <Grid size={4}>
                       <Box
                         sx={{
@@ -75,99 +267,46 @@ const Booking = () => {
                       </Box>
                     </Grid>
                     <Grid size={8}>
-                      <Box sx={{bgcolor: "#f6f6f6", marginInline: 2, padding: 1, borderRadius: 2 }}>
+                      <Box
+                        sx={{
+                          bgcolor: "#f1f1f1",
+                          marginInline: 2,
+                          borderRadius: 2,
+                          padding: 2,
+                          minHeight: 500,
+                        }}
+                      >
+                        <Box sx={{ marginBottom: 2 }}>
+                          <Typo_Subheading
+                            text="Add Ticket"
+                            fc={appcol.font_col_dark_blue}
+                          />
+                        </Box>
 
-                      <Typo_Subheading
-                          text="Add Ticket"
-                          fc={appcol.font_col_dark_blue}
-                        />
-
-
-
-
-                       
+                        <Box>
+                          {seats.map((item) => (
+                            <div key={item.id}>
+                              <TicketView
+                                state={ticketCount[item.area]}
+                                id={item.id}
+                                club={item.area}
+                                quantity={ticketCount[item.area]}
+                                price={item.price}
+                                ticketfn={() => handleTicketCount(item)}
+                                addTicket={() =>
+                                  handleMoreTicket("+", item.area)
+                                }
+                                subTicket={() =>
+                                  handleMoreTicket("-", item.area)
+                                }
+                              />
+                            </div>
+                          ))}
+                        </Box>
                       </Box>
                     </Grid>
                   </Grid>
                 </Box>
-
-
-
-
-
-
-
-
-
-                {/* Price Bar  */}
-                <Box
-                  className="pricebar"
-                  sx={{
-                    borderRadius: 2,
-                    background: "#f6f6f6",
-                    padding: "1.8rem",
-                    marginBottom: "2rem",
-                    position: "relative",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div className="gdeffect gdcol-1"></div>
-                  <div className="gdeffect gdcol-2"></div>
-
-                  <Stack justifyContent={"space-between"} direction={"row"}>
-                    <Box>
-                      <Typo_Subheading
-                        text={<>₹1,500</>}
-                        fw="400"
-                        fc={appcol.font_col_dark_blue}
-                      />
-                      <Typo_Smallfont
-                        text="Onwards"
-                        fc={appcol.font_col_dark_blue}
-                      />
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: 100 }}>
-                      <NavLink to={NavigateTo.Booking}>
-                        <button className="bookbtn flx aic">
-                          Book Tickets
-                          <img src={ticket} alt="" className="bookbtn_icon" />
-                        </button>
-                      </NavLink>
-                    </Box>
-                  </Stack>
-                </Box>
-
-                {/* About Event  */}
-                <Grid container>
-                  <Grid size={12}>
-                    <Box sx={{ paddingBlock: "1rem" }}>
-                      <Box sx={{ marginBottom: "1.6rem" }}>
-                        <Typo_Subheading
-                          text="About"
-                          fc={appcol.font_col_dark_blue}
-                        />
-                      </Box>
-
-                      <Box
-                        sx={{
-                          borderRadius: 2,
-                          background: "#f6f6f6",
-                          padding: "1.4rem",
-                          marginBottom: "2rem",
-                        }}
-                      >
-                        <Typo_Basefont
-                          text="Gather your loved ones and step into Brunch Park – a celebration of food, fun, and family, brought to you by The Daily All Day x Maushi
-For the Foodies: Dive into a mouthwatering spread featuring culinary delights from Tsuki, Bai Mu Dan, Mad House Grill, and Juju to name a few.
-For the Music Lovers"
-                          fc={appcol.font_col_dark_blue}
-                          fw="500"
-                        />
-                      </Box>
-                    </Box>
-                  </Grid>
-                  <Grid size={6}></Grid>
-                </Grid>
               </Box>
             </Grid>
           </Grid>
@@ -178,4 +317,3 @@ For the Music Lovers"
 };
 
 export default Booking;
-
