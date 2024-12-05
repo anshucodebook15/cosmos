@@ -1,17 +1,31 @@
-
-.CheckoutBar{
-
-  background: rgba(255, 255, 255, 0);
-
+.CheckoutBar {
+  width: 100%;
+  z-index: 100;
+  position: fixed;
+  bottom: 0%;
+  background: rgba(0, 0, 0, 0.645);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-
   border-top: 1px solid rgba(255, 255, 255, 0.18);
 
-
-
-   @media only screen and (max-width: 600px) {
-   
+  @media only screen and (max-width: 600px) {
   }
 }
-  
+
+.checkoutbtn {
+  padding: 1rem !important;
+  width: 20rem;
+  color: white;
+  background-color: rgb(187, 46, 69);
+  border-radius: 5px;
+  border: 1px solid #d4d4d4;
+  font-weight: 600;
+}
+
+.checkoutbtn:hover {
+  background-color: rgb(171, 24, 48);
+}
+
+.checkoutbtn:active {
+  outline: white;
+}
