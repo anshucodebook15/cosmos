@@ -1,6 +1,7 @@
 import React from "react";
 import "./Test.scss";
-import Typo, { Typo_Basefont, Typo_Heading, Typo_Smallfont, Typo_Subheading, Typo_Subtitle } from "../../components/Typo/Typo";
+import { Typo_Basefont, Typo_Heading, Typo_Smallfont, Typo_Subheading, Typo_Subtitle } from "../../components/Typo/Typo";
+import { Container } from "@mui/material";
 
 const Bookbtn = () => {
   return (
@@ -18,6 +19,19 @@ const HeadingBar = () => {
   );
 };
 
+
+const NewTicketBar = () => {
+  return (
+    <>
+
+      <Container>
+        <h2></h2>
+      </Container>
+
+    </>
+  )
+}
+
 const Test = () => {
   return (
     <div className="Test">
@@ -30,10 +44,9 @@ const Test = () => {
         <Typo_Subheading text="About" />
         <Typo_Basefont text="Gather your loved ones and step into Brunch Park – a celebration of food, fun, and family, brought to you by The Daily All Day x Maushi For the Foodies: Dive into a mouthwatering spread featuri" />
 
-        <Typo_Smallfont text="onwards" />
 
-        <Typo text={"Anshu Saxena"} fs={'3.8rem'} fw={700} fc={"white"} />
-        <Typo text={"Anshu Saxena"} fs={'1.2rem'} fw={300} fc={"white"} />
+        {/*  */}
+        <NewTicketBar />
 
       </div>
     </div>

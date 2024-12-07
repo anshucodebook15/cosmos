@@ -96,7 +96,6 @@ export const BookingSlice = createSlice({
       
     },
   },
-
   extraReducers: (builder) => {
     builder.addCase(fetchSeats.pending, (state, action) => {
       state.status = "pending";

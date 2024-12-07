@@ -7,6 +7,7 @@ import Layout from "../layout/Layout";
 import Booking from "../pages/Booking/Booking";
 import Details from "../pages/Details/Details";
 import Checkout from "../pages/Checkout/Checkout";
+import Test from "../pages/Test/Test";
 
 export const NavigateTo = {
   Home: "/",
@@ -24,6 +25,7 @@ export const AppRoute = () => {
             <Route path="detail" element={<Details />} />
             <Route path="booking" element={<Booking />} />
             <Route path="checkout" element={<Checkout />} />
+            <Route path="test" element={<Test />} />
           </Route>
         </Routes>
       </BrowserRouter>
