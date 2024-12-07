@@ -10,6 +10,19 @@ import stars from "./stars.svg";
 import discoglob from "./discoglob.png";
 import DOClogo from "./DOClogo.svg";
 import paradox from "./paradox.svg";
+import bandhan from "./bandhan.png";
+import mh from "./mh.png";
+import khanikaar from "./khanikaar.png";
+import artisan from "./artisan.png";
+import tfn from "./tfn.png";
+import aeymann from "./aeymann.png";
+import paradoxconcert from "./paradoxconcert.png";
+import paradoxposter from "./ParadoxPoster.png";
+import stage from "./0003.svg";
+import table from "./0005.svg";
+import overview from "./Overview.png";
+import paradoxoverview from "./paradoxoverview.svg";
+import ticketdetails from "./0004.svg";
 
 export {
   clock,
@@ -21,5 +34,19 @@ export {
   stars,
   discoglob,
   DOClogo,
-  paradox
+  paradox,
+  bandhan,
+  mh,
+  khanikaar,
+  artisan,
+  tfn,
+  aeymann,
+  paradoxconcert,
+  paradoxposter,
+  stage,
+  table,
+  overview,
+  ticketdetails,
+  paradoxoverview
+
 };

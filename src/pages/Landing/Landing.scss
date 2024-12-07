@@ -27,6 +27,21 @@
   animation: spin 3.8s ease-in-out infinite alternate; 
 }
 
+.sponsers{
+  width: 100%;
+  max-width: 40px;
+  margin-top: 3px;
+}
+
+.partners{
+  width: 100%;
+  max-width: 55px;
+}
+
+.poster{
+  width: 100%;
+}
+
 @keyframes spin {
   from {
     transform: rotate(-5deg);  
