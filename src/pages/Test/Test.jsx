@@ -1,79 +1,141 @@
 import React from "react";
 import "./Test.scss";
-import { Typo_Basefont, Typo_Heading, Typo_Smallfont, Typo_Subheading, Typo_Subtitle } from "../../components/Typo/Typo";
-import { Container } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import {
+  Typo_Basefont,
+  Typo_Smallfont,
+  Typo_Subheading,
+  Typo_Subtitle,
+} from "../../components/Typo/Typo";
+import Navbar from "../../components/Navbar/Navbar";
+import ProfileChip from "./ProfileChip";
 
-const Bookbtn = () => {
+const TicketBooking = () => {
   return (
-    <>
-      <div className="Bookbtn"></div>
-    </>
-  );
-};
+    <div className="glassmorph">
+      <Box sx={{ marginY: 2 }}>
+        <Container maxWidth="lg">
+          <Grid container justifyContent={"space-between"}>
+            <Grid size={{ xs: 12, sm: 4, md: 4 }}>
+              <Box
+                sx={{
+                  overflow: "hidden",
+                  borderRadius: "10px",
+                  minHeight: 500,
+                  boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 60px -16px",
+                }}
+              >
+                <img
+                  src="https://b.zmtcdn.com/data/zomaland/4c99369f4183bf8027e77f0e9cdcba1d1731408176.jpeg"
+                  alt=""
+                  className="w100"
+                />
+              </Box>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 8, md: 8 }}>
+              <Box
+                sx={{
+                  bgcolor: "#000000",
+                  marginInline: 2,
+                  borderRadius: 2,
+                  padding: 2,
+                  minHeight: 500,
+                }}
+              >
+                {/* Ticket booking component starts here */}
+                <Box
+                  sx={{
+                    bgcolor: "#121212",
+                    borderRadius: "10px",
+                    padding: "12px",
+                    color: "white",
+                    border: "1px solid #535353",
+                  }}
+                >
+                  <Grid container spacing={0} alignItems="center">
+                    {/* Header Section */}
+                    {/* Left Section (Text) */}
+                    <Grid size={10}>
+                      <Stack spacing={1}>
+                        <Box
+                          sx={{
+                            display: "inline-block",
+                            backgroundColor: "purple",
+                            color: "white",
+                            padding: "0 2px",
+                            fontSize: "12px",
+                            fontWeight: "bold",
+                            width: "fit-content",
+                          }}
+                        >
+                          VIP
+                        </Box>
+                        <Typo_Basefont
+                          sx={{fw: "800"}}
+                          text="₹599/-"
+                        />
+                        <Typo_Smallfont text=" Mobile ticket | Valid for 1 person" />
+                      </Stack>
+                    </Grid>
 
-const HeadingBar = () => {
-  return (
-    <>
-      <div className="HeadingBar"></div>
-    </>
-  );
-};
+                    {/* Right Section (Button) */}
+                    <Grid size={2}>
+                      <Button
+                        variant="contained"
+                        sx={{
+                          bgcolor: "hotpink",
+                          color: "white",
+                          "&:hover": { bgcolor: "deeppink" },
+                          textTransform: "none",
+                          fontWeight: "bold",
+                          padding: "6px 20px",
+                          fontSize: "14px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        Add
+                      </Button>
+                    </Grid>
 
+                    <Divider
+                      sx={{
+                        borderBottom: "2px dashed #4A4A4A",
+                        width: "100%",
+                        margin: "0",
+                        my: 2,
+                      }}
+                    />
 
-const NewTicketBar = () => {
-  return (
-    <>
-
-      <Container>
-        <h2></h2>
-      </Container>
-
-    </>
-  )
-}
-
-const Test = () => {
-  return (
-    <div className="Test">
-      <h2>Test </h2>
-
-      <div className="glassmorph">
-
-        <Typo_Heading text="Brunch Park" />
-        <Typo_Subtitle text="anshu" />
-        <Typo_Subheading text="About" />
-        <Typo_Basefont text="Gather your loved ones and step into Brunch Park – a celebration of food, fun, and family, brought to you by The Daily All Day x Maushi For the Foodies: Dive into a mouthwatering spread featuri" />
-
-
-        {/*  */}
-        <NewTicketBar />
-
-      </div>
+                    {/* Details Section */}
+                    <Grid size={12}>
+                      <Box
+                        sx={{
+                          bgcolor: "#1B1B1B",
+                          padding: 1,
+                          borderRadius: 1,
+                        }}
+                      >
+                        <ProfileChip title={"Details"} text={"Entry point"} />
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
     </div>
   );
 };
 
-export default Test;
-
-/**
- * 
- * Raw Code
- * 
- *         <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
- * 
- * 
- */
+export default TicketBooking;
