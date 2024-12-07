@@ -33,7 +33,13 @@ import { seats } from "../../json/cosmosdata";
 import CheckoutBar from "../../components/CheckoutBar/CheckoutBar";
 import { usePriceHook } from "../../hooks/usePriceHook";
 import { useDispatch, useSelector } from "react-redux";
-import { addSingleTicket, fetchSeats, SelectBooking } from "./BookingSlice";
+import {
+  addorSubTicket,
+  addSingleTicket,
+  checkoutTotalandTickects,
+  fetchSeats,
+  SelectBooking,
+} from "./BookingSlice";
 
 const TicketView = ({
   id,
@@ -45,6 +51,7 @@ const TicketView = ({
   subTicket,
   addTicket,
   quantity,
+  status,
 }) => {
   const { formatPrice, calSingleTicketTotal } = usePriceHook();
   return (
@@ -152,7 +159,7 @@ const TicketView = ({
 
 const Booking = () => {
   const dispatch = useDispatch();
-  const { seats, error } = useSelector(SelectBooking);
+  const { seats, error, total } = useSelector(SelectBooking);
 
   const [buytickets, setBuytickets] = useState([
     {
@@ -198,6 +205,7 @@ const Booking = () => {
     }
   };
 
+  //
   const calTotalTicketsandPrice = (ticketarr = []) => {
     let totalTicket = 0;
     let totalPrice = 0;
@@ -213,32 +221,31 @@ const Booking = () => {
       totalTicket: totalTicket,
       totalPrice: totalPrice,
     });
+
+
   };
 
+  // Handle Redux state
+  const handleSingleDispatch = (item) => {
+    dispatch(addSingleTicket(item));
+    
+  };
 
-  // dispatch(addSingleTicket(ticketdata))
+  const handleAddSubTicket = (sign, area, count) => {
+    dispatch(addorSubTicket({sign, area, count}));
+  };
 
   useEffect(() => {
-    calTotalTicketsandPrice(buytickets);
+    // calTotalTicketsandPrice(buytickets);
+    dispatch(checkoutTotalandTickects())
     dispatch(fetchSeats());
+  }, []);
 
-
-
-  }, [buytickets]);
-
-
+  console.log("seats", total);
 
   return (
     <div className="Details posrel">
-      {/* <Glassmorph
-        uri={
-          "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/ladies-night-party-landscape-poster-flyer-design-template-cc9e9c66c4e308161db9c7dcaa27bffe_screen.jpg?ts=1601365829"
-        }
-      /> */}
-
       <Container maxWidth="lg">
-        {/* <Breadcrumb /> */}
-
         <Box sx={{ paddingBlock: "1rem" }}>
           <Grid container spacing={2}>
             <Grid size={12}>
@@ -285,32 +292,36 @@ const Booking = () => {
                         </Box>
 
                         <Box>
-                          {seats.map((item) => (
-                            <div key={item.id}>
-                              <TicketView
-                                state={item.count}
-                                id={item.id}
-                                club={item.area}
-                                quantity={item.count}
-                                price={item.price}
-                                ticketfn={() => handleAddSingleTicket(item)}
-                                addTicket={() =>
-                                  handleAddandSubTicket(
-                                    "+",
-                                    item.area,
-                                    item.count
-                                  )
-                                }
-                                subTicket={() =>
-                                  handleAddandSubTicket(
-                                    "-",
-                                    item.area,
-                                    item.count
-                                  )
-                                }
-                              />
-                            </div>
-                          ))}
+                          {seats &&
+                            seats.map((item) => (
+                              <div key={item.areaID}>
+                                <TicketView
+                                  id={item.areaID}
+                                  state={item.count}
+                                  club={item.area}
+                                  quantity={item.count}
+                                  price={item.price}
+                                  status={item.status}
+                                  ticketfn={() =>
+                                    handleSingleDispatch(item.areaID)
+                                  }
+                                  addTicket={() =>
+                                    handleAddSubTicket(
+                                      "+",
+                                      item.areaID,
+                                      item.count
+                                    )
+                                  }
+                                  subTicket={() =>
+                                    handleAddSubTicket(
+                                      "-",
+                                      item.areaID,
+                                      item.count
+                                    )
+                                  }
+                                />
+                              </div>
+                            ))}
                         </Box>
                       </Box>
                     </Grid>

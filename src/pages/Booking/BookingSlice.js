@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
@@ -39,26 +39,61 @@ export const BookingSlice = createSlice({
   initialState,
   reducers: {
     addSingleTicket: (state, action) => {
+      console.log(current(state.seats));
 
-      let newdatastate = [...state.seats].map((item) =>
-        item.area === ticketdata.area
-          ? { ...item, count: item.count + 1 }
-          : item
-      );
+      //  copy the object
+      let updatedSeats = [
+        ...state.seats.map((item) =>
+          item.areaID === action.payload
+            ? { ...item, count: item.count + 1 }
+            : item
+        ),
+      ];
 
-      state.bookings = newdatastate;
-      // setBuytickets(newdatastate);
-    },
+      state.seats = updatedSeats;
 
-    
-    increment: (state) => {
-      state.value += 1;
+      console.log("state update eq", action.payload);
     },
-    decrement: (state) => {
-      state.value -= 1;
+    addorSubTicket: (state, action) => {
+      const { sign, area, count } = action.payload;
+
+      if (sign === "+") {
+        let updatedSeats = [
+          ...state.seats.map((item) =>
+            item.areaID === area ? { ...item, count: item.count + 1 } : item
+          ),
+        ];
+
+        state.seats = updatedSeats;
+      } else if (sign === "-" && count > 0) {
+        let updatedSeats = [
+          ...state.seats.map((item) =>
+            item.areaID === area ? { ...item, count: item.count - 1 } : item
+          ),
+        ];
+
+        state.seats = updatedSeats;
+      }
     },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+    checkoutTotalandTickects: (state, action) => {
+      let totalTicket = 0;
+      let totalPrice = 0;
+
+      // Calculate total Price and total ticket
+      state.seats.map((item) => {
+        totalTicket = totalTicket + item.count;
+        totalPrice = totalPrice + item.count * item.price;
+      });
+
+      let newDataSet = [...state.seats]
+
+      //  Price and Ticket
+      state.total.price = totalPrice;
+      state.total.tickects = totalTicket
+
+      console.log("Total Ticket", totalTicket);
+      console.log("Total price", totalPrice);
+      
     },
   },
 
@@ -83,6 +118,6 @@ export const BookingSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addSingleTicket, increment, decrement, incrementByAmount } = BookingSlice.actions;
+export const { addSingleTicket, addorSubTicket, checkoutTotalandTickects } = BookingSlice.actions;
 export const SelectBooking = (store) => store.booking;
 export const BookingReducer = BookingSlice.reducer;
