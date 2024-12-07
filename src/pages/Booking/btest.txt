@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState } from "react";
 import "./Booking.scss";
 
@@ -33,7 +35,7 @@ import { seats } from "../../json/cosmosdata";
 import CheckoutBar from "../../components/CheckoutBar/CheckoutBar";
 import { usePriceHook } from "../../hooks/usePriceHook";
 import { useDispatch, useSelector } from "react-redux";
-import { addSingleTicket, fetchSeats, SelectBooking } from "./BookingSlice";
+import { fetchSeats, SelectBooking } from "./BookingSlice";
 
 const TicketView = ({
   id,
@@ -215,18 +217,13 @@ const Booking = () => {
     });
   };
 
-
-  // dispatch(addSingleTicket(ticketdata))
-
   useEffect(() => {
     calTotalTicketsandPrice(buytickets);
+
     dispatch(fetchSeats());
-
-
-
   }, [buytickets]);
 
-
+  // console.log("Allseats", allSeats);
 
   return (
     <div className="Details posrel">
@@ -285,7 +282,7 @@ const Booking = () => {
                         </Box>
 
                         <Box>
-                          {seats.map((item) => (
+                          {buytickets.map((item) => (
                             <div key={item.id}>
                               <TicketView
                                 state={item.count}
@@ -335,76 +332,3 @@ const Booking = () => {
 };
 
 export default Booking;
-
-/**
- * Archived
- * 
- *   const [ticketCount, setTicketCount] = useState({
-    Diamond: 0,
-    Fanpit: 0,
-    Gold: 0,
-    Silver: 0,
-  });
- * 
- *   const handleAddSingleTicket = (ticketdata) => {
-    // Write Steps to handle Ticket State
-    setTicketCount({
-      ...ticketCount,
-      [ticketdata.area]: ticketCount[ticketdata.area] + 1,
-    });
-  };
-
-  const handleAddSubTicket = (sign, area) => {
-    console.log("Btn Click");
-
-    if (sign === "+") {
-      console.log("Add click");
-
-      setTicketCount({
-        ...ticketCount,
-        [area]: ticketCount[area] + 1,
-      });
-    } else if (sign === "-" && ticketCount[area] > 0) {
-      setTicketCount({
-        ...ticketCount,
-        [area]: ticketCount[area] - 1,
-      });
-
-      console.log("sub click");
-    }
-
-    // if (sign === '+') {
-    //   setTicketCount({
-    //     ...ticketCount,
-    //     [ticketCount.area]: ticketCount[ticketCount.area] + 1,
-    //   });
-    // } else if (sign === '-' && ticketCount[area] > 0) {
-
-    //   setTicketCount({
-    //     ...ticketCount,
-    //     [ticketCount.area]: ticketCount[ticketCount.area] - 1,
-    //   });
-    // }
-
-    console.log(sign, area);
-  };
-
-
-                              <TicketView
-                                state={ticketCount[item.area]}
-                                id={item.id}
-                                club={item.area}
-                                quantity={ticketCount[item.area]}
-                                price={item.price}
-                                ticketfn={() => handleAddSingleTicket(item)}
-                                addTicket={() =>
-                                  handleAddSubTicket("+", item.area)
-                                }
-                                subTicket={() =>
-                                  handleAddSubTicket("-", item.area)
-                                }
-                              /> 
-
-
-
- */

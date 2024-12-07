@@ -18,7 +18,7 @@ export const Typo_Heading = ({
           color: `${fc}`,
           fontFamily: "anton",
           letterSpacing: 1,
-          marginBottom: ".6rem",
+          marginBottom: "1.4rem",
         }}
         variant={v}
         color="initial"

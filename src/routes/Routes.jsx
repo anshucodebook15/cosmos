@@ -2,13 +2,11 @@ import App from "../App";
 
 import { BrowserRouter, Routes, Route } from "react-router";
 
-import Layout from '../layout/Layout';
+import Layout from "../layout/Layout";
 
 import Booking from "../pages/Booking/Booking";
 import Details from "../pages/Details/Details";
-
-
-
+import Checkout from "../pages/Checkout/Checkout";
 
 export const NavigateTo = {
   Home: "/",
@@ -21,10 +19,11 @@ export const AppRoute = () => {
     <>
       <BrowserRouter>
         <Routes>
-            <Route index path="/" element={<App />} />
+          <Route index path="/" element={<App />} />
           <Route element={<Layout />}>
             <Route path="detail" element={<Details />} />
             <Route path="booking" element={<Booking />} />
+            <Route path="checkout" element={<Checkout />} />
           </Route>
         </Routes>
       </BrowserRouter>

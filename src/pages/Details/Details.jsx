@@ -32,7 +32,6 @@ const Details = () => {
       />
 
       <Container maxWidth="lg">
-
         <Breadcrumb />
 
         <Box sx={{ paddingBlock: "1rem" }}>
@@ -74,7 +73,6 @@ const Details = () => {
                     </Grid>
                     <Grid size={6}>
                       <Box sx={{ paddingInline: 4 }}>
-
                         <Typo_Heading
                           text="Brunch Park"
                           fc={appcol.font_col_dark_blue}

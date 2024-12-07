@@ -4,6 +4,7 @@ import { Box, Container, Stack } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Typo_Basefont, Typo_Subheading, Typo_Subtitle } from "../Typo/Typo";
 import { usePriceHook } from "../../hooks/usePriceHook";
+import { NavLink } from "react-router";
 
 const CheckoutBar = ({ totalprice = 0, totaltickets = 0 }) => {
   const { formatPrice } = usePriceHook();
@@ -27,7 +28,10 @@ const CheckoutBar = ({ totalprice = 0, totaltickets = 0 }) => {
             </Box>
             <Box>
               <button className=" defaultBtn checkoutbtn">
-                Pay To Proceed
+                <NavLink to={"/checkout"}>
+
+                  Pay To Proceed
+                </NavLink>
               </button>
             </Box>
           </Stack>
