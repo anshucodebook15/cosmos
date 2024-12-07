@@ -205,7 +205,6 @@ const Booking = () => {
     }
   };
 
-  //
   const calTotalTicketsandPrice = (ticketarr = []) => {
     let totalTicket = 0;
     let totalPrice = 0;
