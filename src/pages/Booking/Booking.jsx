@@ -221,23 +221,20 @@ const Booking = () => {
       totalTicket: totalTicket,
       totalPrice: totalPrice,
     });
-
-
   };
 
   // Handle Redux state
   const handleSingleDispatch = (item) => {
     dispatch(addSingleTicket(item));
-    
+    dispatch(checkoutTotalandTickects());
   };
 
   const handleAddSubTicket = (sign, area, count) => {
-    dispatch(addorSubTicket({sign, area, count}));
+    dispatch(addorSubTicket({ sign, area, count }));
+    dispatch(checkoutTotalandTickects());
   };
 
   useEffect(() => {
-    // calTotalTicketsandPrice(buytickets);
-    dispatch(checkoutTotalandTickects())
     dispatch(fetchSeats());
   }, []);
 
@@ -336,10 +333,7 @@ const Booking = () => {
       {/* Checkoutbar */}
 
       <div className="posab">
-        <CheckoutBar
-          totalprice={checkoutTotal.totalPrice}
-          totaltickets={checkoutTotal.totalTicket}
-        />
+        <CheckoutBar totalprice={total.price} totaltickets={total.tickets} />
       </div>
     </div>
   );

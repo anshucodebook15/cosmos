@@ -14,11 +14,10 @@ const API = axios.create({
 
 const initialState = {
   seats: [],
-  bookings: [],
   total: {
     price: 0,
-    tickects: 0,
-    gst: 0,
+    tickets: 0,
+    gst: 18,
   },
   status: "idle",
   error: "",
@@ -85,16 +84,10 @@ export const BookingSlice = createSlice({
         totalPrice = totalPrice + item.count * item.price;
       });
 
-      let newDataSet = [...state.seats]
-
-      //  Price and Ticket
       state.total.price = totalPrice;
-      state.total.tickects = totalTicket
-
-      console.log("Total Ticket", totalTicket);
-      console.log("Total price", totalPrice);
-      
+      state.total.tickets = totalTicket;
     },
+    proceedToCheckout: (state, action) => {},
   },
   extraReducers: (builder) => {
     builder.addCase(fetchSeats.pending, (state, action) => {
@@ -117,6 +110,7 @@ export const BookingSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addSingleTicket, addorSubTicket, checkoutTotalandTickects } = BookingSlice.actions;
+export const { addSingleTicket, addorSubTicket, checkoutTotalandTickects } =
+  BookingSlice.actions;
 export const SelectBooking = (store) => store.booking;
 export const BookingReducer = BookingSlice.reducer;
