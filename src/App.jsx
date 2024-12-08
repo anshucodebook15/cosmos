@@ -8,24 +8,11 @@ import { Box, Container } from "@mui/material";
 import AppInput from "./components/AppInput/AppInput";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <>
       <div>
-        
-
         <Landing />
-
-
-        {/* <Container maxWidth="lg">
-          
-        <AppInput label="Full Name"  />
-        <AppInput />
-
-        </Container> */}
-
-
       </div>
     </>
   );

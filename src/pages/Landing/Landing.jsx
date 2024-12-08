@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Landing.scss";
 import { SelectLanding } from "./LandingSlice";
 import { useSelector } from "react-redux";
@@ -391,6 +391,19 @@ const AasthaCode = () => {
 };
 
 const Anshul = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    let modalTimer = setTimeout(() => {
+      setOpen(true);
+    }, 2000);
+    return () => {
+      if (modalTimer) clearTimeout(modalTimer);
+    };
+  }, []);
+
   return (
     <>
       <Box
@@ -420,7 +433,6 @@ const Anshul = () => {
         <Box sx={{ position: "relative", zIndex: 100 }}>
           <Container maxWidth="xl">
             {/* Contact */}
-
             <Box>
               <Stack direction={"row"} justifyContent={"space-between"}>
                 <Box>
@@ -483,11 +495,6 @@ const Anshul = () => {
                 </Stack>
               </Box>
 
-              {/* Save the date */}
-              {/* <Box sx={{ textAlign: "center", p: 2 }}>
-                <Typo_Basefont text="Save the date" />
-              </Box> */}
-
               {/* Performing Paradox */}
               <Stack direction={"row"} justifyContent={"center"}>
                 <Box sx={{ width: 460 }}>
@@ -496,7 +503,6 @@ const Anshul = () => {
               </Stack>
 
               {/* Date */}
-
               <Stack direction={"row"} justifyContent={"center"}>
                 <Box sx={{ marginBottom: 0 }}>
                   <Typo_Heading text="30  DEC  2024" />
@@ -552,40 +558,21 @@ const Anshul = () => {
               <Box sx={{ textAlign: "center", marginBottom: 6 }}>
                 <Typo_Basefont text="Tickets are limited!" />
               </Box>
-
-              {/* About Event Box */}
-              {/* <Stack direction={"row"} justifyContent={"center"}>
-                <Box
-                  sx={{
-                    marginBottom: 1,
-                    padding: 2,
-                    background: "#000000",
-                    width: "60%",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typo_Subtitle text="Gather your loved ones and step into Brunch Park – a celebration of food, fun, and family, brought to you by The Daily All Day i For the Foodies: Dive into a mouthwatering spread featuring culinary delights from Tsuki, Bai Mu Dan, Mad House Grill, and Juju to name a few. For the Music Lovers" />
-                </Box>
-              </Stack> */}
             </Box>
           </Container>
         </Box>
       </Box>
+
+      <InquiryModal open={open} handleClose={handleClose} />
     </>
   );
 };
 
 const Landing = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   return (
     <>
       {/* <AasthaCode /> */}
       <Anshul />
-
-      <InquiryModal />
-
       <Footer />
     </>
   );
