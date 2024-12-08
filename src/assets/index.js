@@ -25,6 +25,7 @@ import paradoxoverview from "./paradoxoverview.svg";
 import ticketdetails from "./0004.svg";
 import mail from "./mail3.png";
 import call from "./call.png";
+import cardbg from "./card_bg.svg";
 
 export {
   clock,
@@ -52,4 +53,5 @@ export {
   paradoxoverview,
   mail,
   call,
+  cardbg
 };
