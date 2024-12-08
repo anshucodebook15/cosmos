@@ -19,6 +19,7 @@ import {
 import Navbar from "../../components/Navbar/Navbar";
 import ProfileChip from "./ProfileChip";
 import PricingPlanstest from "./pricingplan";
+import CustomCard from "./pricingplan";
 
 const TicketBooking = () => {
   return (
@@ -131,8 +132,12 @@ const TicketBooking = () => {
             </Grid>
           </Grid>
         </Container>
-
-        <PricingPlanstest />
+        <Box sx={{marginY: 2}}>
+          <Container maxWidth="lg">
+            <CustomCard />  
+          </Container>      
+        </Box>
+       
       </Box>
     </div>
   );
