@@ -10,9 +10,12 @@ import AppInput from "../AppInput/AppInput";
 import { call } from "../../assets";
 import axios from "axios";
 import { instance } from "../../api/ApiMethods";
+import CloseIcon from "@mui/icons-material/Close";
+import { Typo_Basefont } from "../Typo/Typo";
 
 const style = {
   position: "absolute",
+  position: "relative",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -79,19 +82,25 @@ export const InquiryModal = ({ open, handleClose }) => {
     ],
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState(true);
 
   const handleSubmitInquery = async () => {
+    if (Inquery.name === "" || Inquery.email === "" || Inquery.mobile === "") {
+      setErrorMessage("Please Fill Details");
+      return;
+    }
+
     try {
       setLoading(true);
-      setError("");
+      setErrorMessage("");
       let response = await instance.post("inquiry", Inquery);
       setLoading(false);
       handleClose();
       return response.data;
     } catch (error) {
       setLoading(false);
-      setError("something went wrong! Please try after sometime");
+      setErrorMessage("something went wrong! Please try after sometime");
       return error;
     }
   };
@@ -121,7 +130,6 @@ export const InquiryModal = ({ open, handleClose }) => {
   };
 
   console.log("thert", Inquery);
-  
 
   return (
     <div>
@@ -132,6 +140,22 @@ export const InquiryModal = ({ open, handleClose }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <Box sx={{ position: "absolute", right: { xs: 5 }, top: { xs: 5 } }}>
+            <div onClick={handleClose}>
+              <CloseIcon sx={{ fontSize: 26 }} />
+            </div>
+          </Box>
+
+          <Box textAlign={"center"}>
+            {!errorMessage ? (
+              ""
+            ) : (
+              <>
+                <Typo_Basefont text={errorMessage} />
+              </>
+            )}
+          </Box>
+
           <Box marginBottom={4}>
             <AppInput
               type="text"
@@ -159,7 +183,7 @@ export const InquiryModal = ({ open, handleClose }) => {
             />
           </Box>
 
-          <Box sx={{ marginBottom: 2 }}>
+          <Box sx={{ marginBottom: 2.6 }}>
             <Grid container spacing={0}>
               {Inquery.ticket.map((item, i) => (
                 <>
@@ -206,6 +230,7 @@ export const InquiryModal = ({ open, handleClose }) => {
               variant="contained"
               color="primary"
               sx={{
+                width: "100%",
                 fontSize: 20,
                 paddingInline: 3,
                 paddingBlock: 1,

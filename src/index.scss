@@ -65,9 +65,10 @@ select {
   font: inherit;
 }
 
+input,
 input[type="text"],
 input[type="email"],
-button {
+input[type="number"] button {
   width: 100%;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;

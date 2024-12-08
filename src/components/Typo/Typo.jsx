@@ -54,6 +54,32 @@ export const Typo_Subtitle = ({
   );
 };
 
+
+export const Typo_Chip = ({
+  v = "h2",
+  fs = "1.8rem",
+  fw = "400",
+  fc = "white",
+  text = "Heading",
+}) => {
+  return (
+    <>
+      <Typography
+        sx={{
+          fontSize: `${fs}`,
+          fontWeight: `${fw}`,
+          color: `${fc}`,
+          fontFamily: "jost",
+        }}
+        variant={v}
+        color="initial"
+      >
+        {text}
+      </Typography>
+    </>
+  );
+};
+
 export const Typo_Subheading = ({
   v = "h2",
   fs = "2.4rem",

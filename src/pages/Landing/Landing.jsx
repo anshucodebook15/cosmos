@@ -5,13 +5,21 @@ import { useSelector } from "react-redux";
 import Container from "@mui/material/Container";
 import Navbar from "../../components/Navbar/Navbar";
 import Grid from "@mui/material/Grid2";
-import { Box, Card, CardContent, Stack, Button } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Stack,
+  Button,
+  Typography,
+} from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Chip from "@mui/material/Chip";
 import Avatar from "@mui/material/Avatar";
 
 import {
   Typo_Basefont,
+  Typo_Chip,
   Typo_Heading,
   Typo_Smallfont,
   Typo_Subheading,
@@ -23,7 +31,9 @@ import {
   aeymann,
   artisan,
   bandhan,
+  beer,
   call,
+  cardbg,
   concertbg,
   discoglob,
   DOClogo,
@@ -390,6 +400,121 @@ const AasthaCode = () => {
   );
 };
 
+const PriceCard = ({
+  title,
+  details = [
+    { icon: beer, feature: "Basic Entry" },
+    { icon: beer, feature: "Snacks" },
+  ],
+  price,
+}) => {
+  return (
+    <>
+      <Grid size={{ lg: 3, md: 3 }}>
+        <Box
+          sx={{
+            border: "1px solid transparent",
+            borderImage: "linear-gradient(45deg, #C700FF, #FF5733) 1",
+            borderRadius: 2,
+            overflow: "hidden",
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.6)",
+            minHeight: 400,
+            padding: 2.4,
+          }}
+        >
+          <Box sx={{ backgroundImage: `url(${cardbg})` }}>
+            {/* Card Title */}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                position: "relative",
+                width: "100%",
+                marginBottom: 2,
+              }}
+            >
+              {/* Background Bar */}
+              <Box
+                sx={{
+                  width: "40%",
+                  height: 14,
+                  backgroundColor: "#A30000",
+                  position: "absolute",
+                  bottom: 0,
+                  // zIndex: -1,
+                }}
+              ></Box>
+
+              {/* Text */}
+              <Box sx={{ position: "relative", zIndex: 1 }}>
+                <Typo_Subheading text={title} />
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                // border: 1,
+                borderColor: "white",
+                overflow: "hidden",
+                borderRadius: "10px",
+                minHeight: 300,
+                padding: 2,
+              }}
+            >
+              {details.map((item) => (
+                <>
+                  <Box
+                    sx={{
+                      display: "inline-block",
+                      border: "2px solid #C700FF",
+                      padding: 0.6,
+                      borderRadius: 25,
+                      marginBottom: 1,
+                    }}
+                  >
+                    <div className="flx aic">
+                      <Box sx={{ marginRight: 1 }}>
+                        <Imgbox url={item.icon} />
+                      </Box>
+                      <Box sx={{ paddingRight: 1 }}>
+                        <Typo_Chip text={item.feature} fw="400" />
+                      </Box>
+                    </div>
+                  </Box>
+                </>
+              ))}
+            </Box>
+
+            <Box>
+              <Stack direction={"row"} justifyContent={"center"}>
+                <Button
+                  sx={{
+                    background: "#C700FF",
+                    color: "#fff",
+                    borderRadius: 50,
+                    fontSize: 16,
+                    border: "none",
+                    paddingInline: 3.4,
+                    textTransform: "none",
+                    fontFamily: "Anton",
+                    "&:hover": {
+                      backgroundColor: "#A300E8",
+                    },
+                  }}
+                >
+                  ₹ {price} /-
+                </Button>
+                {/* <button className="defaultBtn">Click Me</button> */}
+              </Stack>
+            </Box>
+          </Box>
+        </Box>
+      </Grid>
+    </>
+  );
+};
+
 const Anshul = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -406,6 +531,8 @@ const Anshul = () => {
 
   return (
     <>
+
+    {/* Heading  */}
       <Box
         className="Landing"
         sx={{
@@ -481,6 +608,7 @@ const Anshul = () => {
                 borderColor: "#4a4545",
                 borderRadius: 2,
                 minHeight: "90vh",
+                marginBottom: 4,
               }}
             >
               {/* Spacer */}
@@ -561,6 +689,79 @@ const Anshul = () => {
             </Box>
           </Container>
         </Box>
+      </Box>
+
+      {/* Cards and Prices */}
+      <Box
+        sx={{
+          paddingBlock: 16,
+        }}
+      >
+        <Container maxWidth={"lg"}>
+
+            <Box sx={{marginBottom: 6}}>
+              <Typo_Heading text="Get In the Groove..." />
+            </Box>
+
+          <Grid container spacing={3}>
+            <PriceCard
+              title={"SILVER"}
+              price={"1499"}
+              details={[
+                {
+                  icon: beer,
+                  feature: "Entry To The Event gdfgsds",
+                },
+              ]}
+            />
+            <PriceCard
+              title={"GOLD"}
+              price={"2999"}
+              details={[
+                {
+                  icon: beer,
+                  feature: "Event Entry",
+                },
+                {
+                  icon: beer,
+                  feature: "₹500 Food or Beverage Coupon",
+                },
+              ]}
+            />
+            <PriceCard
+              title={"FANPIT"}
+              price={"4999"}
+              details={[
+                {
+                  icon: beer,
+                  feature: " Fan Pit View Access",
+                },
+                {
+                  icon: beer,
+                  feature: "₹500 food / beverage coupon",
+                },
+                {
+                  icon: beer,
+                  feature: "Includes 4 pints of beer",
+                },
+              ]}
+            />
+            <PriceCard
+              title={"VIP"}
+              price={"14999"}
+              details={[
+                {
+                  icon: beer,
+                  feature: "Priority event access",
+                },
+                {
+                  icon: beer,
+                  feature: "Unlimited premium food & liquor",
+                },
+              ]}
+            />
+          </Grid>
+        </Container>
       </Box>
 
       <InquiryModal open={open} handleClose={handleClose} />

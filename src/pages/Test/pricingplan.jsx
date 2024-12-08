@@ -200,8 +200,8 @@ const CustomCard = () => {
   return (
     <Card
       sx={{
-        width: 300,
-        height: 400,
+        width: "100%",
+        minHeight: 400,
         position: "relative",
         backgroundColor: "#000",
         borderRadius: 2,
@@ -261,9 +261,7 @@ const CustomCard = () => {
           ></Box>
 
           {/* Text */}
-          <Typo_Subheading
-            text="FANPIT"
-          />
+          <Typo_Subheading text="FANPIT" />
         </Box>
 
         {/* Features */}
@@ -298,7 +296,7 @@ const CustomCard = () => {
               px: 4,
               py: 1,
               textTransform: "none",
-            //   border: "1px solid #FFF",
+              //   border: "1px solid #FFF",
               borderRadius: 5,
               width: "50%",
               "&:hover": {
