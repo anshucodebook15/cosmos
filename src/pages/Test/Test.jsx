@@ -18,6 +18,7 @@ import {
 } from "../../components/Typo/Typo";
 import Navbar from "../../components/Navbar/Navbar";
 import ProfileChip from "./ProfileChip";
+import PricingPlanstest from "./pricingplan";
 
 const TicketBooking = () => {
   return (
@@ -79,10 +80,7 @@ const TicketBooking = () => {
                         >
                           VIP
                         </Box>
-                        <Typo_Basefont
-                          sx={{fw: "800"}}
-                          text="₹599/-"
-                        />
+                        <Typo_Basefont sx={{ fw: "800" }} text="₹599/-" />
                         <Typo_Smallfont text=" Mobile ticket | Valid for 1 person" />
                       </Stack>
                     </Grid>
@@ -133,6 +131,8 @@ const TicketBooking = () => {
             </Grid>
           </Grid>
         </Container>
+
+        <PricingPlanstest />
       </Box>
     </div>
   );
