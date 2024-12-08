@@ -23,6 +23,8 @@ import table from "./0005.svg";
 import overview from "./Overview.png";
 import paradoxoverview from "./paradoxoverview.svg";
 import ticketdetails from "./0004.svg";
+import mail from "./mail3.png";
+import call from "./call.png";
 
 export {
   clock,
@@ -47,6 +49,7 @@ export {
   table,
   overview,
   ticketdetails,
-  paradoxoverview
-
+  paradoxoverview,
+  mail,
+  call
 };

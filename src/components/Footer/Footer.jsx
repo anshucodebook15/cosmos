@@ -12,7 +12,6 @@ const Footer = () => {
           <Box sx={{padding: 1.4}}>
             <Typo_Subtitle text='DUNES-OF-COSMOS © 2024 ALL RIGHTS RESERVED' fw='300' />
           </Box>
-
         </Stack>
 
       </Container>

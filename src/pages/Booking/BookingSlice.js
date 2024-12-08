@@ -87,7 +87,12 @@ export const BookingSlice = createSlice({
       state.total.price = totalPrice;
       state.total.tickets = totalTicket;
     },
-    proceedToCheckout: (state, action) => {},
+    proceedToCheckout: (state, action) => {
+
+      
+
+
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchSeats.pending, (state, action) => {

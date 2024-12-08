@@ -7,6 +7,9 @@ import Navbar from "../../components/Navbar/Navbar";
 import Grid from "@mui/material/Grid2";
 import { Box, Card, CardContent, Stack, Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Chip from "@mui/material/Chip";
+import Avatar from "@mui/material/Avatar";
+
 import {
   Typo_Basefont,
   Typo_Heading,
@@ -20,11 +23,13 @@ import {
   aeymann,
   artisan,
   bandhan,
+  call,
   concertbg,
   discoglob,
   DOClogo,
   khanikaar,
   logo,
+  mail,
   mh,
   overview,
   paradox,
@@ -39,6 +44,8 @@ import {
 } from "../../assets";
 import Imgbox from "../../components/Imgbox/Imgbox";
 import Glassmorph from "../../components/Glassmorph/Glassmorph";
+import Footer from "../../components/Footer/Footer";
+import { InquiryModal } from "../../components/InquiryModal/InquiryModal";
 
 const plans = [
   {
@@ -417,14 +424,38 @@ const Anshul = () => {
             <Box>
               <Stack direction={"row"} justifyContent={"space-between"}>
                 <Box>
-                  <Typo_Subtitle
-                    text="anshul@dunesofcosmos.com"
-                    fw={500}
-                    fc="white"
-                  />
+                  <Link to={"mailto:anshus2085@gmail.com"}>
+                    <Chip
+                      avatar={<Avatar alt="Natacha" src={mail} />}
+                      label="anshul@dunesofcosmos.com"
+                      sx={{
+                        color: "white",
+                        fontSize: 14,
+                        fontFamily: "jost",
+                        border: 1,
+                        borderColor: "#4a4545",
+                        background: "#000000c7",
+                      }}
+                      variant="outlined"
+                    />
+                  </Link>
                 </Box>
                 <Box>
-                  <Typo_Basefont text="+91 8058868555" fw={500} fc="white" />
+                  <Link to={"tel:+918058868555"}>
+                    <Chip
+                      avatar={<Avatar alt="Natacha" src={call} />}
+                      label="+91-8058868555"
+                      sx={{
+                        color: "white",
+                        fontSize: 14,
+                        fontFamily: "jost",
+                        border: 1,
+                        borderColor: "#4a4545",
+                        background: "#000000c7",
+                      }}
+                      variant="outlined"
+                    />
+                  </Link>
                 </Box>
               </Stack>
             </Box>
@@ -479,11 +510,14 @@ const Anshul = () => {
                 </Box>
               </Stack>
 
-
+              {/* Address */}
               <Stack direction={"row"} justifyContent={"center"}>
                 <Box sx={{ marginBottom: 6 }}>
                   <Link>
-                  <Typo_Subtitle text="Star Queen Resort, Lohagal Road, Ajmer" fw="500" />
+                    <Typo_Subtitle
+                      text="Star Queen Resort, Lohagal Road, Ajmer"
+                      fw="500"
+                    />
                   </Link>
                 </Box>
               </Stack>
@@ -491,24 +525,26 @@ const Anshul = () => {
               {/* Book Your Tickets Now */}
               <Stack direction={"row"} justifyContent={"center"}>
                 <Box sx={{ marginBottom: 1 }}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{
-                      fontSize: 20,
-                      paddingInline: 3,
-                      paddingBlock: 1.6,
-                      borderRadius: 8,
+                  <Link to={"/booking"} color="white">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      sx={{
+                        fontSize: 20,
+                        paddingInline: 3,
+                        paddingBlock: 1.6,
+                        borderRadius: 8,
 
-                      fontFamily: "Anton",
-                      background: "#BE0472",
-                      ":hover": {
-                        textDecoration: "underline",
-                      },
-                    }}
-                  >
-                    Book Your tickects Now
-                  </Button>
+                        fontFamily: "Anton",
+                        background: "#BE0472",
+                        ":hover": {
+                          textDecoration: "underline",
+                        },
+                      }}
+                    >
+                      Book Your tickects Now
+                    </Button>
+                  </Link>
                 </Box>
               </Stack>
 
@@ -540,22 +576,22 @@ const Anshul = () => {
 };
 
 const Landing = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <>
       {/* <AasthaCode /> */}
       <Anshul />
+
+      <InquiryModal />
+
+
+
+
+      <Footer />
     </>
   );
 };
 
 export default Landing;
-
-/**
- * 
- * Archived
- * 
- * 
-                  <Box className="doc-logo">
-                    <Imgbox url={logo}></Imgbox>
-                  </Box>
- */
