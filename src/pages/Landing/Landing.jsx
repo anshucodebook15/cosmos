@@ -586,9 +586,6 @@ const Landing = () => {
 
       <InquiryModal />
 
-
-
-
       <Footer />
     </>
   );

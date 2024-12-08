@@ -51,5 +51,5 @@ export {
   ticketdetails,
   paradoxoverview,
   mail,
-  call
+  call,
 };
