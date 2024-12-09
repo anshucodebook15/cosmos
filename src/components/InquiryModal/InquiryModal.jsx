@@ -15,7 +15,6 @@ import { Typo_Basefont } from "../Typo/Typo";
 
 const style = {
   position: "absolute",
-  // position: "relative",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -55,7 +54,7 @@ const CounterBtn = ({ state = 0, subTicket, addTicket }) => {
 
 export const InquiryModal = ({ open, handleClose }) => {
   const [Inquery, setInquery] = useState({
-    name: "",
+    fullname: "",
     email: "",
     mobile: "",
     ticket: [
@@ -86,34 +85,33 @@ export const InquiryModal = ({ open, handleClose }) => {
   const [success, setSuccess] = useState(true);
 
   const handleSubmitInquery = async () => {
-    if (Inquery.name === "" || Inquery.email === "" || Inquery.mobile === "") {
+    if (
+      Inquery.fullname === "" ||
+      Inquery.email === "" ||
+      Inquery.mobile === ""
+    ) {
       setErrorMessage("Please Fill Details");
       return;
     }
 
     try {
-      setLoading(true);
-      setErrorMessage("");
       let response = await instance.post("inquiry", Inquery);
-      setLoading(false);
-      handleClose();
+
+      console.log("reponse", response.data);
+
       return response.data;
     } catch (error) {
-      setLoading(false);
-      setErrorMessage("something went wrong! Please try after sometime");
       return error;
     }
   };
 
   const handleInputChange = (e) => {
-    // e.preventDefault()
     let { name, value } = e.target;
     setInquery({ ...Inquery, [name]: value });
   };
 
   const handleAddSubTicket = (sign, seat, count) => {
     console.log("works properly", sign, seat);
-
     if (sign === "+") {
       let updatedState = [...Inquery.ticket].map((item) =>
         item.seat === seat ? { ...item, count: item.count + 1 } : item
@@ -159,8 +157,8 @@ export const InquiryModal = ({ open, handleClose }) => {
           <Box marginBottom={4}>
             <AppInput
               type="text"
-              name="name"
-              val={Inquery.name}
+              name="fullname"
+              val={Inquery.fullname}
               handleChange={handleInputChange}
               label="Full Name"
               placeholder="Ex: Anshul"

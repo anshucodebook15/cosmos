@@ -518,7 +518,7 @@ const PriceCard = ({
 };
 
 const Anshul = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -533,7 +533,7 @@ const Anshul = () => {
 
   return (
     <>
-      {/* Heading  */}
+      {/* Hero Section  */}
       <Box
         className="Landing"
         sx={{
@@ -560,7 +560,7 @@ const Anshul = () => {
       >
         <Box sx={{ position: "relative", zIndex: 100 }}>
           <Container maxWidth="xl">
-            {/* Contact */}
+            {/* Contact Bar*/}
             <Box>
               <Stack direction={"row"} justifyContent={"space-between"}>
                 <Box>
@@ -600,6 +600,7 @@ const Anshul = () => {
               </Stack>
             </Box>
 
+            {/* Middle transaprent Box */}
             <Box
               sx={{
                 padding: 4,
@@ -612,6 +613,7 @@ const Anshul = () => {
                 marginBottom: 4,
               }}
             >
+
               {/* Spacer */}
               <Box sx={{ padding: 4 }}></Box>
 
