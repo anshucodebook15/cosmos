@@ -11,12 +11,12 @@ const ProfileChip = ({ title, name, avatarColor }) => {
 
       <Box
         sx={{
-          display: "inline-flex", 
+          display: "inline-flex",
           alignItems: "center",
           backgroundColor: "#323232",
           padding: "0.6rem",
           borderRadius: "25px",
-          marginRight: "auto", 
+          marginRight: "auto",
         }}
       >
         {/* Avatar */}
@@ -31,7 +31,7 @@ const ProfileChip = ({ title, name, avatarColor }) => {
 
         {/* Text */}
         <Typo_Smallfont
-         text={name} />
+          text={name} />
       </Box>
     </Stack>
   );

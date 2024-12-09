@@ -15,7 +15,7 @@ import { Typo_Basefont } from "../Typo/Typo";
 
 const style = {
   position: "absolute",
-  position: "relative",
+  // position: "relative",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -188,7 +188,7 @@ export const InquiryModal = ({ open, handleClose }) => {
               {Inquery.ticket.map((item, i) => (
                 <>
                   <Grid
-                    key={i}
+                    key={item.seat}
                     size={{ lg: 3, md: 6, sm: 6, xs: 6 }}
                     padding={1}
                     alignSelf={"center"}

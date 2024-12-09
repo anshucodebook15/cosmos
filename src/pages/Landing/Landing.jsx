@@ -452,9 +452,9 @@ const PriceCard = ({
               </Box>
             </Box>
 
+            {/* Card Chips */}
             <Box
               sx={{
-                // border: 1,
                 borderColor: "white",
                 overflow: "hidden",
                 borderRadius: "10px",
@@ -462,7 +462,7 @@ const PriceCard = ({
                 padding: 2,
               }}
             >
-              {details.map((item) => (
+              {details.map((item, i) => (
                 <>
                   <Box
                     sx={{
@@ -484,8 +484,10 @@ const PriceCard = ({
                   </Box>
                 </>
               ))}
+
             </Box>
 
+            {/* Card Btn */}
             <Box>
               <Stack direction={"row"} justifyContent={"center"}>
                 <Button
@@ -505,7 +507,7 @@ const PriceCard = ({
                 >
                   ₹ {price} /-
                 </Button>
-                {/* <button className="defaultBtn">Click Me</button> */}
+
               </Stack>
             </Box>
           </Box>
@@ -531,8 +533,7 @@ const Anshul = () => {
 
   return (
     <>
-
-    {/* Heading  */}
+      {/* Heading  */}
       <Box
         className="Landing"
         sx={{
@@ -698,10 +699,9 @@ const Anshul = () => {
         }}
       >
         <Container maxWidth={"lg"}>
-
-            <Box sx={{marginBottom: 6}}>
-              <Typo_Heading text="Get In the Groove..." />
-            </Box>
+          <Box sx={{ marginBottom: 6 }}>
+            <Typo_Heading text="Get In the Groove..." />
+          </Box>
 
           <Grid container spacing={3}>
             <PriceCard
