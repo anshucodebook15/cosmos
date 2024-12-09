@@ -26,7 +26,7 @@ export const AppRoute = () => {
             <Route path="detail" element={<Details />} />
             <Route path="booking" element={<Commingsoon />} />
             <Route path="checkout" element={<Checkout />} />
-            <Route path="test" element={<Test />} />
+            {/* <Route path="test" element={<Test />} /> */}
           </Route>
         </Routes>
       </BrowserRouter>
