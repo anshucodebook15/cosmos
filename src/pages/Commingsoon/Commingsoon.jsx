@@ -11,6 +11,7 @@ import {
 } from "../Booking/BookingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Grid from "@mui/material/Grid2";
+import { Typo_Basefont, Typo_Subheading, Typo_Subtitle } from "../../components/Typo/Typo";
 
 // const TicketView = ({
 //   id,
@@ -43,10 +44,10 @@ const ts = {
 }
 
 
-const TicketBtn = () => {
+const TicketBtn = () => { 
   return (
     <>
-      <Button sx={{ width: "fit-content" }}>Add</Button>
+      <Button sx={{ width: "fit-content", bgcolor: `${ts.p400}`, color:`${ts.g50}`, fontSize:16, paddingInline: 6, fontFamily:"Anton" }}>Add</Button>
     </>
   );
 };
@@ -66,21 +67,41 @@ const TicketView = ({
   const { formatPrice, calSingleTicketTotal } = usePriceHook();
   return (
     <>
-      <Box>
+    <Container maxWidth="md">
+      <Box sx={{ border: 1, borderColor:`${ts.g100}`, borderRadius:1, bgcolor:`${ts.g200}`}}>
         {/* Ticket price and Action */}
-        <Box sx={{ padding: 1, borderBottom: 1 }}>
-          <Grid container spacing={0}>
-            <Grid size={6}>{/* Ticket Content */}</Grid>
-            <Grid size={6}>{/* Ticket Action Btn */}</Grid>
+        <Box sx={{ padding: 2, borderBottom: 1, borderColor:`${ts.g100}`, borderBottomStyle:"dashed"}}>
+          <Grid container spacing={0} alignItems={"center"}>
+            <Grid size={6}>{/* Ticket Content */}
+              <Box sx={{bgcolor:`${ts.p400}`, width:"fit-content", marginBottom: 1.8}}>
+                <Typo_Subheading text="VIP" fs="1.8rem" fw="600"/>
+              </Box>
+              <Box sx={{marginBottom: 0.2}}>
+                <Typo_Subheading text="499/-" fs="1.8rem"/>
+              </Box>
+              <Box sx={{}}>
+                <Typo_Basefont text="Mobile ticket | Valid for 1 Person" fs="1.4rem" fw="300"/>
+              </Box>
+            </Grid>
+            <Grid size={6}>{/* Ticket Action Btn */}
+              <Box sx={{float:"right"}}>
+              <TicketBtn/>
+              </Box>
+            </Grid>
           </Grid>
         </Box>
 
         {/* Ticket details */}
         <Box sx={{ padding: 1 }}>
           {/* Inner Grey Box */}
-          <Box sx={{ padding: 1 }}></Box>
+          <Box sx={{ padding: 1, bgcolor: `${ts.g300}`, borderRadius:1}}>
+            <Box>
+              <Typo_Basefont text="Details" fs="1.4rem" fw="600"/>
+            </Box>
+          </Box>
         </Box>
       </Box>
+      </Container>
     </>
   );
 };
@@ -100,9 +121,9 @@ const Commingsoon = () => {
     dispatch(checkoutTotalandTickects());
   };
 
-  useEffect(() => {
-    dispatch(fetchSeats());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchSeats());
+  // }, []);
 
   console.log("seats", total);
 
