@@ -52,15 +52,54 @@ const ts = {
 const TicketAddBtn = () => {
   return (
     <>
-      <Box>
+      <Box sx={{ bgcolor: `${ts.p400}`, borderRadius: 1, paddingInline:1, marginBottom:1}}>
         <Stack direction={"row"}>
-          <Button sx={{ padding: 0, margin: 0, minWidth: "fit-content" }}>
+          <Button
+            sx={{
+              paddingInline: 1.4,
+              margin: 0,
+              minWidth: "fit-content",
+              bgcolor: `${ts.p400}`,
+              color: `${ts.g50}`,
+              fontSize: 18,
+              fontFamily: "Anton",
+              "&:focus": {
+                outline: "none",
+              },
+            }}
+          >
             -
           </Button>
-          <Button sx={{ padding: 0, margin: 0, minWidth: "fit-content" }}>
-            0
+          <Button
+            sx={{
+              paddingInline: 1.4,
+              margin: 0,
+              minWidth: "fit-content",
+              bgcolor: `${ts.p400}`,
+              color: `${ts.g50}`,
+              fontSize: 16,
+              fontFamily: "Anton",
+              "&:focus": {
+                outline: "none",
+              },
+            }}
+          >
+            1
           </Button>
-          <Button sx={{ padding: 0, margin: 0, minWidth: "fit-content" }}>
+          <Button
+            sx={{
+              paddingInline: 1.4,
+              margin: 0,
+              minWidth: "fit-content",
+              bgcolor: `${ts.p400}`,
+              color: `${ts.g50}`,
+              fontSize: 18,
+              fontFamily: "Anton",
+              "&:focus": {
+                outline: "none",
+              },
+            }}
+          >
             +
           </Button>
         </Stack>
@@ -69,22 +108,44 @@ const TicketAddBtn = () => {
   );
 };
 
-const TicketBtn = () => {
+// const TicketBtn = () => {
+//   return (
+//     <>
+//       <Button
+//         sx={{
+//           width: "fit-content",
+//           bgcolor: `${ts.p400}`,
+//           color: `${ts.g50}`,
+//           fontSize: 16,
+//           paddingInline: 6,
+//           fontFamily: "Anton",
+//         }}
+//       >
+//         Add
+//       </Button>
+//     </>
+//   );
+// };
+const Chip = ({ feature, icon }) => {
   return (
-    <>
-      <Button
-        sx={{
-          width: "fit-content",
-          bgcolor: `${ts.p400}`,
-          color: `${ts.g50}`,
-          fontSize: 16,
-          paddingInline: 6,
-          fontFamily: "Anton",
-        }}
-      >
-        Add
-      </Button>
-    </>
+    <Box
+      sx={{
+        display: "inline-block",
+        border: "2px solid #C700FF",
+        paddingRight: "1px",
+        borderRadius: 25,
+        marginBottom: 1,
+      }}
+    >
+      <div className="flx aic">
+        <Box sx={{ marginRight: 1 }}>
+          <Imgbox url={icon} />
+        </Box>
+        <Box sx={{ paddingRight: 1 }}>
+          <Typo_Chip text={feature} fw="400" fs="1.4rem" />
+        </Box>
+      </div>
+    </Box>
   );
 };
 
@@ -134,7 +195,7 @@ const TicketView = ({
                   <Typo_Subheading text="VIP" fs="1.8rem" fw="600" />
                 </Box>
                 <Box sx={{ marginBottom: 0.2 }}>
-                  <Typo_Subheading text="499/-" fs="1.8rem" />
+                  <Typo_Subheading text="₹1499/-" fs="1.8rem" />
                 </Box>
                 <Box sx={{}}>
                   <Typo_Basefont
@@ -147,8 +208,11 @@ const TicketView = ({
               <Grid size={6}>
                 {/* Ticket Action Btn */}
                 <Box sx={{ float: "right" }}>
-                  <TicketBtn />
-                  {/* <TicketAddBtn /> */}
+                  {/* <TicketBtn /> */}
+                  <TicketAddBtn />
+                  <Box sx={{textAlign:"center"}}>
+                    <Typo_Subheading text="₹1499/-" fs="1.8rem" />
+                  </Box>
                 </Box>
               </Grid>
             </Grid>
@@ -158,29 +222,12 @@ const TicketView = ({
           <Box sx={{ padding: 1 }}>
             {/* Inner Grey Box */}
             <Box sx={{ padding: 1, bgcolor: `${ts.g300}`, borderRadius: 1 }}>
-              <Box>
+              <Box sx={{ marginBottom: 1 }}>
                 <Typo_Basefont text="Details" fs="1.4rem" fw="600" />
               </Box>
 
               <Box>
-                <Box
-                  sx={{
-                    display: "inline-block",
-                    border: "2px solid #C700FF",
-                    padding: 0.6,
-                    borderRadius: 25,
-                    marginBottom: 1,
-                  }}
-                >
-                  <div className="flx aic">
-                    <Box sx={{ marginRight: 1 }}>
-                      <Imgbox url={beer} />
-                    </Box>
-                    <Box sx={{ paddingRight: 1 }}>
-                      <Typo_Chip text={"Test "} fw="400" />
-                    </Box>
-                  </div>
-                </Box>
+                <Chip feature="Entry Free" icon={beer} />
               </Box>
             </Box>
           </Box>
