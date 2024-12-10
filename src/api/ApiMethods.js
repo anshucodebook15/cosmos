@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BaseURL = "http://localhost:3000/";
+export const BaseURL = "https://cosmos-be.vercel.app/";
 
 export const instance = axios.create({
   baseURL: BaseURL,
