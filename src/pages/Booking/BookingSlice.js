@@ -2,15 +2,11 @@ import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
-export const BaseURL = "http://localhost:3000/";
+export const BaseURL = "https://cosmos-be.vercel.app/";
 
 const API = axios.create({
   baseURL: BaseURL,
 });
-
-// const initialState = {
-//   value: 0,
-// };
 
 const initialState = {
   seats: [],
@@ -87,12 +83,7 @@ export const BookingSlice = createSlice({
       state.total.price = totalPrice;
       state.total.tickets = totalTicket;
     },
-    proceedToCheckout: (state, action) => {
-
-      
-
-
-    },
+    proceedToCheckout: (state, action) => {},
   },
   extraReducers: (builder) => {
     builder.addCase(fetchSeats.pending, (state, action) => {
