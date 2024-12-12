@@ -107,6 +107,9 @@ const TicketView = ({
             </Box>
           </Box>
 
+
+
+
           <Box>
             {state > 0 ? (
               <>
@@ -151,6 +154,7 @@ const TicketView = ({
               </Box>
             )}
           </Box>
+
         </Stack>
       </Box>
     </>

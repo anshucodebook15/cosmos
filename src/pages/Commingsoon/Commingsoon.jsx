@@ -56,7 +56,7 @@ const ts = {
   p400: "#E32B7E",
 };
 
-const TicketAddBtn = () => {
+const TicketAddBtn = ({ state, addTicket, subTicket }) => {
   return (
     <>
       <Box
@@ -81,6 +81,7 @@ const TicketAddBtn = () => {
                 outline: "none",
               },
             }}
+            onClick={subTicket}
           >
             -
           </Button>
@@ -98,7 +99,7 @@ const TicketAddBtn = () => {
               },
             }}
           >
-            1
+            {state}
           </Button>
           <Button
             sx={{
@@ -113,6 +114,7 @@ const TicketAddBtn = () => {
                 outline: "none",
               },
             }}
+            onClick={addTicket}
           >
             +
           </Button>
@@ -122,7 +124,7 @@ const TicketAddBtn = () => {
   );
 };
 
-const TicketBtn = () => {
+const TicketBtn = ({ ticketfn }) => {
   return (
     <>
       <Button
@@ -134,6 +136,7 @@ const TicketBtn = () => {
           paddingInline: 6,
           fontFamily: "Anton",
         }}
+        onClick={ticketfn}
       >
         Add
       </Button>
@@ -277,17 +280,21 @@ const TicketView = ({
                   <Box>
                     {state > 0 ? (
                       <>
-                        <TicketAddBtn />
+                        <TicketAddBtn
+                          state={state}
+                          subTicket={subTicket}
+                          addTicket={addTicket}
+                        />
                         <Box sx={{ textAlign: "center" }}>
                           <Typo_Subheading
-                            text={`₹ ${formatPrice(price)}`}
+                            text={`${calSingleTicketTotal(price, quantity)}`}
                             fs="1.4rem"
                           />
                         </Box>
                       </>
                     ) : (
                       <>
-                        <TicketBtn  />
+                        <TicketBtn ticketfn={ticketfn} />
                       </>
                     )}
                   </Box>
