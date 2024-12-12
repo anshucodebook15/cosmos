@@ -23,9 +23,6 @@ import { NavigateTo } from "../../routes/Routes";
 import Glassmorph from "../../components/Glassmorph/Glassmorph";
 import CheckoutBar from "../../components/CheckoutBar/CheckoutBar";
 
-
-
-
 const Checkout = () => {
   return (
     <div className="Details">
@@ -48,8 +45,8 @@ const Checkout = () => {
               >
                 {/* Heading and event poster */}
                 <Box sx={{ marginBottom: "2.8rem" }}>
-                  <Grid container spacing={0} justifyContent={"space-between"}>
-                    <Grid size={4}>
+                  <Grid container spacing={1} justifyContent={"space-between"}>
+                    <Grid size={{ lg: 4, md: 4, sm: 12, xs: 12 }}>
                       <Box sx={{ paddingTop: 1 }}>
                         <Typo_Heading text="Paradox In Ajmer | 2025" />
                         <Typo_Subtitle text="Full Of Energy and lots of fun" />
@@ -58,8 +55,50 @@ const Checkout = () => {
                           {/* <Divider sx={{ bgcolor: "#eeeeee" }} /> */}
                         </Box>
 
-                        <IconTitle icon={calender} text={"1st December"} />
-                        <IconTitle icon={clock} text={"9:00 PM - 10:00 PM"} />
+                        <Box>
+                          <div className="IconTitle">
+                            <Box sx={{ marginBottom: 2 }}>
+                              <div className="flx aic">
+                                <Box sx={{ paddingRight: 2 }}>
+                                  <img
+                                    src={calender}
+                                    alt=""
+                                    className="iconwidth20"
+                                  />
+                                </Box>
+                                <Typo_Basefont
+                                  text={"1st December"}
+                                  fc="white"
+                                  fw="500"
+                                />
+                              </div>
+                            </Box>
+                          </div>
+                        </Box>
+
+                        <Box>
+                          <div className="IconTitle">
+                            <Box sx={{ marginBottom: 2 }}>
+                              <div className="flx aic">
+                                <Box sx={{ paddingRight: 2 }}>
+                                  <img
+                                    src={clock}
+                                    alt=""
+                                    className="iconwidth20"
+                                  />
+                                </Box>
+                                <Typo_Basefont
+                                  text={"9:00 PM - 10:00 PM"}
+                                  fc="white"
+                                  fw="500"
+                                />
+                              </div>
+                            </Box>
+                          </div>
+                        </Box>
+
+                        {/* <IconTitle icon={calender} text={"1st December"} /> */}
+                        {/* <IconTitle icon={clock} text={"9:00 PM - 10:00 PM"} /> */}
                         <IconTitle
                           icon={map}
                           text={
@@ -67,7 +106,7 @@ const Checkout = () => {
                               <Link
                                 href="#"
                                 variant="body2"
-                                sx={{ fontSize: "1.4rem", color: "#9c9c9c" }}
+                                sx={{ fontSize: "1.4rem", color: "#bcbcbc" }}
                               >
                                 {
                                   'Pune International Airport Area, Lohegaon, Pune"'
@@ -81,7 +120,7 @@ const Checkout = () => {
                       </Box> */}
                       </Box>
                     </Grid>
-                    <Grid size={7}>
+                    <Grid size={{ lg: 7, md: 7, sm: 12, xs: 12 }}>
                       <Box
                         sx={{
                           border: 1,

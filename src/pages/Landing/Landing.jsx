@@ -36,6 +36,7 @@ import {
   call,
   cardbg,
   concertbg,
+  desidrop,
   discoglob,
   DOClogo,
   khanikaar,
@@ -47,11 +48,14 @@ import {
   paradoxconcert,
   paradoxoverview,
   paradoxposter,
+  savethedate,
   stage,
+  stagenew,
   stars,
   table,
   tfn,
   ticketdetails,
+  ultimate,
 } from "../../assets";
 import Imgbox from "../../components/Imgbox/Imgbox";
 import Glassmorph from "../../components/Glassmorph/Glassmorph";
@@ -167,9 +171,10 @@ const Overview = () => {
   return (
     <Box
       sx={{
-        position: "relative",
-        height: "80vh", // Adjust as needed
-        backgroundImage: `url(${paradoxposter})`,
+        backgroundImage: {
+          xs: "none",
+          md: `url(${paradoxposter})`,
+        },
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
@@ -192,7 +197,7 @@ const Overview = () => {
       >
         <Grid container spacing={3} justifyContent={"right"}>
           <Grid size={{ xs: 12, sm: 6 }}>
-            <Typo_Heading text="Overview" />
+            <Typo_Heading text="Overview"/>
             <Box sx={{ marginBottom: 2 }}>
               <Typo_Basefont
                 text="PARADOX IS AN UNDERGROUND
@@ -517,6 +522,22 @@ const PriceCard = ({
   );
 };
 
+const Poster = () => {
+  return (
+    <Container maxWidth={"lg"}>
+      <Grid container spacing={2}>
+        <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
+          <Imgbox url={ultimate}></Imgbox>
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, lg: 6 }}>
+          <Imgbox url={stagenew}></Imgbox>
+        </Grid>
+      </Grid>
+    </Container>
+  );
+};
+
 const Anshul = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -524,7 +545,7 @@ const Anshul = () => {
 
   useEffect(() => {
     let modalTimer = setTimeout(() => {
-      setOpen(true);
+      setOpen(false);
     }, 2000);
     return () => {
       if (modalTimer) clearTimeout(modalTimer);
@@ -570,7 +591,7 @@ const Anshul = () => {
                       label="anshul@dunesofcosmos.com"
                       sx={{
                         color: "white",
-                        fontSize: 14,
+                        fontSize: 12,
                         fontFamily: "jost",
                         border: 1,
                         borderColor: "#4a4545",
@@ -587,7 +608,7 @@ const Anshul = () => {
                       label="+91-8058868555"
                       sx={{
                         color: "white",
-                        fontSize: 14,
+                        fontSize: 12,
                         fontFamily: "jost",
                         border: 1,
                         borderColor: "#4a4545",
@@ -645,7 +666,7 @@ const Anshul = () => {
 
                 {/* Time */}
                 <Stack direction={"row"} justifyContent={"center"}>
-                  <Box sx={{ marginBottom: 2 }}>
+                  <Box sx={{ marginBottom: 1 }}>
                     <Typo_Subtitle text="From 7:00 PM Onwards" fw="500" />
                   </Box>
                 </Stack>
@@ -655,23 +676,34 @@ const Anshul = () => {
               <Stack direction={"row"} justifyContent={"center"}>
                 <Box
                   sx={{
-                    marginBottom: 6,
+                    marginBottom: { lg: 6, xs: 4 },
                     background: "#000",
-                    padding: 1,
+                    paddingInline: 2,
+                    paddingBlock: 1,
                     textDecoration: "underline",
                     borderRadius: 20,
                   }}
                 >
                   <Link className="tdn">
                     <Stack direction={"row"}>
-                      <Box sx={{ paddingRight: 1 }}>
+                      <Box
+                        sx={{
+                          paddingRight: { lg: 1, xs: 0 },
+                          textAlign: "center",
+                        }}
+                      >
                         <Typo_Subtitle
                           text="Star Queen Resort, Lohagal Road, Ajmer"
                           fw="500"
                         />
                       </Box>
                       <Box>
-                        <LocationOnIcon sx={{ fontSize: 18, fill: "white" }} />
+                        <LocationOnIcon
+                          sx={{
+                            fontSize: { lg: 22, md: 22, sm: 22, xs: 32 },
+                            fill: "white",
+                          }}
+                        />
                       </Box>
                     </Stack>
                   </Link>
@@ -680,15 +712,15 @@ const Anshul = () => {
 
               {/* Book Your Tickets Now */}
               <Stack direction={"row"} justifyContent={"center"}>
-                <Box sx={{ marginBottom: 12 }}>
+                <Box sx={{ marginBottom: { lg: 12, xs: 8 } }}>
                   <Link to={"/booking"} color="white">
                     <Button
                       variant="contained"
                       color="primary"
                       sx={{
                         fontSize: 20,
-                        paddingInline: 6,
-                        paddingBlock: 1.6,
+                        paddingInline: { lg: 6, xs: 4 },
+                        paddingBlock: {lg:1.6, xs: 1},
                         borderRadius: 8,
 
                         fontFamily: "Anton",
@@ -714,16 +746,15 @@ const Anshul = () => {
       {/* Cards and Prices */}
       <Box
         sx={{
-          paddingBlock: 16,
+          paddingBlock: { lg: 10, md: 4, sm: 4, xs: 4 },
         }}
       >
         <Container maxWidth={"lg"}>
-          <Box sx={{ marginBottom: 6 }}>
+          <Box sx={{ marginBottom: 6, textAlign: "center" }}>
             <Typo_Heading text="Get In the Groove..." />
           </Box>
 
           <Grid container spacing={4} justifyContent={"center"}>
-
             <PriceCard
               title={"GOLD"}
               price={"2999"}
@@ -777,6 +808,14 @@ const Anshul = () => {
       {/* Overview */}
       <Box>
         <Overview />
+      </Box>
+
+      <Box
+        sx={{
+          paddingBlock: 2,
+        }}
+      >
+        <Poster />
       </Box>
 
       {/* Overview */}

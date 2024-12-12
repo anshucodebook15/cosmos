@@ -30,6 +30,10 @@ import beer from "./beer.png";
 import FI_MP from "./Firstindia.png";
 import Tuborg from "./Tuborg.png";
 import CarlsB from "./Carlsberg.png";
+import desidrop from "./desidrop.png";
+import stagenew from "./stagenew.png";
+import savethedate from "./savethedate.png";
+import ultimate from "./ultimate.png";
 
 export {
   clock,
@@ -61,5 +65,9 @@ export {
   beer,
   FI_MP,
   Tuborg,
-  CarlsB
+  CarlsB,
+  ultimate,
+  desidrop,
+  stagenew,
+  savethedate
 };
