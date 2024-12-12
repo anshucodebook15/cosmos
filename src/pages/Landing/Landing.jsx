@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Container from "@mui/material/Container";
 import Navbar from "../../components/Navbar/Navbar";
 import Grid from "@mui/material/Grid2";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import {
   Box,
   Card,
@@ -56,6 +57,7 @@ import Imgbox from "../../components/Imgbox/Imgbox";
 import Glassmorph from "../../components/Glassmorph/Glassmorph";
 import Footer from "../../components/Footer/Footer";
 import { InquiryModal } from "../../components/InquiryModal/InquiryModal";
+import Sponserbar from "../../components/Sponserbar/Sponserbar";
 
 const plans = [
   {
@@ -410,7 +412,7 @@ const PriceCard = ({
 }) => {
   return (
     <>
-      <Grid size={{ lg: 3, md: 3 }}>
+      <Grid size={{ lg: 4, md: 4 }}>
         <Box
           sx={{
             border: "1px solid transparent",
@@ -474,7 +476,7 @@ const PriceCard = ({
                     }}
                   >
                     <div className="flx aic">
-                      <Box sx={{ marginRight: 1 }}>
+                      <Box sx={{ marginRight: 1, width: 30 }}>
                         <Imgbox url={item.icon} />
                       </Box>
                       <Box sx={{ paddingRight: 1 }}>
@@ -484,7 +486,6 @@ const PriceCard = ({
                   </Box>
                 </>
               ))}
-
             </Box>
 
             {/* Card Btn */}
@@ -507,7 +508,6 @@ const PriceCard = ({
                 >
                   ₹ {price} /-
                 </Button>
-
               </Stack>
             </Box>
           </Box>
@@ -518,7 +518,7 @@ const PriceCard = ({
 };
 
 const Anshul = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -606,14 +606,13 @@ const Anshul = () => {
                 padding: 4,
                 background: "#000000c7",
                 border: 1,
-                marginBlock: 1,
-                borderColor: "#4a4545",
                 borderRadius: 2,
+                borderColor: "#4a4545",
+                marginBlock: 1,
                 minHeight: "90vh",
                 marginBottom: 4,
               }}
             >
-
               {/* Spacer */}
               <Box sx={{ padding: 4 }}></Box>
 
@@ -627,48 +626,68 @@ const Anshul = () => {
               </Box>
 
               {/* Performing Paradox */}
-              <Stack direction={"row"} justifyContent={"center"}>
-                <Box sx={{ width: 460 }}>
-                  <Imgbox url={paradox}></Imgbox>
-                </Box>
-              </Stack>
+              <Box sx={{ marginBottom: 4 }}>
+                <Stack direction={"row"} justifyContent={"center"}>
+                  <Box sx={{ width: 460 }}>
+                    <Imgbox url={paradox}></Imgbox>
+                  </Box>
+                </Stack>
+              </Box>
 
-              {/* Date */}
-              <Stack direction={"row"} justifyContent={"center"}>
-                <Box sx={{ marginBottom: 0 }}>
-                  <Typo_Heading text="30  DEC  2024" />
-                </Box>
-              </Stack>
+              {/* Date And Time */}
+              <Box sx={{ marginBottom: 2 }}>
+                {/* Date */}
+                <Stack direction={"row"} justifyContent={"center"}>
+                  <Box sx={{ marginBottom: 0 }}>
+                    <Typo_Heading text="30  DEC  2024" />
+                  </Box>
+                </Stack>
 
-              {/* Time */}
-              <Stack direction={"row"} justifyContent={"center"}>
-                <Box sx={{ marginBottom: 2 }}>
-                  <Typo_Subtitle text="From 7:00 PM Onwards" fw="500" />
-                </Box>
-              </Stack>
+                {/* Time */}
+                <Stack direction={"row"} justifyContent={"center"}>
+                  <Box sx={{ marginBottom: 2 }}>
+                    <Typo_Subtitle text="From 7:00 PM Onwards" fw="500" />
+                  </Box>
+                </Stack>
+              </Box>
 
               {/* Address */}
               <Stack direction={"row"} justifyContent={"center"}>
-                <Box sx={{ marginBottom: 6 }}>
-                  <Link>
-                    <Typo_Subtitle
-                      text="Star Queen Resort, Lohagal Road, Ajmer"
-                      fw="500"
-                    />
+                <Box
+                  sx={{
+                    marginBottom: 6,
+                    background: "#000",
+                    padding: 1,
+                    textDecoration: "underline",
+                    borderRadius: 20,
+                  }}
+                >
+                  <Link className="tdn">
+                    <Stack direction={"row"}>
+                      <Box sx={{ paddingRight: 1 }}>
+                        <Typo_Subtitle
+                          text="Star Queen Resort, Lohagal Road, Ajmer"
+                          fw="500"
+                        />
+                      </Box>
+                      <Box>
+                        <LocationOnIcon sx={{ fontSize: 18, fill: "white" }} />
+                      </Box>
+                    </Stack>
                   </Link>
                 </Box>
               </Stack>
 
               {/* Book Your Tickets Now */}
               <Stack direction={"row"} justifyContent={"center"}>
-                <Box sx={{ marginBottom: 1 }}>
+                <Box sx={{ marginBottom: 12 }}>
                   <Link to={"/booking"} color="white">
                     <Button
                       variant="contained"
                       color="primary"
                       sx={{
                         fontSize: 20,
-                        paddingInline: 3,
+                        paddingInline: 6,
                         paddingBlock: 1.6,
                         borderRadius: 8,
 
@@ -685,10 +704,8 @@ const Anshul = () => {
                 </Box>
               </Stack>
 
-              {/* Tickets are limited */}
-              <Box sx={{ textAlign: "center", marginBottom: 6 }}>
-                <Typo_Basefont text="Tickets are limited!" />
-              </Box>
+              {/* Organisers */}
+              <Sponserbar />
             </Box>
           </Container>
         </Box>
@@ -705,17 +722,8 @@ const Anshul = () => {
             <Typo_Heading text="Get In the Groove..." />
           </Box>
 
-          <Grid container spacing={3}>
-            <PriceCard
-              title={"SILVER"}
-              price={"1499"}
-              details={[
-                {
-                  icon: beer,
-                  feature: "Entry To The Event gdfgsds",
-                },
-              ]}
-            />
+          <Grid container spacing={4} justifyContent={"center"}>
+
             <PriceCard
               title={"GOLD"}
               price={"2999"}
@@ -766,6 +774,12 @@ const Anshul = () => {
         </Container>
       </Box>
 
+      {/* Overview */}
+      <Box>
+        <Overview />
+      </Box>
+
+      {/* Overview */}
       <InquiryModal open={open} handleClose={handleClose} />
     </>
   );

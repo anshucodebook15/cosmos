@@ -27,6 +27,9 @@ import mail from "./mail3.png";
 import call from "./call.png";
 import cardbg from "./card_bg.svg";
 import beer from "./beer.png";
+import FI_MP from "./Firstindia.png";
+import Tuborg from "./Tuborg.png";
+import CarlsB from "./Carlsberg.png";
 
 export {
   clock,
@@ -55,5 +58,8 @@ export {
   mail,
   call,
   cardbg,
-  beer
+  beer,
+  FI_MP,
+  Tuborg,
+  CarlsB
 };

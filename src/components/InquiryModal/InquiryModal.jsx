@@ -161,7 +161,7 @@ export const InquiryModal = ({ open, handleClose }) => {
               val={Inquery.fullname}
               handleChange={handleInputChange}
               label="Full Name"
-              placeholder="Ex: Anshul"
+              placeholder=""
             />
             <AppInput
               type="number"
@@ -169,7 +169,7 @@ export const InquiryModal = ({ open, handleClose }) => {
               val={Inquery.mobile}
               handleChange={handleInputChange}
               label="Mobile Number"
-              placeholder="Ex: 8058868555"
+              placeholder=""
             />
             <AppInput
               type="email"
@@ -177,7 +177,7 @@ export const InquiryModal = ({ open, handleClose }) => {
               val={Inquery.email}
               handleChange={handleInputChange}
               label="Email "
-              placeholder="Ex: xyz@gmail.com"
+              placeholder=""
             />
           </Box>
 
