@@ -27,7 +27,7 @@ import mail from "./mail3.png";
 import call from "./call.png";
 import cardbg from "./card_bg.svg";
 import beer from "./beer.png";
-import FI_MP from "./Firstindia.png";
+import FI_MP from "./FirstIndia.png";
 import Tuborg from "./Tuborg.png";
 import CarlsB from "./Carlsberg.png";
 import desidrop from "./desidrop.png";
