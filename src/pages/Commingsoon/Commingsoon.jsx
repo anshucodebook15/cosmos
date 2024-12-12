@@ -260,7 +260,7 @@ const Commingsoon = () => {
 
   return (
     <div className="Commingsoon">
-      <Box sx={{ padding: 12 }}>
+      <Box sx={{padding: { xs: 0, sm: 2, lg: 12 }}}>
         <Container>
           {/* Banner Box */}
           <Box></Box>
