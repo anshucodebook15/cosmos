@@ -318,9 +318,9 @@ const TicketView = ({
               </Box>
 
               <Box>
+                {/* <Chip feature="Entry Free" icon={beer} />
                 <Chip feature="Entry Free" icon={beer} />
-                <Chip feature="Entry Free" icon={beer} />
-                <Chip feature="Entry Free" icon={beer} />
+                <Chip feature="Entry Free" icon={beer} /> */}
               </Box>
             </Box>
           </Box>
