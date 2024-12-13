@@ -161,7 +161,18 @@ const TicketView = ({
   );
 };
 
-const Booking = () => {
+
+
+const CS = ()=> {
+  return (
+    <>
+    <h2>Comming Soon...</h2>
+    </>
+  )
+}
+
+
+const BookingState = () => {
   const dispatch = useDispatch();
   const { seats, error, total } = useSelector(SelectBooking);
 
@@ -340,6 +351,14 @@ const Booking = () => {
       </div>
     </div>
   );
+}
+
+const Booking = () => {
+  return (
+    <>
+    <CS />
+    </>
+  )
 };
 
 export default Booking;

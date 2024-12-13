@@ -757,16 +757,13 @@ const Anshul = () => {
           <Grid container spacing={4} justifyContent={"center"}>
             <PriceCard
               title={"GOLD"}
-              price={"2999"}
+              price={"2499"}
               details={[
                 {
                   icon: beer,
                   feature: "Event Entry",
                 },
-                {
-                  icon: beer,
-                  feature: "₹500 Food or Beverage Coupon",
-                },
+
               ]}
             />
             <PriceCard
