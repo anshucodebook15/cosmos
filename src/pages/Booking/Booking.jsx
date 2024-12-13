@@ -381,7 +381,7 @@ const Booking = () => {
     dispatch(checkoutTotalandTickects());
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     dispatch(fetchSeats());
   }, []);
 
