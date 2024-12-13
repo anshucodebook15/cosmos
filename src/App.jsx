@@ -11,6 +11,9 @@ function App() {
   return (
     <>
       <div>
+        <Box sx={{ padding: 2, background: "#ca1e6b", position: "relative", color: "#fff", zIndex: 200 }}>
+          <h5>Site is in maintainance mode ... ticket booking will be start soon </h5>
+        </Box>
         <Landing />
       </div>
     </>

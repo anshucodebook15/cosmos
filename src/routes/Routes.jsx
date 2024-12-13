@@ -8,6 +8,8 @@ import Booking from "../pages/Booking/Booking";
 import Details from "../pages/Details/Details";
 import Checkout from "../pages/Checkout/Checkout";
 import Test from "../pages/Test/Test";
+import Contact from "../components/Contact/Contact";
+import Termsandcondition from "../components/Termsandcondition/Termsandcondition";
 // import Commingsoon from "../pages/Commingsoon/Commingsoon";
 
 export const NavigateTo = {
@@ -25,6 +27,8 @@ export const AppRoute = () => {
           <Route element={<Layout />}>
             {/* <Route path="detail" element={<Details />} /> */}
             <Route path="booking" element={<Booking />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="terms-and-condition" element={<Termsandcondition />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="test" element={<Test />} />
           </Route>
