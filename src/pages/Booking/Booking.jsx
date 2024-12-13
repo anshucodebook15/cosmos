@@ -381,7 +381,7 @@ const Booking = () => {
     dispatch(checkoutTotalandTickects());
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     dispatch(fetchSeats());
   }, []);
 
@@ -402,7 +402,7 @@ const Booking = () => {
         <Grid container spacing={0}>
           <Grid size={{ lg: 4, md: 4, sm: 12, xs: 12 }}>
             <Box sx={{ overflow: "hidden", borderRadius: 2 }}>
-              <Imgbox url={PDB} />
+              {/* <Imgbox url={PDB} /> */}
             </Box>
           </Grid>
           <Grid size={{ lg: 8, md: 8, sm: 12, xs: 12 }}>
