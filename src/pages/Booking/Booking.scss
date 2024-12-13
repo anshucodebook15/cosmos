@@ -1,68 +1,6 @@
-.Booking {
+.Commingsoon {
   // color: black;
 
   @media only screen and (max-width: 600px) {
   }
-}
-
-.defaultBtn {
-  padding: 0 !important;
-  background: #ffffff;
-  margin: 0;
-  border-radius: 0;
-  width: fit-content;
-  color: rgb(187, 46, 69);
-  font-weight: 400;
-  font-family: "jost" !important;
-  outline: none;
-}
-
-.defaultBtn:active {
-  outline: none;
-}
-.defaultBtn:focus {
-  outline: none;
-}
-
-.addbtn {
-  background-color: #ffa1a136;
-  padding-inline: 2.6rem !important;
-  padding-block: 0.8rem !important;
-  width: 100%;
-  text-align: center;
-  border-radius: 5px;
-  border: 1px solid rgb(187, 46, 69);
-}
-
-.counterTabsBtn {
-  background-color: transparent;
-  padding-inline: 2rem !important;
-  padding-block: 0.8rem !important;
-  width: 100%;
-  text-align: center;
-  color: #ffffff !important ;
-
-  padding: 0.2rem !important;
-}
-
-.counterBtn {
-  background-color: rgb(187, 46, 69);
-
-  padding-inline: 2rem !important;
-  padding-block: 0.8rem !important;
-  width: 100%;
-  text-align: center;
-  border-radius: 5px;
-  border: 1px solid rgb(187, 46, 69);
-
-  padding: 0.2rem !important;
-}
-
-.checkoutbarview {
-  background: rgba(255, 255, 255, 0);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
 }

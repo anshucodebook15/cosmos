@@ -197,7 +197,7 @@ const Overview = () => {
       >
         <Grid container spacing={3} justifyContent={"right"}>
           <Grid size={{ xs: 12, sm: 6 }}>
-            <Typo_Heading text="Overview"/>
+            <Typo_Heading text="Overview" />
             <Box sx={{ marginBottom: 2 }}>
               <Typo_Basefont
                 text="PARADOX IS AN UNDERGROUND
@@ -720,7 +720,7 @@ const Anshul = () => {
                       sx={{
                         fontSize: 20,
                         paddingInline: { lg: 6, xs: 4 },
-                        paddingBlock: {lg:1.6, xs: 1},
+                        paddingBlock: { lg: 1.6, xs: 1 },
                         borderRadius: 8,
 
                         fontFamily: "Anton",
@@ -763,7 +763,6 @@ const Anshul = () => {
                   icon: beer,
                   feature: "Event Entry",
                 },
-
               ]}
             />
             <PriceCard

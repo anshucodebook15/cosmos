@@ -2,7 +2,7 @@ import clock from "./clock2.svg";
 import calender from "./calender.svg";
 import map from "./map.svg";
 import ticket from "./ticket.svg";
-import logo from "./logo.svg";
+import logo from "./DFC_logo.png";
 
 // Landing
 import concertbg from "./landingconcert.jpg";
@@ -34,6 +34,7 @@ import desidrop from "./desidrop.png";
 import stagenew from "./stagenew.png";
 import savethedate from "./savethedate.png";
 import ultimate from "./ultimate.png";
+import PDB from "./pdox_bg.png";
 
 export {
   clock,
@@ -69,5 +70,6 @@ export {
   ultimate,
   desidrop,
   stagenew,
-  savethedate
+  savethedate,
+  PDB
 };

@@ -8,7 +8,7 @@ import Booking from "../pages/Booking/Booking";
 import Details from "../pages/Details/Details";
 import Checkout from "../pages/Checkout/Checkout";
 import Test from "../pages/Test/Test";
-import Commingsoon from "../pages/Commingsoon/Commingsoon";
+// import Commingsoon from "../pages/Commingsoon/Commingsoon";
 
 export const NavigateTo = {
   Home: "/",
@@ -23,7 +23,7 @@ export const AppRoute = () => {
         <Routes>
           <Route index path="/" element={<App />} />
           <Route element={<Layout />}>
-            <Route path="detail" element={<Details />} />
+            {/* <Route path="detail" element={<Details />} /> */}
             <Route path="booking" element={<Booking />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="test" element={<Test />} />

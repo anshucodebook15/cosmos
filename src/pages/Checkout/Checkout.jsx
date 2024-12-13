@@ -22,8 +22,43 @@ import { NavLink } from "react-router";
 import { NavigateTo } from "../../routes/Routes";
 import Glassmorph from "../../components/Glassmorph/Glassmorph";
 import CheckoutBar from "../../components/CheckoutBar/CheckoutBar";
+import { SelectBooking } from "../Booking/BookingSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { usePriceHook } from "../../hooks/usePriceHook";
+
+const PaymentBar = () => {
+  return (
+    <>
+      <div className="CheckoutBar">
+        <Box sx={{ padding: 3.6 }}>
+          <Container>
+            <Box sx={{ marginRight: 4 }}>
+              <Stack
+                direction={"row"}
+                justifyContent={"flex-end"}
+                alignItems={"flex-end"}
+              >
+                <Box>
+                  <button className=" defaultBtn checkoutbtn">
+                    <NavLink to={"/checkout"}>
+                      <Typo_Subtitle text={`Pay To Proceed`} fw="600" />
+                    </NavLink>
+                  </button>
+                </Box>
+              </Stack>
+            </Box>
+          </Container>
+        </Box>
+      </div>
+    </>
+  );
+};
 
 const Checkout = () => {
+  const { formatPrice } = usePriceHook();
+  const dispatch = useDispatch();
+  const { seats, error, total } = useSelector(SelectBooking);
+
   return (
     <div className="Details">
       {/* <Glassmorph
@@ -144,7 +179,9 @@ const Checkout = () => {
                                 justifyContent={"space-between"}
                               >
                                 <Typo_Subtitle text="Total Ticket Price" />
-                                <Typo_Subtitle text="₹1999" />
+                                <Typo_Subtitle
+                                  text={`₹ ${formatPrice(total.price)}`}
+                                />
                               </Stack>
                               <Stack
                                 direction={"row"}
@@ -205,7 +242,8 @@ For the Music Lovers"
       </Container>
 
       <div className="posab">
-        <CheckoutBar totalprice={""} totaltickets={""} />
+        <PaymentBar />
+        {/* <CheckoutBar totalprice={""} totaltickets={""} /> */}
       </div>
     </div>
   );

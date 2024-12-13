@@ -5,29 +5,27 @@ import Grid from "@mui/material/Grid2";
 import { Box } from "@mui/material";
 import { logo } from "../../assets";
 import { Typo_Subtitle } from "../Typo/Typo";
-
-
+import { Link } from "react-router";
 
 const Navbar = () => {
   return (
     <div className="Navbar">
       <Container maxWidth="lg">
         <Box sx={{ padding: 2 }}>
-          <Grid container alignItems={'baseline'}>
+          <Grid container alignItems={"baseline"}>
             <Grid size={6}>
-              <img src={logo} alt="" className="logo" />
+              <Link to={"/"}>
+                <img src={logo} alt="" className="logo" />
+              </Link>
             </Grid>
             <Grid size={6}>
               <div className="floatright">
-                  <div className="avtarchip flx aic">
-                    <div className="avtarchip_logo">
-
-                    </div>
-                    <div className="avtarchip_text">
-                      <Typo_Subtitle text={"Anshu"} fw="500"/>
-                    </div>
-
+                <div className="avtarchip flx aic">
+                  <div className="avtarchip_logo"></div>
+                  <div className="avtarchip_text">
+                    <Typo_Subtitle text={"Anshu"} fw="500" />
                   </div>
+                </div>
               </div>
             </Grid>
           </Grid>
