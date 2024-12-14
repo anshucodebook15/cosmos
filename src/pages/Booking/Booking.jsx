@@ -74,7 +74,7 @@ const TicketAddBtn = ({ state, addTicket, subTicket }) => {
         sx={{
           bgcolor: `${ts.p400}`,
           borderRadius: 1,
-          paddingInline: 1,
+          paddingInline: {lg:1, sm:0, xs:0},
           marginBottom: 1.4,
         }}
       >
@@ -144,7 +144,7 @@ const TicketBtn = ({ ticketfn }) => {
           bgcolor: `${ts.p400}`,
           color: `${ts.g50}`,
           fontSize: 16,
-          paddingInline: 6,
+          paddingInline: {lg:6, sm:4, xs:4},
           fontFamily: "Anton",
         }}
         onClick={ticketfn}
@@ -196,7 +196,7 @@ const TicketClass = ({ text }) => {
   return (
     <Typography
       sx={{
-        fontSize: { lg: 24, md: 24, sm: 22, xs: 20 },
+        fontSize: { lg: 24, md: 24, sm: 18, xs: 18 },
         fontWeight: 600,
         color: "white",
         fontFamily: "Anton",
@@ -210,23 +210,23 @@ const TicketClass = ({ text }) => {
   );
 };
 
-const TicketPrice = ({ text }) => {
-  return (
-    <Typography
-      sx={{
-        fontSize: { lg: 24, md: 24, sm: 22, xs: 20 },
-        fontWeight: 600,
-        color: "white",
-        fontFamily: "Anton",
-        letterSpacing: 1.1,
-      }}
-      variant={"body1"}
-      color="initial"
-    >
-      {text}
-    </Typography>
-  );
-};
+// const TicketPrice = ({ text }) => {
+//   return (
+//     <Typography
+//       sx={{
+//         fontSize: { lg: 24, md: 24, sm: 22, xs: 20 },
+//         fontWeight: 600,
+//         color: "white",
+//         fontFamily: "Anton",
+//         letterSpacing: 1.1,
+//       }}
+//       variant={"body1"}
+//       color="initial"
+//     >
+//       {text}
+//     </Typography>
+//   );
+// };
 
 const TicketDetail = () => {
   return (
@@ -405,8 +405,8 @@ const Booking = () => {
 
         <Grid container spacing={0}>
           <Grid size={{ lg: 4, md: 4, sm: 12, xs: 12 }}>
-            <Box sx={{ overflow: "hidden", borderRadius: 2 }}>
-              {/* <Imgbox url={PDB} /> */}
+            <Box sx={{ overflow: "hidden", borderRadius: 2, height: {lg:400, sm:130, xs:130}, marginBottom: 2, paddingInline: 2 }}>
+              <Imgbox url={PDB} cls={"mg-neg"}/>
             </Box>
           </Grid>
           <Grid size={{ lg: 8, md: 8, sm: 12, xs: 12 }}>

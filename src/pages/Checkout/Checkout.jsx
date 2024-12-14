@@ -125,14 +125,17 @@ const Checkout = () => {
                 <Box sx={{ marginBottom: "2.8rem" }}>
                   <Grid container spacing={1} justifyContent={"space-between"}>
                     <Grid size={{ lg: 4, md: 4, sm: 12, xs: 12 }}>
-                      <Box sx={{ paddingTop: 1 }}>
+                      <Box sx={{ paddingTop: 2 }}>
                         {/* Title and Date Box */}
 
+                        <Box sx={{ marginBottom: 0 }}>
+                          <Typo_Heading text="Dunes Of Cosmos " />
+                        </Box>
                         <Box sx={{ marginBottom: 4 }}>
-                          <Typo_Heading text="Paradox In Ajmer | 2025" />
+                          <Typo_Subtitle text="Featuring Paradox and Celebrity DJ" fs={"2rem"} />
                         </Box>
 
-                        <Box sx={{ marginBottom: 4 }}>
+                        <Box sx={{ marginBottom: {lg:4, sm:6, xs:6}}}>
                           <Box>
                             <div className="IconTitle">
                               <Box sx={{ marginBottom: 2 }}>
@@ -145,7 +148,7 @@ const Checkout = () => {
                                     />
                                   </Box>
                                   <Typo_Basefont
-                                    text={"1st December"}
+                                    text={"30th and 31st December 2024"}
                                     fc="white"
                                     fw="500"
                                     fs="1.8rem"
@@ -167,7 +170,7 @@ const Checkout = () => {
                                     />
                                   </Box>
                                   <Typo_Basefont
-                                    text={"9:00 PM - 10:00 PM"}
+                                    text={"6:00 PM - 10:00 PM"}
                                     fc="white"
                                     fw="500"
                                   />
@@ -182,7 +185,7 @@ const Checkout = () => {
                               text={
                                 <>
                                   <Link
-                                    href="#"
+                                    href="https://www.google.com/maps/dir//Lohagal+Panchsheel+Rd,+C+Block,+Panchsheel+Nagar,+Ajmer,+Lohagal,+Rajasthan+305004/@26.5041369,74.5682678,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x396be630b27b083f:0x797a581420e1b4fc!2m2!1d74.6506772!2d26.5041396?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D"
                                     variant="body2"
                                     sx={{
                                       fontSize: "1.4rem",
@@ -190,7 +193,7 @@ const Checkout = () => {
                                     }}
                                   >
                                     {
-                                      'Pune International Airport Area, Lohegaon, Pune"'
+                                      "STAR QUEEN - Lohagal Panchsheel Road C-Block (Ajmer) Rajasthan (305004)"
                                     }
                                   </Link>
                                 </>
@@ -229,10 +232,18 @@ const Checkout = () => {
                                   />
                                 </Stack>
                                 <Stack
+                                  sx={{ marginBottom: 0.6 }}
                                   direction={"row"}
                                   justifyContent={"space-between"}
                                 >
-                                  <Typo_Subtitle text="Convenience fee ( inc. of GST )" />
+                                  <Typo_Subtitle text="(Inc. of GST)" />
+                                  <Typo_Subtitle text="₹117.94" />
+                                </Stack>
+                                <Stack
+                                  direction={"row"}
+                                  justifyContent={"space-between"}
+                                >
+                                  <Typo_Subtitle text="Convenience fee" />
                                   <Typo_Subtitle text="₹117.94" />
                                 </Stack>
                               </Box>
@@ -318,7 +329,7 @@ For the Music Lovers"
         </Box>
       </Container>
 
-      <Box sx={{ padding: 18 }}></Box>
+      <Box sx={{ padding: 1 }}></Box>
 
       <div className="posab">
         <PaymentBar proceedtopayment={handleProceedToPayment} />

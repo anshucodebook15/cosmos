@@ -46,7 +46,7 @@ import {
   overview,
   paradox,
   paradoxconcert,
-  paradoxoverview,
+  paradoxperforming,
   paradoxposter,
   savethedate,
   stage,
@@ -193,7 +193,7 @@ const Overview = () => {
 
       {/* Content */}
       <Container
-        sx={{ position: "relative", zIndex: 1, color: "white", py: 6 }}
+        sx={{ position: "relative", zIndex: 1, color: "white", px: 4 }}
       >
         <Grid container spacing={3} justifyContent={"right"}>
           <Grid size={{ xs: 12, sm: 6 }}>
@@ -409,6 +409,7 @@ const AasthaCode = () => {
 
 const PriceCard = ({
   title,
+  cardicon,
   details = [
     { icon: beer, feature: "Basic Entry" },
     { icon: beer, feature: "Snacks" },
@@ -418,102 +419,110 @@ const PriceCard = ({
   return (
     <>
       <Grid size={{ lg: 4, md: 4 }}>
-        <Box
-          sx={{
-            border: "1px solid transparent",
-            borderImage: "linear-gradient(45deg, #C700FF, #FF5733) 1",
-            borderRadius: 2,
-            overflow: "hidden",
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.6)",
-            minHeight: 400,
-            padding: 2.4,
-          }}
-        >
-          <Box sx={{ backgroundImage: `url(${cardbg})` }}>
-            {/* Card Title */}
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                position: "relative",
-                width: "100%",
-                marginBottom: 2,
-              }}
-            >
-              {/* Background Bar */}
+        <Box sx={{ padding: { sm: 2, xs: 2 } }}>
+          <Box
+            sx={{
+              border: "1px solid transparent",
+              borderImage: "linear-gradient(45deg, #C700FF, #FF5733) 1",
+              borderRadius: 2,
+              overflow: "hidden",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.6)",
+              minHeight: 400,
+              padding: 2.4,
+            }}
+          >
+            <Box sx={{ backgroundImage: `url(${cardbg})` }}>
+              {/* Card Title */}
               <Box
                 sx={{
-                  width: "40%",
-                  height: 14,
-                  backgroundColor: "#A30000",
-                  position: "absolute",
-                  bottom: 0,
-                  // zIndex: -1,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  position: "relative",
+                  width: "100%",
+                  marginBottom: 2,
                 }}
-              ></Box>
+              >
+                {/* Background Bar */}
+                <Box
+                  sx={{
+                    width: "40%",
+                    height: 14,
+                    backgroundColor: "#A30000",
+                    position: "absolute",
+                    bottom: 0,
+                    // zIndex: -1,
+                  }}
+                ></Box>
 
-              {/* Text */}
-              <Box sx={{ position: "relative", zIndex: 1 }}>
-                <Typo_Subheading text={title} />
+                {/* Text */}
+                <Box sx={{marginTop: -1, textAlign:"center"}}>
+                  <Box sx={{ position: "relative", zIndex: 1 }}>
+                    <Typo_Subheading text={cardicon} />
+                  </Box>
+                  <Box sx={{ position: "relative", zIndex: 1 }}>
+                    <Typo_Subheading text={title} />
+                  </Box>
+                </Box>
               </Box>
-            </Box>
 
-            {/* Card Chips */}
-            <Box
-              sx={{
-                borderColor: "white",
-                overflow: "hidden",
-                borderRadius: "10px",
-                minHeight: 300,
-                padding: 2,
-              }}
-            >
-              {details.map((item, i) => (
-                <>
-                  <Box
+              {/* Card Chips */}
+              <Box
+                sx={{
+                  borderColor: "white",
+                  overflow: "hidden",
+                  borderRadius: "10px",
+                  minHeight: 300,
+                  padding: 2,
+                }}
+              >
+                {details.map((item, i) => (
+                  <>
+                    <Box
+                      sx={{
+                        display: "inline-block",
+                        border: "2px solid #1b1b1b",
+                        backgroundColor: "#000000",
+                        padding: 0.6,
+                        borderRadius: 25,
+                        marginBottom: 1,
+                      }}
+                    >
+                      <div className="flx aic">
+                        <Box sx={{ marginRight: 1, width: 30, minWidth: 30 }}>
+                          <Imgbox url={item.icon} />
+                        </Box>
+                        <Box sx={{ paddingRight: 1 }}>
+                          <Typo_Chip text={item.feature} fw="400" />
+                        </Box>
+                      </div>
+                    </Box>
+                  </>
+                ))}
+              </Box>
+
+              {/* Card Btn */}
+              <Box>
+                <Stack direction={"row"} justifyContent={"center"}>
+                  <Button
                     sx={{
-                      display: "inline-block",
-                      border: "2px solid #C700FF",
-                      padding: 0.6,
-                      borderRadius: 25,
-                      marginBottom: 1,
+                      background: "#C700FF",
+                      color: "#fff",
+                      borderRadius: 50,
+                      fontSize: { lg: 16, sm: 18, xs: 18 },
+                      border: "none",
+                      paddingInline: 3.4,
+                      textTransform: "none",
+                      fontFamily: "Anton",
+                      "&:hover": {
+                        backgroundColor: "#A300E8",
+                      },
                     }}
                   >
-                    <div className="flx aic">
-                      <Box sx={{ marginRight: 1, width: 30 }}>
-                        <Imgbox url={item.icon} />
-                      </Box>
-                      <Box sx={{ paddingRight: 1 }}>
-                        <Typo_Chip text={item.feature} fw="400" />
-                      </Box>
-                    </div>
-                  </Box>
-                </>
-              ))}
-            </Box>
-
-            {/* Card Btn */}
-            <Box>
-              <Stack direction={"row"} justifyContent={"center"}>
-                <Button
-                  sx={{
-                    background: "#C700FF",
-                    color: "#fff",
-                    borderRadius: 50,
-                    fontSize: 16,
-                    border: "none",
-                    paddingInline: 3.4,
-                    textTransform: "none",
-                    fontFamily: "Anton",
-                    "&:hover": {
-                      backgroundColor: "#A300E8",
-                    },
-                  }}
-                >
-                  ₹ {price} /-
-                </Button>
-              </Stack>
+                    ₹ {price} /-
+                  </Button>
+                </Stack>
+              </Box>
             </Box>
           </Box>
         </Box>
@@ -585,10 +594,10 @@ const Anshul = () => {
             <Box>
               <Stack direction={"row"} justifyContent={"space-between"}>
                 <Box>
-                  <Link to={"mailto:anshus2085@gmail.com"}>
+                  <Link to={"mailto:dunesofcosmos@gmail.com"}>
                     <Chip
                       avatar={<Avatar alt="Natacha" src={mail} />}
-                      label="anshul@dunesofcosmos.com"
+                      label="dunesofcosmos@gmail.com"
                       sx={{
                         color: "white",
                         fontSize: 12,
@@ -602,10 +611,10 @@ const Anshul = () => {
                   </Link>
                 </Box>
                 <Box>
-                  <Link to={"tel:+918058868555"}>
+                  <Link to={"tel:+918690630405"}>
                     <Chip
                       avatar={<Avatar alt="Natacha" src={call} />}
-                      label="+91-8058868555"
+                      label="+91-8690630405"
                       sx={{
                         color: "white",
                         fontSize: 12,
@@ -635,39 +644,53 @@ const Anshul = () => {
               }}
             >
               {/* Spacer */}
-              <Box sx={{ padding: 4 }}></Box>
+              <Box sx={{ padding: { lg: 4, sm: 2, xs: 2 } }}></Box>
 
               {/* Logo */}
-              <Box>
+              <Box sx={{ marginBottom: { xs: 2 } }}>
                 <Stack direction={"row"} justifyContent={"center"}>
-                  <Box>
+                  <Box sx={{ width: 150 }}>
                     <Imgbox url={logo}></Imgbox>
                   </Box>
                 </Stack>
               </Box>
 
               {/* Performing Paradox */}
-              <Box sx={{ marginBottom: 4 }}>
+              <Box sx={{ marginBottom: { lg: 4, xs: 6 } }}>
                 <Stack direction={"row"} justifyContent={"center"}>
                   <Box sx={{ width: 460 }}>
-                    <Imgbox url={paradox}></Imgbox>
+                    <Imgbox url={paradoxperforming}></Imgbox>
                   </Box>
                 </Stack>
               </Box>
 
               {/* Date And Time */}
-              <Box sx={{ marginBottom: 2 }}>
+              <Box sx={{ marginBottom: { lg: 2, xs: 2 } }}>
                 {/* Date */}
                 <Stack direction={"row"} justifyContent={"center"}>
                   <Box sx={{ marginBottom: 0 }}>
-                    <Typo_Heading text="30  DEC  2024" />
+                    <Typography
+                      sx={{
+                        fontSize: { lg: 38, sm: 34, xs: 36 },
+                        fontWeight: 500,
+                        color: "#fff",
+                        fontFamily: "anton",
+                        letterSpacing: 1,
+                        marginBottom: "1.4rem",
+                      }}
+                      variant={"body1"}
+                      color="initial"
+                    >
+                      30th DEC 2024
+                    </Typography>
+                    {/* <Typo_Heading text="30th DEC 2024" /> */}
                   </Box>
                 </Stack>
 
                 {/* Time */}
                 <Stack direction={"row"} justifyContent={"center"}>
                   <Box sx={{ marginBottom: 1 }}>
-                    <Typo_Subtitle text="From 7:00 PM Onwards" fw="500" />
+                    <Typo_Subtitle text="From 6:00 PM Onwards" fw="500" />
                   </Box>
                 </Stack>
               </Box>
@@ -676,7 +699,7 @@ const Anshul = () => {
               <Stack direction={"row"} justifyContent={"center"}>
                 <Box
                   sx={{
-                    marginBottom: { lg: 6, xs: 4 },
+                    marginBottom: { lg: 6, xs: 8 },
                     background: "#000",
                     paddingInline: 2,
                     paddingBlock: 1,
@@ -684,7 +707,12 @@ const Anshul = () => {
                     borderRadius: 20,
                   }}
                 >
-                  <Link className="tdn">
+                  <Link
+                    to={
+                      "https://www.google.com/maps/dir//Lohagal+Panchsheel+Rd,+C+Block,+Panchsheel+Nagar,+Ajmer,+Lohagal,+Rajasthan+305004/@26.5041369,74.5682678,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x396be630b27b083f:0x797a581420e1b4fc!2m2!1d74.6506772!2d26.5041396?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D"
+                    }
+                    className="tdn"
+                  >
                     <Stack direction={"row"}>
                       <Box
                         sx={{
@@ -700,7 +728,7 @@ const Anshul = () => {
                       <Box>
                         <LocationOnIcon
                           sx={{
-                            fontSize: { lg: 22, md: 22, sm: 22, xs: 32 },
+                            fontSize: { lg: 22, md: 22, sm: 22, xs: 28 },
                             fill: "white",
                           }}
                         />
@@ -718,7 +746,7 @@ const Anshul = () => {
                       variant="contained"
                       color="primary"
                       sx={{
-                        fontSize: 20,
+                        fontSize: 22,
                         paddingInline: { lg: 6, xs: 4 },
                         paddingBlock: { lg: 1.6, xs: 1 },
                         borderRadius: 8,
@@ -746,54 +774,78 @@ const Anshul = () => {
       {/* Cards and Prices */}
       <Box
         sx={{
-          paddingBlock: { lg: 10, md: 4, sm: 4, xs: 4 },
+          paddingBlock: { lg: 10, md: 8, sm: 6, xs: 6 },
         }}
       >
         <Container maxWidth={"lg"}>
-          <Box sx={{ marginBottom: 6, textAlign: "center" }}>
+          <Box sx={{ marginBottom: {lg:4,}, textAlign: "center" }}>
             <Typo_Heading text="Get In the Groove..." />
           </Box>
 
           <Grid container spacing={4} justifyContent={"center"}>
             <PriceCard
               title={"GOLD"}
+              cardicon={<>🌟</>}
               price={"2499"}
               details={[
                 {
                   icon: beer,
-                  feature: "Event Entry",
+                  feature: "Entry On 30th",
+                },
+                {
+                  icon: beer,
+                  feature: "Free 31st Party Access ",
+                },
+                {
+                  icon: beer,
+                  feature: "Experience Lifestyle Area",
+                },
+                {
+                  icon: beer,
+                  feature: "Food Stalls and Photobooth Club",
                 },
               ]}
             />
             <PriceCard
               title={"FANPIT"}
+              cardicon={<>&#128131;</>}
               price={"4999"}
               details={[
                 {
                   icon: beer,
-                  feature: " Fan Pit View Access",
+                  feature: " Entry (Hottest spot closest to the stage)",
                 },
                 {
                   icon: beer,
-                  feature: "₹500 food / beverage coupon",
+                  feature: "Free ₹500 Food Coupon",
                 },
                 {
                   icon: beer,
-                  feature: "Includes 4 pints of beer",
+                  feature: "Free 4 pints of beer",
                 },
               ]}
             />
             <PriceCard
               title={"VIP"}
+              cardicon={<>&#128081;</>}
               price={"14999"}
               details={[
                 {
                   icon: beer,
-                  feature: "Priority event access",
+                  feature: "Priority Access to the Event",
                 },
                 {
                   icon: beer,
-                  feature: "Unlimited premium food & liquor",
+                  feature: "Unlimited Premium Food",
+                },
+                {
+                  icon: beer,
+                  feature: "Unlimited Premium Liquor",
+                },
+                {
+                  icon: beer,
+                  feature:
+                    "A night of luxury, comfort and unforgettable moments",
                 },
               ]}
             />
@@ -808,7 +860,8 @@ const Anshul = () => {
 
       <Box
         sx={{
-          paddingBlock: 2,
+          paddingBlock: {lg:2, sm:4, xs:4},
+          paddingInline: {sm:2, xs:2},
         }}
       >
         <Poster />

@@ -33,13 +33,13 @@ const Contact = () => {
           <Box sx={{padding: 2}}></Box>
 
           <Box sx={{ paddingBlock: 1 }}>
-            <Typo_Basefont text='support@dunesofcosmos.com, thekahanikaars@gmail.com' fc='#eeeeee' fs='1.8rem' />
+            <Typo_Basefont text='dunesofcosmos@gmail.com, thekahanikaars@gmail.com' fc='#eeeeee' fs='1.8rem' />
           </Box>
           <Box sx={{ paddingBlock: 1 }}>
             <Typo_Basefont text='DOC office, near dainik bhaskar office, panchsheel road, vaishali nagar, Ajmer' fc='#eeeeee' fs='1.8rem' />
           </Box>
           <Box sx={{ paddingBlock: 1 }}>
-            <Typo_Smallfont text='+91-9636074720, +91-8824627181, +91-7296840137' fc='#eeeeee' fs='1.8rem' />
+            <Typo_Smallfont text='+91-9636074720, +91-8824627181, +91-7296840137, +91-8233345554'  fc='#eeeeee' fs='1.8rem' />
           </Box>
 
         </Box>

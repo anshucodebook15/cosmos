@@ -30,7 +30,7 @@ const Sponserbar = () => {
     <Box
       sx={{
         paddingBlock: 4,
-        background: "#00000082",
+        background: {lg:"#00000082", sm:"#0000000", xs:"#000000"},
         border: 1,
         borderRadius: 2,
         borderColor: "#4a4545",
@@ -44,7 +44,7 @@ const Sponserbar = () => {
                 <Typography
                   variant="h2"
                   sx={{
-                    fontSize: { lg: 22, md: 22, sm: 20, xs: 20 },
+                    fontSize: { lg: 22, md: 22, sm: 18, xs: 18 },
                     fontWeight: 500,
                     fontFamily: "jost",
                     color: "white",
@@ -76,13 +76,13 @@ const Sponserbar = () => {
                 <Typography
                   variant="h2"
                   sx={{
-                    fontSize: { lg: 22, md: 22, sm: 20, xs: 20 },
+                    fontSize: { lg: 22, md: 22, sm: 18, xs: 18},
                     fontWeight: 500,
                     fontFamily: "jost",
                     color: "white",
                   }}
                 >
-                  Event Organizers
+                  Event Organisers
                 </Typography>
               </Box>
               <Stack direction={"row"} justifyContent={"center"}>
@@ -123,7 +123,7 @@ const Sponserbar = () => {
                 <Typography
                   variant="h2"
                   sx={{
-                    fontSize: { lg: 22, md: 22, sm: 20, xs: 20 },
+                    fontSize: { lg: 22, md: 22, sm: 18, xs: 18 },
                     fontWeight: 500,
                     fontFamily: "jost",
                     color: "white",
@@ -158,7 +158,7 @@ const Sponserbar = () => {
                 <Typography
                   variant="h2"
                   sx={{
-                    fontSize: { lg: 22, md: 22, sm: 20, xs: 20 },
+                    fontSize: { lg: 22, md: 22, sm: 18, xs: 18 },
                     fontWeight: 500,
                     fontFamily: "jost",
                     color: "white",

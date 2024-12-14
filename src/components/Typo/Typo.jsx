@@ -110,7 +110,7 @@ export const Typo_Basefont = ({
   return (
     <>
       <Typography
-        sx={{ fontSize: `${fs}`, fontWeight: `${fw}`, color: `${fc}`, fontFamily: "jost", }}
+        sx={{ fontSize: `${fs}`, fontWeight: `${fw}`, color: `${fc}`, fontFamily: "jost"}}
         variant={v}
         color="initial"
       >
