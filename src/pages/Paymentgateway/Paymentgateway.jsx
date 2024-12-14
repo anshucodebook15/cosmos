@@ -4,27 +4,14 @@ import './Paymentgateway.scss'
 import { cashfree } from '../../cashfree/cashfree'
 import axios from 'axios'
 
-
-
-
-
-
-
-
-
-
-
 const Paymentgateway = () => {
 
   const [loading, setLoading] = useState(false);
   const [sessionID, setSessionID] = useState('');
   const [error, setError] = useState('');
 
-
   // Define version
   let version = cashfree.version();
-
-
 
   const getSessionID = (e) => {
     e.preventDefault();
