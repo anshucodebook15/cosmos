@@ -2,7 +2,7 @@ import clock from "./clock2.svg";
 import calender from "./calender.svg";
 import map from "./map.svg";
 import ticket from "./ticket.svg";
-import logo from "./DFC_logo.png";
+import logo from "./DOC_svg.svg";
 
 // Landing
 import concertbg from "./landingconcert.jpg";
