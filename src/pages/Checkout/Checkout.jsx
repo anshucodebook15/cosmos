@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Checkout.scss";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid2";
@@ -22,11 +22,12 @@ import { NavLink } from "react-router";
 import { NavigateTo } from "../../routes/Routes";
 import Glassmorph from "../../components/Glassmorph/Glassmorph";
 import CheckoutBar from "../../components/CheckoutBar/CheckoutBar";
-import { SelectBooking } from "../Booking/BookingSlice";
+import { addCheckoutDetails, SelectBooking } from "../Booking/BookingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { usePriceHook } from "../../hooks/usePriceHook";
+import AppInput from "../../components/AppInput/AppInput";
 
-const PaymentBar = () => {
+const PaymentBar = ({ proceedtopayment }) => {
   return (
     <>
       <div className="CheckoutBar">
@@ -39,7 +40,10 @@ const PaymentBar = () => {
                 alignItems={"flex-end"}
               >
                 <Box>
-                  <button className=" defaultBtn checkoutbtn">
+                  <button
+                    className=" defaultBtn checkoutbtn"
+                    onClick={proceedtopayment}
+                  >
                     <NavLink to={"/checkout"}>
                       <Typo_Subtitle text={`Pay To Proceed`} fw="600" />
                     </NavLink>
@@ -54,22 +58,62 @@ const PaymentBar = () => {
   );
 };
 
+const CheckoutForm = ({ details, handleChange }) => {
+  return (
+    <>
+      <Box marginBottom={4}>
+        <AppInput
+          type="text"
+          name="name"
+          val={details.name}
+          handleChange={handleChange}
+          label="Full Name"
+          placeholder=""
+        />
+        <AppInput
+          type="email"
+          name="email"
+          val={details.email}
+          handleChange={handleChange}
+          label="Email "
+          placeholder=""
+        />
+        <AppInput
+          type="number"
+          name="mobile"
+          val={details.mobile}
+          handleChange={handleChange}
+          label="Mobile Number"
+          placeholder=""
+        />
+      </Box>
+    </>
+  );
+};
+
 const Checkout = () => {
   const { formatPrice } = usePriceHook();
   const dispatch = useDispatch();
-  const { seats, error, total } = useSelector(SelectBooking);
+  const { seats, error, total, name, email, mobile } =
+    useSelector(SelectBooking);
+  const allticketdata = useSelector(SelectBooking);
+
+  // Update React Redux State to Provide details
+  const handleAddCheckoutDetails = (e) => {
+    const { name, value } = e.target;
+    dispatch(addCheckoutDetails({ name, value }));
+  };
+
+  const handleProceedToPayment = () => {
+    // Print all ticket data here
+    console.log("allticketdata", allticketdata);
+  };
+
+  // console.log("checkoutDetails", name, email, mobile);
 
   return (
     <div className="Details">
-      {/* <Glassmorph
-        uri={
-          "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/ladies-night-party-landscape-poster-flyer-design-template-cc9e9c66c4e308161db9c7dcaa27bffe_screen.jpg?ts=1601365829"
-        }
-      /> */}
-
       <Container maxWidth="lg">
-        {/* <Breadcrumb /> */}
-
         <Box sx={{ paddingBlock: "1rem" }}>
           <Grid container spacing={2}>
             <Grid size={12}>
@@ -78,138 +122,171 @@ const Checkout = () => {
                   margin: "1rem",
                 }}
               >
-                {/* Heading and event poster */}
                 <Box sx={{ marginBottom: "2.8rem" }}>
                   <Grid container spacing={1} justifyContent={"space-between"}>
                     <Grid size={{ lg: 4, md: 4, sm: 12, xs: 12 }}>
                       <Box sx={{ paddingTop: 1 }}>
-                        <Typo_Heading text="Paradox In Ajmer | 2025" />
-                        <Typo_Subtitle text="Full Of Energy and lots of fun" />
+                        {/* Title and Date Box */}
 
-                        <Box sx={{ paddingBlock: 2.4 }}>
-                          {/* <Divider sx={{ bgcolor: "#eeeeee" }} /> */}
+                        <Box sx={{ marginBottom: 4 }}>
+                          <Typo_Heading text="Paradox In Ajmer | 2025" />
                         </Box>
 
-                        <Box>
-                          <div className="IconTitle">
-                            <Box sx={{ marginBottom: 2 }}>
-                              <div className="flx aic">
-                                <Box sx={{ paddingRight: 2 }}>
-                                  <img
-                                    src={calender}
-                                    alt=""
-                                    className="iconwidth20"
+                        <Box sx={{ marginBottom: 4 }}>
+                          <Box>
+                            <div className="IconTitle">
+                              <Box sx={{ marginBottom: 2 }}>
+                                <div className="flx aic">
+                                  <Box sx={{ paddingRight: 2 }}>
+                                    <img
+                                      src={calender}
+                                      alt=""
+                                      className="iconwidth20"
+                                    />
+                                  </Box>
+                                  <Typo_Basefont
+                                    text={"1st December"}
+                                    fc="white"
+                                    fw="500"
+                                    fs="1.8rem"
                                   />
-                                </Box>
-                                <Typo_Basefont
-                                  text={"1st December"}
-                                  fc="white"
-                                  fw="500"
-                                />
-                              </div>
-                            </Box>
-                          </div>
-                        </Box>
+                                </div>
+                              </Box>
+                            </div>
+                          </Box>
 
-                        <Box>
-                          <div className="IconTitle">
-                            <Box sx={{ marginBottom: 2 }}>
-                              <div className="flx aic">
-                                <Box sx={{ paddingRight: 2 }}>
-                                  <img
-                                    src={clock}
-                                    alt=""
-                                    className="iconwidth20"
+                          <Box>
+                            <div className="IconTitle">
+                              <Box sx={{ marginBottom: 2 }}>
+                                <div className="flx aic">
+                                  <Box sx={{ paddingRight: 2 }}>
+                                    <img
+                                      src={clock}
+                                      alt=""
+                                      className="iconwidth20"
+                                    />
+                                  </Box>
+                                  <Typo_Basefont
+                                    text={"9:00 PM - 10:00 PM"}
+                                    fc="white"
+                                    fw="500"
                                   />
-                                </Box>
-                                <Typo_Basefont
-                                  text={"9:00 PM - 10:00 PM"}
-                                  fc="white"
-                                  fw="500"
-                                />
-                              </div>
-                            </Box>
-                          </div>
+                                </div>
+                              </Box>
+                            </div>
+                          </Box>
+
+                          <Box>
+                            <IconTitle
+                              icon={map}
+                              text={
+                                <>
+                                  <Link
+                                    href="#"
+                                    variant="body2"
+                                    sx={{
+                                      fontSize: "1.4rem",
+                                      color: "#bcbcbc",
+                                    }}
+                                  >
+                                    {
+                                      'Pune International Airport Area, Lohegaon, Pune"'
+                                    }
+                                  </Link>
+                                </>
+                              }
+                            />
+                          </Box>
                         </Box>
 
-                        {/* <IconTitle icon={calender} text={"1st December"} /> */}
-                        {/* <IconTitle icon={clock} text={"9:00 PM - 10:00 PM"} /> */}
-                        <IconTitle
-                          icon={map}
-                          text={
-                            <>
-                              <Link
-                                href="#"
-                                variant="body2"
-                                sx={{ fontSize: "1.4rem", color: "#bcbcbc" }}
+                        {/* Billing Details */}
+                        <Box
+                          sx={{
+                            border: 1,
+                            borderColor: "white",
+                            overflow: "hidden",
+                            borderRadius: "10px",
+                            height: "100%",
+                            padding: 2,
+                            marginBottom: 4,
+                          }}
+                        >
+                          <div className="flx flxdc jcsb h100">
+                            <Box>
+                              <Box sx={{ marginBottom: 2 }}>
+                                <Typo_Subheading text={"Bill Summary"} />
+                              </Box>
+
+                              <Box marginBottom={4}>
+                                <Stack
+                                  sx={{ marginBottom: 0.6 }}
+                                  direction={"row"}
+                                  justifyContent={"space-between"}
+                                >
+                                  <Typo_Subtitle text="Total Ticket Price" />
+                                  <Typo_Subtitle
+                                    text={`₹ ${formatPrice(total.price)}`}
+                                  />
+                                </Stack>
+                                <Stack
+                                  direction={"row"}
+                                  justifyContent={"space-between"}
+                                >
+                                  <Typo_Subtitle text="Convenience fee ( inc. of GST )" />
+                                  <Typo_Subtitle text="₹117.94" />
+                                </Stack>
+                              </Box>
+                            </Box>
+
+                            <Box sx={{ borderTop: 1, paddingTop: 1 }}>
+                              <Stack
+                                direction={"row"}
+                                justifyContent={"space-between"}
                               >
-                                {
-                                  'Pune International Airport Area, Lohegaon, Pune"'
-                                }
-                              </Link>
-                            </>
-                          }
-                        />
-                        {/* <Box sx={{ paddingBlock: 3.4 }}>
-                        <Divider />
-                      </Box> */}
+                                <Typo_Subtitle text={"To Be Paid"} fc="white" />
+                                <Typo_Subtitle text={"1669.00"} fc="white" />
+                              </Stack>
+                            </Box>
+                          </div>
+                        </Box>
                       </Box>
                     </Grid>
                     <Grid size={{ lg: 7, md: 7, sm: 12, xs: 12 }}>
-                      <Box
-                        sx={{
-                          border: 1,
-                          borderColor: "white",
-                          overflow: "hidden",
-                          borderRadius: "10px",
-                          height: "100%",
-                          padding: 2,
-                        }}
-                      >
-                        <div className="flx flxdc jcsb h100">
-                          <Box>
-                            <Box sx={{ marginBottom: 2 }}>
-                              <Typo_Subheading text={"Bill Summary"} />
-                            </Box>
-
-                            <Box>
-                              <Stack
-                                sx={{ marginBottom: 0.6 }}
-                                direction={"row"}
-                                justifyContent={"space-between"}
-                              >
-                                <Typo_Subtitle text="Total Ticket Price" />
-                                <Typo_Subtitle
-                                  text={`₹ ${formatPrice(total.price)}`}
-                                />
-                              </Stack>
-                              <Stack
-                                direction={"row"}
-                                justifyContent={"space-between"}
-                              >
-                                <Typo_Subtitle text="Convenience fee ( inc. of GST )" />
-                                <Typo_Subtitle text="₹117.94" />
-                              </Stack>
-                            </Box>
-                          </Box>
-
-                          <Box sx={{ borderTop: 1, paddingTop: 1 }}>
-                            <Stack
-                              direction={"row"}
-                              justifyContent={"space-between"}
-                            >
-                              <Typo_Subtitle text={"To Be Paid"} fc="white" />
-                              <Typo_Subtitle text={"1669.00"} fc="white" />
-                            </Stack>
-                          </Box>
-                        </div>
+                      {/* Checkout Form */}
+                      <Box>
+                        <Box marginBottom={4}>
+                          <AppInput
+                            type="text"
+                            name="name"
+                            val={name}
+                            handleChange={handleAddCheckoutDetails}
+                            label="Full Name"
+                            placeholder=""
+                          />
+                          <AppInput
+                            type="email"
+                            name="email"
+                            val={email}
+                            handleChange={handleAddCheckoutDetails}
+                            label="Email "
+                            placeholder=""
+                          />
+                          <AppInput
+                            type="number"
+                            name="mobile"
+                            val={mobile}
+                            handleChange={handleAddCheckoutDetails}
+                            label="Mobile Number"
+                            placeholder=""
+                          />
+                        </Box>
                       </Box>
                     </Grid>
                   </Grid>
                 </Box>
 
                 {/* About Event  */}
-                <Grid container>
+                {/* <Grid container>
                   <Grid size={12}>
                     <Box sx={{ paddingBlock: "1rem" }}>
                       <Box sx={{ marginBottom: "1.6rem" }}>
@@ -234,15 +311,17 @@ For the Music Lovers"
                     </Box>
                   </Grid>
                   <Grid size={6}></Grid>
-                </Grid>
+                </Grid> */}
               </Box>
             </Grid>
           </Grid>
         </Box>
       </Container>
 
+      <Box sx={{ padding: 18 }}></Box>
+
       <div className="posab">
-        <PaymentBar />
+        <PaymentBar proceedtopayment={handleProceedToPayment} />
         {/* <CheckoutBar totalprice={""} totaltickets={""} /> */}
       </div>
     </div>

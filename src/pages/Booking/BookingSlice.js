@@ -9,6 +9,10 @@ const API = axios.create({
 });
 
 const initialState = {
+  name: "",
+  mobile: "",
+  email: "",
+  payment_transactionID: "",
   seats: [],
   total: {
     price: 0,
@@ -83,7 +87,15 @@ export const BookingSlice = createSlice({
       state.total.price = totalPrice;
       state.total.tickets = totalTicket;
     },
-    proceedToCheckout: (state, action) => {},
+    addCheckoutDetails: (state, action) => {
+      // Add Name, Mobile, Email to send ticket
+
+      state[action.payload.name] = action.payload.value
+
+      // console.log("action details", action.payload);
+      
+
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchSeats.pending, (state, action) => {
@@ -106,7 +118,7 @@ export const BookingSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addSingleTicket, addorSubTicket, checkoutTotalandTickects } =
+export const { addSingleTicket, addorSubTicket, checkoutTotalandTickects, addCheckoutDetails } =
   BookingSlice.actions;
 export const SelectBooking = (store) => store.booking;
 export const BookingReducer = BookingSlice.reducer;
