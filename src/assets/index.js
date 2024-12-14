@@ -21,7 +21,7 @@ import paradoxposter from "./ParadoxPoster.png";
 import stage from "./0003.svg";
 import table from "./0005.svg";
 import overview from "./Overview.png";
-import paradoxoverview from "./paradoxoverview.svg";
+import paradoxoverview from "./psvg.svg";
 import ticketdetails from "./0004.svg";
 import mail from "./mail3.png";
 import call from "./call.png";
