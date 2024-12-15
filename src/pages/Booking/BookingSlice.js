@@ -16,8 +16,10 @@ const initialState = {
   seats: [],
   total: {
     price: 0,
+    finalprice: 0,
     tickets: 0,
     gst: 18,
+    convenience_fee: 0,
   },
   status: "idle",
   error: "",
@@ -77,6 +79,7 @@ export const BookingSlice = createSlice({
     checkoutTotalandTickects: (state, action) => {
       let totalTicket = 0;
       let totalPrice = 0;
+      let finalPriceAfterConfee = 0;
 
       // Calculate total Price and total ticket
       state.seats.map((item) => {
@@ -84,17 +87,17 @@ export const BookingSlice = createSlice({
         totalPrice = totalPrice + item.count * item.price;
       });
 
-      state.total.price = totalPrice;
       state.total.tickets = totalTicket;
+      state.total.price = totalPrice;
+      state.total.convenience_fee = totalPrice * 0.02;
+      state.total.finalprice = state.total.price + state.total.convenience_fee;
     },
     addCheckoutDetails: (state, action) => {
       // Add Name, Mobile, Email to send ticket
 
-      state[action.payload.name] = action.payload.value
+      state[action.payload.name] = action.payload.value;
 
       // console.log("action details", action.payload);
-      
-
     },
   },
   extraReducers: (builder) => {
@@ -118,7 +121,11 @@ export const BookingSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addSingleTicket, addorSubTicket, checkoutTotalandTickects, addCheckoutDetails } =
-  BookingSlice.actions;
+export const {
+  addSingleTicket,
+  addorSubTicket,
+  checkoutTotalandTickects,
+  addCheckoutDetails,
+} = BookingSlice.actions;
 export const SelectBooking = (store) => store.booking;
 export const BookingReducer = BookingSlice.reducer;

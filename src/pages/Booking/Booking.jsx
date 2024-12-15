@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import "./Booking.scss";
 import {
   Box,
@@ -55,8 +55,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 //   );
 // };
 
-
-
 /***** */
 
 const ts = {
@@ -74,7 +72,7 @@ const TicketAddBtn = ({ state, addTicket, subTicket }) => {
         sx={{
           bgcolor: `${ts.p400}`,
           borderRadius: 1,
-          paddingInline: {lg:1, sm:0, xs:0},
+          paddingInline: { lg: 1, sm: 0, xs: 0 },
           marginBottom: 1.4,
         }}
       >
@@ -144,7 +142,7 @@ const TicketBtn = ({ ticketfn }) => {
           bgcolor: `${ts.p400}`,
           color: `${ts.g50}`,
           fontSize: 16,
-          paddingInline: {lg:6, sm:4, xs:4},
+          paddingInline: { lg: 6, sm: 4, xs: 4 },
           fontFamily: "Anton",
         }}
         onClick={ticketfn}
@@ -271,7 +269,7 @@ const TicketView = ({
   quantity,
   status,
 }) => {
-  const { formatPrice, calSingleTicketTotal } = usePriceHook();
+  const { formatPrice, calSingleTicketTotal, formatShowPrice } = usePriceHook();
   return (
     <>
       <Container maxWidth="lg">
@@ -306,7 +304,7 @@ const TicketView = ({
                   <TicketClass text={club} />
                 </Box>
                 <Box sx={{ marginBottom: 0.4 }}>
-                  <TicketClass text={`₹ ${formatPrice(price)}/-`} />
+                  <TicketClass text={`₹ ${formatShowPrice(price)}/-`} />
                 </Box>
                 <Box sx={{}}>
                   <Typo_Basefont
@@ -374,16 +372,21 @@ const Booking = () => {
   const dispatch = useDispatch();
   const { seats, error, total } = useSelector(SelectBooking);
 
-  // handle ticket Event
-  const handleSingleDispatch = (item) => {
-    dispatch(addSingleTicket(item));
-    dispatch(checkoutTotalandTickects());
-  };
+  const handleSingleDispatch = useCallback(
+    (item) => {
+      dispatch(addSingleTicket(item));
+      dispatch(checkoutTotalandTickects());
+    },
+    [seats, total]
+  );
 
-  const handleAddSubTicket = (sign, area, count) => {
-    dispatch(addorSubTicket({ sign, area, count }));
-    dispatch(checkoutTotalandTickects());
-  };
+  const handleAddSubTicket = useCallback(
+    (sign, area, count) => {
+      dispatch(addorSubTicket({ sign, area, count }));
+      dispatch(checkoutTotalandTickects());
+    },
+    [seats, total]
+  );
 
   useEffect(() => {
     dispatch(fetchSeats());
@@ -405,8 +408,16 @@ const Booking = () => {
 
         <Grid container spacing={0}>
           <Grid size={{ lg: 4, md: 4, sm: 12, xs: 12 }}>
-            <Box sx={{ overflow: "hidden", borderRadius: 2, height: {lg:400, sm:130, xs:130}, marginBottom: 2, paddingInline: 2 }}>
-              <Imgbox url={PDB} cls={"mg-neg"}/>
+            <Box
+              sx={{
+                overflow: "hidden",
+                borderRadius: 2,
+                height: { lg: 400, sm: 130, xs: 130 },
+                marginBottom: 2,
+                paddingInline: 2,
+              }}
+            >
+              <Imgbox url={PDB} cls={"mg-neg"} />
             </Box>
           </Grid>
           <Grid size={{ lg: 8, md: 8, sm: 12, xs: 12 }}>

@@ -16,7 +16,7 @@ import IconTitle from "../../components/IconTitle/IconTitle";
 import { calender, clock, map, ticket } from "../../assets";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
-import { appcol } from "../../theme/apptheme";
+import { appcol, ts } from "../../theme/apptheme";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import { NavLink } from "react-router";
 import { NavigateTo } from "../../routes/Routes";
@@ -26,6 +26,7 @@ import { addCheckoutDetails, SelectBooking } from "../Booking/BookingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { usePriceHook } from "../../hooks/usePriceHook";
 import AppInput from "../../components/AppInput/AppInput";
+import ActionButton from "../../components/ActionButton/ActionButton";
 
 const PaymentBar = ({ proceedtopayment }) => {
   return (
@@ -40,14 +41,11 @@ const PaymentBar = ({ proceedtopayment }) => {
                 alignItems={"flex-end"}
               >
                 <Box>
-                  <button
-                    className=" defaultBtn checkoutbtn"
-                    onClick={proceedtopayment}
-                  >
-                    <NavLink to={"/checkout"}>
-                      <Typo_Subtitle text={`Pay To Proceed`} fw="600" />
-                    </NavLink>
-                  </button>
+                  <ActionButton
+                    text={"Pay Now"}
+                    disabled={false}
+                    onclick={() => {}}
+                  />
                 </Box>
               </Stack>
             </Box>
@@ -92,7 +90,7 @@ const CheckoutForm = ({ details, handleChange }) => {
 };
 
 const Checkout = () => {
-  const { formatPrice } = usePriceHook();
+  const { formatPrice, calConvenience } = usePriceHook();
   const dispatch = useDispatch();
   const { seats, error, total, name, email, mobile } =
     useSelector(SelectBooking);
@@ -132,10 +130,13 @@ const Checkout = () => {
                           <Typo_Heading text="Dunes Of Cosmos " />
                         </Box>
                         <Box sx={{ marginBottom: 4 }}>
-                          <Typo_Subtitle text="Featuring Paradox and Celebrity DJ" fs={"2rem"} />
+                          <Typo_Subtitle
+                            text="Featuring Paradox and Celebrity DJ"
+                            fs={"2rem"}
+                          />
                         </Box>
 
-                        <Box sx={{ marginBottom: {lg:4, sm:6, xs:6}}}>
+                        <Box sx={{ marginBottom: { lg: 4, sm: 6, xs: 6 } }}>
                           <Box>
                             <div className="IconTitle">
                               <Box sx={{ marginBottom: 2 }}>
@@ -228,7 +229,7 @@ const Checkout = () => {
                                 >
                                   <Typo_Subtitle text="Total Ticket Price" />
                                   <Typo_Subtitle
-                                    text={`₹ ${formatPrice(total.price)}`}
+                                    text={`${formatPrice(total.price)}`}
                                   />
                                 </Stack>
                                 <Stack
@@ -236,15 +237,22 @@ const Checkout = () => {
                                   direction={"row"}
                                   justifyContent={"space-between"}
                                 >
-                                  <Typo_Subtitle text="(Inc. of GST)" />
-                                  <Typo_Subtitle text="₹117.94" />
+                                  <Typo_Basefont
+                                    text="(Inc. of GST)"
+                                    fc={ts.g100}
+                                  />
+                                  {/* <Typo_Subtitle text="₹117.94" /> */}
                                 </Stack>
                                 <Stack
                                   direction={"row"}
                                   justifyContent={"space-between"}
                                 >
-                                  <Typo_Subtitle text="Convenience fee" />
-                                  <Typo_Subtitle text="₹117.94" />
+                                  <Typo_Subtitle text="Convenience fee (2%)" />
+                                  <Typo_Subtitle
+                                    text={`+ ${formatPrice(
+                                      total.convenience_fee
+                                    )}`}
+                                  />
                                 </Stack>
                               </Box>
                             </Box>
@@ -254,8 +262,14 @@ const Checkout = () => {
                                 direction={"row"}
                                 justifyContent={"space-between"}
                               >
-                                <Typo_Subtitle text={"To Be Paid"} fc="white" />
-                                <Typo_Subtitle text={"1669.00"} fc="white" />
+                                <Typo_Subtitle
+                                  text={"Amount to be paid"}
+                                  fc="white"
+                                />
+                                <Typo_Subtitle
+                                  text={`${formatPrice(total.finalprice)}`}
+                                  fc="white"
+                                />
                               </Stack>
                             </Box>
                           </div>

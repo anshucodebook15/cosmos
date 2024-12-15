@@ -4,17 +4,21 @@ import { Box, Button, Container, Stack } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Typo_Basefont, Typo_Subheading, Typo_Subtitle } from "../Typo/Typo";
 import { usePriceHook } from "../../hooks/usePriceHook";
-import { NavLink } from "react-router";
+import { useNavigate, NavLink } from "react-router";
+import ActionButton from "../ActionButton/ActionButton";
+import { ts } from "../../theme/apptheme";
 
-const ts = {
-  g50: "#ffffff",
-  g100: "#535353",
-  g200: "#1B1B1B",
-  g300: "#121212",
-  p400: "#E32B7E",
-};
+// const ts = {
+//   g50: "#ffffff",
+//   g100: "#535353",
+//   g200: "#1B1B1B",
+//   g300: "#121212",
+//   p400: "#E32B7E",
+// };
 const CheckoutBar = ({ totalprice = 0, totaltickets = 0 }) => {
-  const { formatPrice } = usePriceHook();
+  const navigate = useNavigate();
+
+  const { formatPrice, formatShowPrice } = usePriceHook();
   return (
     <div className="CheckoutBar">
       <Box sx={{ padding: 3.6 }}>
@@ -25,10 +29,10 @@ const CheckoutBar = ({ totalprice = 0, totaltickets = 0 }) => {
               justifyContent={"flex-end"}
               alignItems={"flex-end"}
             >
-              <Box textAlign={"right"} marginRight={{lg:2, xs:3}}>
+              <Box textAlign={"right"} marginRight={{ lg: 2, xs: 3 }}>
                 <Box>
                   <Typo_Subtitle
-                    text={`₹ ${formatPrice(totalprice)}`}
+                    text={`₹ ${formatShowPrice(totalprice)}`}
                     fw="600"
                   />
                 </Box>
@@ -38,26 +42,33 @@ const CheckoutBar = ({ totalprice = 0, totaltickets = 0 }) => {
                 />
               </Box>
               <Box>
-                <NavLink to={"/checkout"}>
-                  <Button
-                    sx={{
-                      width: "fit-content",
-                      bgcolor: `${ts.p400}`,
-                      color: `${ts.g50}`,
-                      fontSize: 16,
-                      paddingInline: { lg: 6, sm: 1.6, xs:1.6},
-                      fontFamily: "Jost",
-                      textTransform: "none",
-                    }}
-                  >
-                    Proceed to Pay
-                  </Button>
-                </NavLink>
-                {/* <button className=" defaultBtn checkoutbtn">
-                  <NavLink to={"/checkout"}>
-                    <Typo_Subtitle text={`Pay To Proceed`} fw="600" />
-                  </NavLink>
-                </button> */}
+                <ActionButton
+                  text={"Pay To Proceed"}
+                  disabled={false}
+                  onclick={() => navigate("/checkout")}
+                />
+
+                {/* <Button
+                  sx={{
+                    width: "fit-content",
+                    bgcolor: `${ts.p400}`,
+                    color: `${ts.g50}`,
+                    fontSize: 16,
+                    paddingInline: { lg: 6, sm: 1.6, xs: 1.6 },
+                    fontFamily: "Jost",
+                    textTransform: "none",
+                    "&:disabled": {
+                      background: `${ts.g300}`,
+                      color: `${ts.g100}`,
+                      borderColor: `${ts.g100}`,
+                      border: 1,
+                    },
+                  }}
+                  onClick={() => navigate("/checkout")}
+                  disabled={false}
+                >
+                  Proceed to Pay
+                </Button> */}
               </Box>
             </Stack>
           </Box>
