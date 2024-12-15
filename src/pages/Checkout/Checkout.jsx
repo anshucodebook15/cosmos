@@ -43,7 +43,7 @@ const PaymentBar = ({ proceedtopayment }) => {
                 <Box>
                   <ActionButton
                     text={"Pay Now"}
-                    disabled={false}
+                    disabled={true}
                     onclick={() => {}}
                   />
                 </Box>
