@@ -343,7 +343,7 @@ For the Music Lovers"
         </Box>
       </Container>
 
-      <Box sx={{ padding: 1 }}></Box>
+      <Box sx={{ padding: { lg: 0, md: 0, sm: 1, xs: 1 } }}></Box>
 
       <div className="posab">
         <PaymentBar proceedtopayment={handleProceedToPayment} />

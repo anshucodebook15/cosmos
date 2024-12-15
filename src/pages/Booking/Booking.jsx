@@ -226,7 +226,7 @@ const TicketClass = ({ text }) => {
 //   );
 // };
 
-const TicketDetail = () => {
+const TicketDetail = ({ areadetails = [] }) => {
   return (
     <>
       <Accordion
@@ -245,12 +245,14 @@ const TicketDetail = () => {
           Details
         </AccordionSummary>
         <AccordionDetails sx={{ color: "white" }}>
-          <Typo_Basefont
-            text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget."
-            fs="1.4rem"
-            fw="300"
-          />
+          {areadetails &&
+            areadetails.map((item) => (
+              <>
+                <Box>
+                  <Typo_Basefont text={item} fw="300" />
+                </Box>
+              </>
+            ))}
         </AccordionDetails>
       </Accordion>
     </>
@@ -347,7 +349,7 @@ const TicketView = ({
           <Box sx={{ padding: { lg: 2, md: 2, sm: 2, xs: 1.6 } }}>
             {/* Inner Grey Box */}
             <Box>
-              <TicketDetail />
+              <TicketDetail areadetails={details} />
 
               {/* <Box sx={{ marginBottom: 1 }}>
                 <Typo_Basefont text="Details" fs="1.6rem" fw="600" />
@@ -433,6 +435,7 @@ const Booking = () => {
                       quantity={item.count}
                       price={item.price}
                       status={item.status}
+                      details={item.details}
                       ticketfn={() => handleSingleDispatch(item.areaID)}
                       addTicket={() =>
                         handleAddSubTicket("+", item.areaID, item.count)
