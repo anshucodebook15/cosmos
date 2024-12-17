@@ -34,6 +34,25 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
+import Lottie from "react-lottie";
+import { LOAD } from "../../json";
+
+const LotiAni = () => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: LOAD,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+  return (
+    <>
+      <Lottie options={defaultOptions} height={400} width={400} />
+    </>
+  );
+};
+
 // const TicketView = ({
 //   id,
 //   state = 0,
@@ -226,6 +245,10 @@ const TicketClass = ({ text }) => {
 //   );
 // };
 
+const Aniloader = () => {
+  return <></>;
+};
+
 const TicketDetail = ({ areadetails = [] }) => {
   return (
     <>
@@ -372,7 +395,11 @@ const TicketView = ({
 
 const Booking = () => {
   const dispatch = useDispatch();
-  const { seats, error, total } = useSelector(SelectBooking);
+  const { seats, error, total, status } = useSelector(SelectBooking);
+
+  useEffect(() => {
+    dispatch(fetchSeats());
+  }, []);
 
   const handleSingleDispatch = useCallback(
     (item) => {
@@ -390,79 +417,115 @@ const Booking = () => {
     [seats, total]
   );
 
-  useEffect(() => {
-    dispatch(fetchSeats());
-  }, []);
+  // Add Loader
+  if (status === "pending") {
+    return (
+      <>
+        <LotiAni />
+      </>
+    );
+  } else if (status === "success") {
+    return (
+      <div className="Commingsoon posrel">
+        <Box sx={{ padding: 2 }}></Box>
 
-  return (
-    <div className="Commingsoon posrel">
-      {/* <Glassmorph
-        uri={
-          "https://b.zmtcdn.com/data/zomaland/c94a1e779c5f3126720dcfb0c6a8dad81733740463.png"
-        }
-      /> */}
+        <Container>
+          {/* Banner Box */}
+          <Box></Box>
 
-      <Box sx={{ padding: 2 }}></Box>
-
-      <Container>
-        {/* Banner Box */}
-        <Box></Box>
-
-        <Grid container spacing={0}>
-          <Grid size={{ lg: 4, md: 4, sm: 12, xs: 12 }}>
-            <Box
-              sx={{
-                overflow: "hidden",
-                borderRadius: 2,
-                height: { lg: 400, sm: 130, xs: 130 },
-                marginBottom: 2,
-                paddingInline: 2,
-              }}
-            >
-              <Imgbox url={PDB} cls={"mg-neg"} />
-            </Box>
+          <Grid container spacing={0}>
+            <Grid size={{ lg: 4, md: 4, sm: 12, xs: 12 }}>
+              <Box
+                sx={{
+                  overflow: "hidden",
+                  borderRadius: 2,
+                  height: { lg: 400, sm: 130, xs: 130 },
+                  marginBottom: 2,
+                  paddingInline: 2,
+                }}
+              >
+                <Imgbox url={PDB} cls={"mg-neg"} />
+              </Box>
+            </Grid>
+            <Grid size={{ lg: 8, md: 8, sm: 12, xs: 12 }}>
+              {/* Ticket Pannel */}
+              <Box>
+                {seats &&
+                  seats.map((item) => (
+                    <div key={item.areaID}>
+                      <TicketView
+                        id={item.areaID}
+                        state={item.count}
+                        club={item.area}
+                        quantity={item.count}
+                        price={item.price}
+                        status={item.status}
+                        details={item.details}
+                        ticketfn={() => handleSingleDispatch(item.areaID)}
+                        addTicket={() =>
+                          handleAddSubTicket("+", item.areaID, item.count)
+                        }
+                        subTicket={() =>
+                          handleAddSubTicket("-", item.areaID, item.count)
+                        }
+                      />
+                    </div>
+                  ))}
+              </Box>
+            </Grid>
           </Grid>
-          <Grid size={{ lg: 8, md: 8, sm: 12, xs: 12 }}>
-            {/* Ticket Pannel */}
-            <Box>
-              {seats &&
-                seats.map((item) => (
-                  <div key={item.areaID}>
-                    <TicketView
-                      id={item.areaID}
-                      state={item.count}
-                      club={item.area}
-                      quantity={item.count}
-                      price={item.price}
-                      status={item.status}
-                      details={item.details}
-                      ticketfn={() => handleSingleDispatch(item.areaID)}
-                      addTicket={() =>
-                        handleAddSubTicket("+", item.areaID, item.count)
-                      }
-                      subTicket={() =>
-                        handleAddSubTicket("-", item.areaID, item.count)
-                      }
-                    />
-                  </div>
-                ))}
-            </Box>
-          </Grid>
-        </Grid>
-      </Container>
+        </Container>
 
-      <Box sx={{ padding: 6 }}></Box>
+        <Box sx={{ padding: 6 }}></Box>
 
-      {/* Checkoutbar */}
-      {total.price > 0 && total.tickets > 0 ? (
-        <div className="posab">
-          <CheckoutBar totalprice={total.price} totaltickets={total.tickets} />
-        </div>
-      ) : (
-        ""
-      )}
-    </div>
-  );
+        {/* Checkoutbar */}
+        {total.price > 0 && total.tickets > 0 ? (
+          <div className="posab">
+            <CheckoutBar
+              totalprice={total.price}
+              totaltickets={total.tickets}
+            />
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+    );
+  } else if (status === "failed") {
+    <h1>Sommthing Went Wrong Please try again later...</h1>;
+  }
 };
 
 export default Booking;
+
+/**
+ * 
+ * import React from 'react';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
+const App = () => {
+  return (
+    <DotLottieReact
+      src="https://lottie.host/4138c9ec-3104-4a71-8768-3811e4ee3d9d/MlJiAGOXep.lottie"
+      loop
+      autoplay
+    />
+  );
+};
+
+
+
+const isEmailValid = (email) => {
+  let pattern = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}";
+  return !!email.match(pattern);
+};
+
+const isMobileValid = (mobile) => {
+  let pattern = "^[6-9]d{9}$";
+  return !!mobile.match(pattern);
+};
+
+
+ * 
+ * 
+ */

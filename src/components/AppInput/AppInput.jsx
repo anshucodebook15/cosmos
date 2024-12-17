@@ -9,7 +9,8 @@ const AppInput = ({
   label = "Full Name",
   placeholder = "Placeholder",
   val,
-  handleChange
+  handleChange,
+  maxlength = "",
 }) => {
   return (
     <div className="AppInput">

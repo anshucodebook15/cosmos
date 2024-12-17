@@ -137,6 +137,55 @@ const Termsandcondition = () => {
               fs="1.6rem"
             />
           </Box>
+
+          <p>
+            ---------------------------------------------------------------------------------------
+          </p>
+
+          <Box sx={{ padding: 2 }}></Box>
+
+          <h2>Privacy Policy</h2>
+          <Box sx={{ paddingBlock: 1 }}>
+            <p>&nbsp;</p>
+            <ul>
+              <li>
+                We collect personal information, such as your name, email, and
+                payment details, solely for booking and customer support
+                purposes.
+              </li>
+              <li>
+                Your data is securely stored and shared only with trusted
+                partners necessary for processing transactions and delivering
+                services.
+              </li>
+              <li>
+                We do not sell or disclose your information to third parties for
+                marketing without your explicit consent.
+              </li>
+              <li>
+                Cookies may be used to enhance your experience, and you can
+                manage these through your browser settings.
+              </li>
+              <li>
+                By using our website, you agree to our Privacy Policy; contact
+                us for any questions or concerns.
+              </li>
+            </ul>
+            <p>&nbsp;</p>
+          </Box>
+
+          <Box sx={{ padding: 2 }}></Box>
+
+          <h2>Refund Policy</h2>
+          <Box sx={{ paddingBlock: 1 }}>
+            <p>
+              All ticket sales are final, and no refunds will be issued once a
+              booking is confirmed. In case of event cancellation or
+              rescheduling, refunds or exchanges will be handled as per the
+              event organizer's policy. Please review all details carefully
+              before completing your purchase.
+            </p>
+          </Box>
         </Box>
       </Container>
     </div>

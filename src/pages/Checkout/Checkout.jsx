@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Checkout.scss";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid2";
@@ -22,13 +22,29 @@ import { NavLink } from "react-router";
 import { NavigateTo } from "../../routes/Routes";
 import Glassmorph from "../../components/Glassmorph/Glassmorph";
 import CheckoutBar from "../../components/CheckoutBar/CheckoutBar";
-import { addCheckoutDetails, SelectBooking } from "../Booking/BookingSlice";
+import {
+  addCheckoutDetails,
+  COSBaseURL,
+  fetchOrder,
+  SelectBooking,
+} from "../Booking/BookingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { usePriceHook } from "../../hooks/usePriceHook";
 import AppInput from "../../components/AppInput/AppInput";
 import ActionButton from "../../components/ActionButton/ActionButton";
+import { cashfree } from "../../cashfree/cashfree";
 
-const PaymentBar = ({ proceedtopayment }) => {
+const isEmailValid = (email) => {
+  let pattern = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}";
+  return !!email.match(pattern);
+};
+
+const isMobileValid = (mobile) => {
+  let pattern = "^[7-9][0-9]{9}$";
+  return !!mobile.match(pattern);
+};
+
+const PaymentBar = ({ proceedtopayment, disabled = false }) => {
   return (
     <>
       <div className="CheckoutBar">
@@ -43,8 +59,8 @@ const PaymentBar = ({ proceedtopayment }) => {
                 <Box>
                   <ActionButton
                     text={"Pay Now"}
-                    disabled={true}
-                    onclick={() => {}}
+                    disabled={disabled}
+                    onclick={proceedtopayment}
                   />
                 </Box>
               </Stack>
@@ -92,22 +108,90 @@ const CheckoutForm = ({ details, handleChange }) => {
 const Checkout = () => {
   const { formatPrice, calConvenience } = usePriceHook();
   const dispatch = useDispatch();
-  const { seats, error, total, name, email, mobile } =
+  const { seats, error, total, name, email, mobile, payment_session_id } =
     useSelector(SelectBooking);
   const allticketdata = useSelector(SelectBooking);
+  const [paynowbtn, setPaynowbtn] = useState(true);
+  const [formerror, setFormerror] = useState("");
 
-  // Update React Redux State to Provide details
+  useEffect(() => {
+    if (name !== "" && email !== "" && mobile !== "") {
+      setPaynowbtn(false);
+    }
+    setFormerror("");
+  }, [name, email, mobile]);
+
+  useEffect(() => {
+    if (payment_session_id) {
+      // handleCashfreePayment();
+    }
+    return () => {};
+  }, [payment_session_id]);
+
+  // Update react redux state to provide details
   const handleAddCheckoutDetails = (e) => {
     const { name, value } = e.target;
+    if (name === "mobile" && value.length === 11) {
+      return;
+    }
     dispatch(addCheckoutDetails({ name, value }));
   };
 
   const handleProceedToPayment = () => {
-    // Print all ticket data here
-    console.log("allticketdata", allticketdata);
+    if (!isEmailValid(email)) {
+      setFormerror("Please Enter your correct email");
+      return;
+    }
+    if (!isMobileValid(mobile)) {
+      setFormerror("Please enter correct Mobile Number");
+      return;
+    }
+
+    // Seat configuration
+    let seats_order = seats.map((item) => {
+      let neworder = {
+        areaID: item.areaID,
+        count: item.count,
+        price: item.price,
+      };
+      return neworder;
+    });
+
+    // Create Customer Order
+    let customer_order = {
+      name: name,
+      email: email,
+      mobile: mobile,
+      seats: seats_order,
+      total: {
+        total_tickets: total.tickets,
+        convenience_fee: total.convenience_fee,
+        total_amount: total.finalprice,
+      },
+    };
+
+    // console.log("prepare Order ID", customer_order);
+    // Dispatch order
+    dispatch(fetchOrder(customer_order));
   };
 
-  // console.log("checkoutDetails", name, email, mobile);
+  const handleCashfreePayment = () => {
+    let checkoutOptions = {
+      paymentSessionId: payment_session_id,
+      returnUrl: `${COSBaseURL}payments/status/{order_id}`,
+    };
+    cashfree.checkout(checkoutOptions).then(function (result) {
+      if (result.error) {
+        alert(result.error.message);
+      }
+      if (result.redirect) {
+        console.log("Redirection");
+        console.log(result);
+      }
+    });
+  };
+
+  console.log("checkpayment seesion ID", allticketdata);
 
   return (
     <div className="Details">
@@ -125,7 +209,6 @@ const Checkout = () => {
                     <Grid size={{ lg: 4, md: 4, sm: 12, xs: 12 }}>
                       <Box sx={{ paddingTop: 2 }}>
                         {/* Title and Date Box */}
-
                         <Box sx={{ marginBottom: 0 }}>
                           <Typo_Heading text="Dunes Of Cosmos " />
                         </Box>
@@ -135,7 +218,6 @@ const Checkout = () => {
                             fs={"2rem"}
                           />
                         </Box>
-
                         <Box sx={{ marginBottom: { lg: 4, sm: 6, xs: 6 } }}>
                           <Box>
                             <div className="IconTitle">
@@ -276,7 +358,17 @@ const Checkout = () => {
                         </Box>
                       </Box>
                     </Grid>
+
+                    {/* Payment Form */}
                     <Grid size={{ lg: 7, md: 7, sm: 12, xs: 12 }}>
+                      {formerror ? (
+                        <>
+                          <Box>{formerror}</Box>
+                        </>
+                      ) : (
+                        ""
+                      )}
+
                       {/* Checkout Form */}
                       <Box>
                         <Box marginBottom={4}>
@@ -309,9 +401,38 @@ const Checkout = () => {
                     </Grid>
                   </Grid>
                 </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
+      </Container>
 
-                {/* About Event  */}
-                {/* <Grid container>
+      {/* Bottom Spacer */}
+      <Box sx={{ padding: { lg: 0, md: 0, sm: 1, xs: 1 } }}></Box>
+
+      <div className="posab">
+        <PaymentBar
+          proceedtopayment={handleProceedToPayment}
+          disabled={paynowbtn}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Checkout;
+
+{
+  /* <div className="breadcrumb">
+          <Box sx={{paddingLeft: 2}}> 
+            <Typo_Subtitle text={"Live / Event in Ajmer / Paradox & Milind"} />
+          </Box>
+        </div>
+        
+                        {/* About Event  */
+}
+{
+  /* <Grid container>
                   <Grid size={12}>
                     <Box sx={{ paddingBlock: "1rem" }}>
                       <Box sx={{ marginBottom: "1.6rem" }}>
@@ -336,29 +457,16 @@ For the Music Lovers"
                     </Box>
                   </Grid>
                   <Grid size={6}></Grid>
-                </Grid> */}
-              </Box>
-            </Grid>
-          </Grid>
-        </Box>
-      </Container>
+                </Grid> 
 
-      <Box sx={{ padding: { lg: 0, md: 0, sm: 1, xs: 1 } }}></Box>
 
-      <div className="posab">
-        <PaymentBar proceedtopayment={handleProceedToPayment} />
-        {/* <CheckoutBar totalprice={""} totaltickets={""} /> */}
-      </div>
-    </div>
-  );
-};
-
-export default Checkout;
-
-{
-  /* <div className="breadcrumb">
-          <Box sx={{paddingLeft: 2}}> 
-            <Typo_Subtitle text={"Live / Event in Ajmer / Paradox & Milind"} />
-          </Box>
-        </div> */
+                  let checkoutOptions = {
+      paymentSessionId: payment_session_id,
+      returnUrl: "http://localhost:5000/api/status/{order_id}",
+    };
+        
+        
+        
+        
+        */
 }

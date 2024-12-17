@@ -2,17 +2,31 @@ import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
-export const BaseURL = "https://cosmos-be.vercel.app/";
+// export const BaseURL = "https://cosmos-be.vercel.app/";
+export const COSBaseURL = "https://cosmos-be.vercel.app/";
+// export const COSBaseURL = "http://localhost:3000/";
 
 const API = axios.create({
-  baseURL: BaseURL,
+  baseURL: COSBaseURL,
 });
+
+const api_endpoints = {
+  payment: {
+    create_order: "payments/genorder",
+  },
+};
+
+const api_actions = {
+  payment: {
+    fetch_create_order: "fetch/createorder",
+  },
+};
 
 const initialState = {
   name: "",
   mobile: "",
   email: "",
-  payment_transactionID: "",
+  payment_session_id: "",
   seats: [],
   total: {
     price: 0,
@@ -34,6 +48,19 @@ export const fetchSeats = createAsyncThunk("fetch/seats", async () => {
     return rejectWithValue("error occured");
   }
 });
+
+export const fetchOrder = createAsyncThunk(
+  api_actions.payment.fetch_create_order,
+  async (data) => {
+    try {
+      let response = await API.post(api_endpoints.payment.create_order, data);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue("error occured");
+    }
+  }
+);
 
 export const BookingSlice = createSlice({
   name: "booking",
@@ -103,19 +130,30 @@ export const BookingSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchSeats.pending, (state, action) => {
       state.status = "pending";
-      console.log(state);
     });
     builder.addCase(fetchSeats.fulfilled, (state, action) => {
       state.status = "success";
       state.seats = action.payload;
-      console.log("actiondata", action.payload);
     });
     builder.addCase(fetchSeats.rejected, (state, action) => {
       state.status = "failed";
       state.error = "Something Went Wrong";
-      console.log("error Rejected successfully");
+    });
 
-      // console.log(state);
+    // *************************************** Payment portal
+
+    builder.addCase(fetchOrder.pending, (state, action) => {
+      state.status = "pending";
+    });
+    builder.addCase(fetchOrder.fulfilled, (state, action) => {
+      state.status = "success";
+      state.payment_session_id = action.payload.message;
+
+      console.log("see Payload", action.payload);
+    });
+    builder.addCase(fetchOrder.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = "Something Went Wrong";
     });
   },
 });
