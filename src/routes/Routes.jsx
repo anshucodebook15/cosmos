@@ -10,9 +10,9 @@ import Checkout from "../pages/Checkout/Checkout";
 import Test from "../pages/Test/Test";
 import Contact from "../components/Contact/Contact";
 import Termsandcondition from "../components/Termsandcondition/Termsandcondition";
-import Success from "../pages/success/success";
 import Failure from "../pages/failure/failure";
 import NotFound from "../pages/NotFound/NotFound";
+import PaymentSuccess from "../pages/PaymentSuccess/PaymentSuccess";
 // import Commingsoon from "../pages/Commingsoon/Commingsoon";
 
 export const NavigateTo = {
@@ -32,7 +32,7 @@ export const AppRoute = () => {
             <Route path="booking" element={<Booking />} />
             <Route path="contact" element={<Contact />} />
             <Route path="terms-and-condition" element={<Termsandcondition />} />
-            <Route path="success" element={<Success />} />
+            <Route path="success" element={<PaymentSuccess />} />
             <Route path="failure" element={<Failure />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="test" element={<Test />} />
