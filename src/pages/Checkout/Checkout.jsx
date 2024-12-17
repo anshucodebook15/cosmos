@@ -125,7 +125,7 @@ const Checkout = () => {
     if (payment_session_id) {
       // handleCashfreePayment();
     }
-    return () => {};
+    return () => { };
   }, [payment_session_id]);
 
   // Update react redux state to provide details

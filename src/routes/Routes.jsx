@@ -10,7 +10,7 @@ import Checkout from "../pages/Checkout/Checkout";
 import Test from "../pages/Test/Test";
 import Contact from "../components/Contact/Contact";
 import Termsandcondition from "../components/Termsandcondition/Termsandcondition";
-import Failure from "../pages/failure/failure";
+import PaymentFailure from "../pages/PaymentFailure/PaymentFailure";
 import NotFound from "../pages/NotFound/NotFound";
 import PaymentSuccess from "../pages/PaymentSuccess/PaymentSuccess";
 // import Commingsoon from "../pages/Commingsoon/Commingsoon";
@@ -33,7 +33,7 @@ export const AppRoute = () => {
             <Route path="contact" element={<Contact />} />
             <Route path="terms-and-condition" element={<Termsandcondition />} />
             <Route path="success" element={<PaymentSuccess />} />
-            <Route path="failure" element={<Failure />} />
+            <Route path="failure" element={<PaymentFailure />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="test" element={<Test />} />
           </Route>
