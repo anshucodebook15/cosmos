@@ -24,6 +24,7 @@ import Glassmorph from "../../components/Glassmorph/Glassmorph";
 import CheckoutBar from "../../components/CheckoutBar/CheckoutBar";
 import {
   addCheckoutDetails,
+  clearAppState,
   COSBaseURL,
   fetchOrder,
   SelectBooking,
@@ -107,25 +108,48 @@ const CheckoutForm = ({ details, handleChange }) => {
 };
 
 const Checkout = () => {
-  const navigate = useNavigate();
+
+  // const navigate = useNavigate();
   const { formatPrice, calConvenience } = usePriceHook();
   const dispatch = useDispatch();
   const { seats, error, total, name, email, mobile, payment_session_id } =
     useSelector(SelectBooking);
-  const allticketdata = useSelector(SelectBooking);
+  // const allticketdata = useSelector(SelectBooking);
   const [paynowbtn, setPaynowbtn] = useState(true);
   const [formerror, setFormerror] = useState("");
 
+  // 
+  const [onRedirect, setOnRedirect] = useState(false);
+  const [reloadStop, setReloadStop] = useState(true);
+
+  // This redirect on reload if user not convinced
   useEffect(() => {
-    window.addEventListener("beforeunload", () => {
-      alert("Please try ");
-    });
-    return () => {
-      window.removeEventListener("beforeunload", () => {
-        alert("Please try ");
-      });
-    };
-  }, []);
+
+    if (reloadStop) {
+
+      const eventAfterOnload = (e) => {
+        e.preventDefault();
+        e.returnValue = "";
+      };
+
+      window.addEventListener("beforeunload", eventAfterOnload);
+
+      let timer;
+
+      if (total.price === 0) {
+        timer = setTimeout(() => {
+          window.location.href = "/booking";
+        }, 0);
+      }
+
+      return () => {
+        window.removeEventListener("beforeunload", eventAfterOnload);
+        clearTimeout(timer);
+      };
+
+    }
+
+  }, [total, reloadStop]);
 
   // For Input Error
   useEffect(() => {
@@ -138,10 +162,10 @@ const Checkout = () => {
   // get session id
   useEffect(() => {
     if (payment_session_id) {
-      // handleCashfreePayment();
+      handleCashfreePayment();
       return;
     }
-    return () => {};
+    return () => { };
   }, [payment_session_id]);
 
   // Update react redux state to provide details
@@ -154,6 +178,7 @@ const Checkout = () => {
   };
 
   const handleProceedToPayment = () => {
+
     if (!isEmailValid(email)) {
       setFormerror("Please Enter your correct email");
       return;
@@ -186,9 +211,10 @@ const Checkout = () => {
       },
     };
 
-    // console.log("prepare Order ID", customer_order);
-    // Dispatch order
     dispatch(fetchOrder(customer_order));
+    setPaynowbtn(true);
+    setReloadStop(false);
+
   };
 
   const handleCashfreePayment = async () => {
@@ -211,8 +237,6 @@ const Checkout = () => {
       }
     });
   };
-
-  // console.log("checkpayment seesion ID", allticketdata);
 
   return (
     <div className="Details">

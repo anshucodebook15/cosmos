@@ -42,7 +42,6 @@ const initialState = {
 export const fetchSeats = createAsyncThunk("fetch/seats", async () => {
   try {
     let response = await API.get("seats");
-    console.log("response data", response.data);
     return response.data;
   } catch (error) {
     return rejectWithValue("error occured");
@@ -54,7 +53,6 @@ export const fetchOrder = createAsyncThunk(
   async (data) => {
     try {
       let response = await API.post(api_endpoints.payment.create_order, data);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue("error occured");

@@ -417,11 +417,9 @@ const Booking = () => {
     };
   }, [onReloadChange]);
 
-
   useEffect(() => {
     dispatch(fetchSeats());
   }, []);
-
 
   const handleSingleDispatch = useCallback(
     (item) => {
@@ -470,10 +468,6 @@ const Booking = () => {
     ),
     [seats]
   );
-
-
-  console.log("appstate", appstate);
-  
 
   // Add Loader
   if (status === "pending") {
