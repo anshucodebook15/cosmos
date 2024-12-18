@@ -18,7 +18,7 @@ import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
 import { appcol, ts } from "../../theme/apptheme";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { NavigateTo } from "../../routes/Routes";
 import Glassmorph from "../../components/Glassmorph/Glassmorph";
 import CheckoutBar from "../../components/CheckoutBar/CheckoutBar";
@@ -107,6 +107,7 @@ const CheckoutForm = ({ details, handleChange }) => {
 };
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const { formatPrice, calConvenience } = usePriceHook();
   const dispatch = useDispatch();
   const { seats, error, total, name, email, mobile, payment_session_id } =
@@ -116,18 +117,31 @@ const Checkout = () => {
   const [formerror, setFormerror] = useState("");
 
   useEffect(() => {
+    window.addEventListener("beforeunload", () => {
+      alert("Please try ");
+    });
+    return () => {
+      window.removeEventListener("beforeunload", () => {
+        alert("Please try ");
+      });
+    };
+  }, []);
+
+  // For Input Error
+  useEffect(() => {
     if (name !== "" && email !== "" && mobile !== "") {
       setPaynowbtn(false);
     }
     setFormerror("");
   }, [name, email, mobile]);
 
+  // get session id
   useEffect(() => {
     if (payment_session_id) {
       // handleCashfreePayment();
-
+      return;
     }
-    return () => { };
+    return () => {};
   }, [payment_session_id]);
 
   // Update react redux state to provide details
@@ -198,7 +212,7 @@ const Checkout = () => {
     });
   };
 
-  console.log("checkpayment seesion ID", allticketdata);
+  // console.log("checkpayment seesion ID", allticketdata);
 
   return (
     <div className="Details">

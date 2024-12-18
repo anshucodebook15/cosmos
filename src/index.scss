@@ -1,9 +1,9 @@
 @import url("./theme/utils.scss");
 // @import url("./theme/colors.scss");
 @import url("./theme/typography.scss");
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Jost:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Jost:ital,wght@0,100..900;1,100..900&family=League+Spartan:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Anton&family=Jost:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Anton&family=Jost:ital,wght@0,100..900;1,100..900&family=League+Spartan:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 
 /**
 
@@ -16,6 +16,18 @@
 }
 
 */
+
+@font-face {
+  font-family: "Anton";
+  src: local("Anton"), url("./theme/fonts/Anton-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Jost";
+  src: local("Jost-Regular"),
+    url("./theme/fonts/Jost-Regular.ttf") format("truetype"),
+    url("./theme/fonts/Jost-Medium.ttf") format("truetype");
+}
 
 :root {
   // font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -87,7 +99,7 @@ a:hover {
 body {
   background-color: #050505;
   font-size: 1.6rem;
-  font-family: "Jost", sans-serif !important;
+  font-family: "Jost", sans-serif;
   margin: 0;
   padding: 0;
 }

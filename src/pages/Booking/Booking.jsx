@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import "./Booking.scss";
 import {
   Box,
@@ -13,6 +13,7 @@ import {
   addorSubTicket,
   addSingleTicket,
   checkoutTotalandTickects,
+  clearAppState,
   fetchSeats,
   SelectBooking,
 } from "./BookingSlice";
@@ -396,13 +397,35 @@ const TicketView = ({
 const Booking = () => {
   const dispatch = useDispatch();
   const { seats, error, total, status } = useSelector(SelectBooking);
+  const appstate = useSelector(SelectBooking);
+  const [onReloadChange, setOnReloadChange] = useState(false)
+
+
+  useEffect(() => {
+    if (!onReloadChange) return
+    const eventAfterOnload = (e) => {
+      e.preventDefault();
+      e.returnValue = "";
+
+      // it will clear app state
+      dispatch(clearAppState());
+    };
+
+    window.addEventListener("beforeunload", eventAfterOnload);
+    return () => {
+      window.removeEventListener("beforeunload", eventAfterOnload);
+    };
+  }, [onReloadChange]);
+
 
   useEffect(() => {
     dispatch(fetchSeats());
   }, []);
 
+
   const handleSingleDispatch = useCallback(
     (item) => {
+      setOnReloadChange(true);
       dispatch(addSingleTicket(item));
       dispatch(checkoutTotalandTickects());
     },
@@ -416,6 +439,41 @@ const Booking = () => {
     },
     [seats, total]
   );
+
+  const TicketActionBox = useCallback(
+    () => (
+      <>
+        <Box>
+          {seats &&
+            seats.map((item) => (
+              <div key={item.areaID}>
+                <TicketView
+                  id={item.areaID}
+                  state={item.count}
+                  club={item.area}
+                  quantity={item.count}
+                  price={item.price}
+                  status={item.status}
+                  details={item.details}
+                  ticketfn={() => handleSingleDispatch(item.areaID)}
+                  addTicket={() =>
+                    handleAddSubTicket("+", item.areaID, item.count)
+                  }
+                  subTicket={() =>
+                    handleAddSubTicket("-", item.areaID, item.count)
+                  }
+                />
+              </div>
+            ))}
+        </Box>
+      </>
+    ),
+    [seats]
+  );
+
+
+  console.log("appstate", appstate);
+  
 
   // Add Loader
   if (status === "pending") {
@@ -449,29 +507,7 @@ const Booking = () => {
             </Grid>
             <Grid size={{ lg: 8, md: 8, sm: 12, xs: 12 }}>
               {/* Ticket Pannel */}
-              <Box>
-                {seats &&
-                  seats.map((item) => (
-                    <div key={item.areaID}>
-                      <TicketView
-                        id={item.areaID}
-                        state={item.count}
-                        club={item.area}
-                        quantity={item.count}
-                        price={item.price}
-                        status={item.status}
-                        details={item.details}
-                        ticketfn={() => handleSingleDispatch(item.areaID)}
-                        addTicket={() =>
-                          handleAddSubTicket("+", item.areaID, item.count)
-                        }
-                        subTicket={() =>
-                          handleAddSubTicket("-", item.areaID, item.count)
-                        }
-                      />
-                    </div>
-                  ))}
-              </Box>
+              <TicketActionBox />
             </Grid>
           </Grid>
         </Container>
@@ -526,6 +562,19 @@ const isMobileValid = (mobile) => {
 };
 
 
- * 
+ *   
+useEffect(() => {
+    window.addEventListener("beforeunload", alertUser);
+    return () => {
+      window.removeEventListener("beforeunload", alertUser);
+    };
+  }, []);
+
+  const alertUser = (e) => {
+    e.preventDefault();
+    console.log("happen on snd load");
+  };
+
+
  * 
  */

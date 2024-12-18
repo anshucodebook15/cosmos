@@ -2,8 +2,6 @@ export const usePriceHook = () => {
   const formatShowPrice = (price) => {
     let total = price;
     let formatNum = total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-    console.log(formatNum);
-
     return formatNum;
   };
 

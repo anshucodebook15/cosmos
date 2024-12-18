@@ -28,6 +28,11 @@ const Footer = () => {
             <Typo_Subtitle text="Terms and Conditions" fw="300" />
             </Link>
           </Box>
+          <Box sx={{ padding: 1.4 }}>
+            <Link to={"#"} className="tdn">
+            <Typo_Subtitle text="Owned By The Kahanikaars" fw="300" />
+            </Link>
+          </Box>
         </Stack>
       </Container>
     </div>

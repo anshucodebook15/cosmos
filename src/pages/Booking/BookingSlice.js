@@ -67,8 +67,6 @@ export const BookingSlice = createSlice({
   initialState,
   reducers: {
     addSingleTicket: (state, action) => {
-      console.log(current(state.seats));
-
       //  copy the object
       let updatedSeats = [
         ...state.seats.map((item) =>
@@ -79,8 +77,6 @@ export const BookingSlice = createSlice({
       ];
 
       state.seats = updatedSeats;
-
-      console.log("state update eq", action.payload);
     },
     addorSubTicket: (state, action) => {
       const { sign, area, count } = action.payload;
@@ -120,11 +116,10 @@ export const BookingSlice = createSlice({
       state.total.finalprice = state.total.price + state.total.convenience_fee;
     },
     addCheckoutDetails: (state, action) => {
-      // Add Name, Mobile, Email to send ticket
-
       state[action.payload.name] = action.payload.value;
-
-      // console.log("action details", action.payload);
+    },
+    clearAppState: (state, action) => {
+      return state = initialState
     },
   },
   extraReducers: (builder) => {
@@ -148,8 +143,6 @@ export const BookingSlice = createSlice({
     builder.addCase(fetchOrder.fulfilled, (state, action) => {
       state.status = "success";
       state.payment_session_id = action.payload.message;
-
-      console.log("see Payload", action.payload);
     });
     builder.addCase(fetchOrder.rejected, (state, action) => {
       state.status = "failed";
@@ -164,6 +157,7 @@ export const {
   addorSubTicket,
   checkoutTotalandTickects,
   addCheckoutDetails,
+  clearAppState
 } = BookingSlice.actions;
 export const SelectBooking = (store) => store.booking;
 export const BookingReducer = BookingSlice.reducer;

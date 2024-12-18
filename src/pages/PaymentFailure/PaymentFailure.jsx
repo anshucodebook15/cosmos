@@ -20,7 +20,9 @@ const AppSuccessLottie = () => {
   };
   return (
     <>
-      <Lottie options={defaultOptions} height={400} width={400} />
+      <Box sx={{ overflow: "hidden", height: "30rem" }}>
+        <Lottie options={defaultOptions} height={400} width={400} />
+      </Box>
     </>
   );
 };
@@ -28,12 +30,13 @@ const AppSuccessLottie = () => {
 const PaymentFailure = () => {
   return (
     <div>
+      <Box sx={{ padding: 4 }}></Box>
       <AppSuccessLottie />
       <Container>
         <Box textAlign={"center"}>
           <Box>
             <Typo_Heading
-              text="Something Went Wrong ! Please if any query contact us on"
+              text="Something Went Wrong ! if any query Feel free to contact us on"
               fs="4rem"
             />
           </Box>

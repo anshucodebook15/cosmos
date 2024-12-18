@@ -456,7 +456,7 @@ const PriceCard = ({
                 ></Box>
 
                 {/* Text */}
-                <Box sx={{marginTop: -1, textAlign:"center"}}>
+                <Box sx={{ marginTop: -1, textAlign: "center" }}>
                   <Box sx={{ position: "relative", zIndex: 1 }}>
                     <Typo_Subheading text={cardicon} />
                   </Box>
@@ -778,7 +778,7 @@ const Anshul = () => {
         }}
       >
         <Container maxWidth={"lg"}>
-          <Box sx={{ marginBottom: {lg:4,}, textAlign: "center" }}>
+          <Box sx={{ marginBottom: { lg: 4, }, textAlign: "center" }}>
             <Typo_Heading text="Get In the Groove..." />
           </Box>
 
@@ -860,8 +860,8 @@ const Anshul = () => {
 
       <Box
         sx={{
-          paddingBlock: {lg:2, sm:4, xs:4},
-          paddingInline: {sm:2, xs:2},
+          paddingBlock: { lg: 2, sm: 4, xs: 4 },
+          paddingInline: { sm: 2, xs: 2 },
         }}
       >
         <Poster />
