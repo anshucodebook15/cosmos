@@ -124,7 +124,8 @@ const Checkout = () => {
 
   useEffect(() => {
     if (payment_session_id) {
-      handleCashfreePayment();
+      // handleCashfreePayment();
+
     }
     return () => { };
   }, [payment_session_id]);
@@ -177,7 +178,6 @@ const Checkout = () => {
   };
 
   const handleCashfreePayment = async () => {
-
     const cashfree = await load({
       mode: "sandbox", //or production
     });
