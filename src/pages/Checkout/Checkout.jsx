@@ -32,7 +32,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { usePriceHook } from "../../hooks/usePriceHook";
 import AppInput from "../../components/AppInput/AppInput";
 import ActionButton from "../../components/ActionButton/ActionButton";
-import { cashfree } from "../../cashfree/cashfree";
+// import { cashfree } from "../../cashfree/cashfree";
+import { load } from "@cashfreepayments/cashfree-js";
 
 const isEmailValid = (email) => {
   let pattern = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}";
@@ -123,7 +124,7 @@ const Checkout = () => {
 
   useEffect(() => {
     if (payment_session_id) {
-      // handleCashfreePayment();
+      handleCashfreePayment();
     }
     return () => { };
   }, [payment_session_id]);
@@ -175,11 +176,17 @@ const Checkout = () => {
     dispatch(fetchOrder(customer_order));
   };
 
-  const handleCashfreePayment = () => {
+  const handleCashfreePayment = async () => {
+
+    const cashfree = await load({
+      mode: "sandbox", //or production
+    });
+
     let checkoutOptions = {
       paymentSessionId: payment_session_id,
       returnUrl: `${COSBaseURL}payments/status/{order_id}`,
     };
+
     cashfree.checkout(checkoutOptions).then(function (result) {
       if (result.error) {
         alert(result.error.message);
