@@ -3,8 +3,8 @@ import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // export const BaseURL = "https://cosmos-be.vercel.app/";
-// export const COSBaseURL = "https://cosmos-be.vercel.app/";
-export const COSBaseURL = "http://localhost:3000/";
+export const COSBaseURL = "https://cosmos-be.vercel.app/";
+// export const COSBaseURL = "http://localhost:3000/";
 
 const API = axios.create({
   baseURL: COSBaseURL,
@@ -117,7 +117,7 @@ export const BookingSlice = createSlice({
       state[action.payload.name] = action.payload.value;
     },
     clearAppState: (state, action) => {
-      return state = initialState
+      return (state = initialState);
     },
   },
   extraReducers: (builder) => {
@@ -155,7 +155,7 @@ export const {
   addorSubTicket,
   checkoutTotalandTickects,
   addCheckoutDetails,
-  clearAppState
+  clearAppState,
 } = BookingSlice.actions;
 export const SelectBooking = (store) => store.booking;
 export const BookingReducer = BookingSlice.reducer;

@@ -524,6 +524,8 @@ const Booking = () => {
   } else if (status === "failed") {
     <h1>Sommthing Went Wrong Please try again later...</h1>;
   }
+
+  
 };
 
 export default Booking;
