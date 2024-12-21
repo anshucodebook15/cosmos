@@ -12,7 +12,7 @@ const API = axios.create({
   // headers: {
   //   "Access-Control-Allow-Origin": "https://be.dunesofcosmos.com/",
   // },
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 const api_endpoints = {
