@@ -3,8 +3,9 @@ import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // export const BaseURL = "https://cosmos-be.vercel.app/";
-// export const COSBaseURL = "https://cosmos-be.vercel.app/";
-export const COSBaseURL = "http://localhost:3000/";
+// old export const COSBaseURL = "https://cosmos-be.vercel.app/";
+export const COSBaseURL = "https://be.dunesofcosmos.com/";
+// export const COSBaseURL = "http://localhost:3001/";
 
 const API = axios.create({
   baseURL: COSBaseURL,
