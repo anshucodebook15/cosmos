@@ -9,7 +9,10 @@ export const COSBaseURL = "https://be.dunesofcosmos.com/";
 
 const API = axios.create({
   baseURL: COSBaseURL,
-  withCredentials: true
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+  },
+  withCredentials: true,
 });
 
 const api_endpoints = {
