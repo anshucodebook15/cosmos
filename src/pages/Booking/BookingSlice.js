@@ -9,6 +9,7 @@ export const COSBaseURL = "https://be.dunesofcosmos.com/";
 
 const API = axios.create({
   baseURL: COSBaseURL,
+  withCredentials: true
 });
 
 const api_endpoints = {
