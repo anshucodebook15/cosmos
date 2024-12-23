@@ -107,6 +107,29 @@ const CheckoutForm = ({ details, handleChange }) => {
   );
 };
 
+const ReferBox = () => {
+
+
+
+  return (
+    <>
+    
+      <Box marginBottom={4}>
+        <AppInput
+          type="text"
+          name="name"
+          val={name}
+          handleChange={handleAddCheckoutDetails}
+          label="Full Name"
+          placeholder=""
+        />
+      </Box>
+
+    </>
+  )
+
+}
+
 const Checkout = () => {
 
   // const navigate = useNavigate();
@@ -237,6 +260,7 @@ const Checkout = () => {
       }
     });
   };
+
 
   return (
     <div className="Details">
