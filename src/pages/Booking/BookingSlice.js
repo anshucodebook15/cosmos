@@ -140,29 +140,33 @@ export const BookingSlice = createSlice({
       state.total.price = totalPrice;
       state.total.convenience_fee = totalPrice * 0.02;
 
-
-
       // Calculate
       if (parseInt(state.discount_of) === 0) {
         state.total.finalprice =
           state.total.price + state.total.convenience_fee;
       } else if (parseInt(state.discount_of) > 0) {
+        /**
+         * 
+        
         let discountCost =
           (state.total.price + state.total.convenience_fee) *
           (parseInt(state.discount_of) / 100);
-
-        console.log("discountCost", discountCost);
 
         state.total.discount_cost = discountCost;
 
         state.total.finalprice =
           state.total.price + state.total.convenience_fee - discountCost;
+
+           */
+
+        let discountCost =
+          state.total.price * (parseInt(state.discount_of) / 100);
+
+        state.total.discount_cost = discountCost;
+
+        state.total.finalprice =
+          state.total.price - discountCost + state.total.convenience_fee;
       }
-
-      // calculate
-
-
-
     },
 
     addCheckoutDetails: (state, action) => {

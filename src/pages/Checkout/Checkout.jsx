@@ -472,7 +472,7 @@ const Checkout = () => {
                                     justifyContent={"space-between"}
                                     sx={{ background: "#101010" }}
                                   >
-                                    <Typo_Subtitle text="Discount Added" />
+                                    <Typo_Subtitle text="Discount Availed" />
                                     <Typo_Subtitle
                                       text={`- ${formatPrice(
                                         total.discount_cost
