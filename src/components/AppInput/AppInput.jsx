@@ -10,6 +10,7 @@ const AppInput = ({
   placeholder = "Placeholder",
   val,
   handleChange,
+  disabled = false,
   maxlength = "",
 }) => {
   return (
@@ -20,6 +21,7 @@ const AppInput = ({
         </Box>
         <Box marginBottom={2}>
           <input
+            disabled={disabled}
             type={type}
             name={name}
             value={val}

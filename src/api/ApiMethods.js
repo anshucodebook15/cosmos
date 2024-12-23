@@ -1,10 +1,11 @@
 import axios from "axios";
+import { COSBaseURL } from "./API";
 
 // export const BaseURL = "https://cosmos-be.vercel.app/";
-export const BaseURL = "https://be.dunesofcosmos.com/";
+// export const BaseURL = "https://be.dunesofcosmos.com/";
 
 export const instance = axios.create({
-  baseURL: BaseURL,
+  baseURL: COSBaseURL,
 });
 
 export const clientGET = (url) => {

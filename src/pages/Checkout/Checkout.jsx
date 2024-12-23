@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Checkout.scss";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid2";
+// import Grid from "@mui/material/Grid2";
 import Button from "@mui/material/Button";
 import { purple } from "@mui/material/colors";
 import {
@@ -14,6 +14,7 @@ import {
 import { Box, Stack } from "@mui/material";
 import IconTitle from "../../components/IconTitle/IconTitle";
 import { calender, clock, map, ticket } from "../../assets";
+import Grid from "@mui/material/Grid2";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
 import { appcol, ts } from "../../theme/apptheme";
@@ -24,9 +25,11 @@ import Glassmorph from "../../components/Glassmorph/Glassmorph";
 import CheckoutBar from "../../components/CheckoutBar/CheckoutBar";
 import {
   addCheckoutDetails,
+  checkoutTotalandTickects,
+  checkReferCode,
   clearAppState,
-  COSBaseURL,
   fetchOrder,
+  fetchReferCode,
   SelectBooking,
 } from "../Booking/BookingSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,6 +38,7 @@ import AppInput from "../../components/AppInput/AppInput";
 import ActionButton from "../../components/ActionButton/ActionButton";
 // import { cashfree } from "../../cashfree/cashfree";
 import { load } from "@cashfreepayments/cashfree-js";
+import { COSBaseURL } from "../../api/API";
 
 const isEmailValid = (email) => {
   let pattern = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}";
@@ -108,48 +112,96 @@ const CheckoutForm = ({ details, handleChange }) => {
 };
 
 const ReferBox = () => {
+  const dispatch = useDispatch();
+  const { refer_code } = useSelector(SelectBooking);
 
+  const [referState, setReferState] = useState(true);
 
+  useEffect(() => {
+    if (referState.length > 2) {
+      setReferState(false);
+    }
+  }, [refer_code]);
+
+  const handleReferCodeCheck = (e) => {
+    let { name, value } = e.target.value;
+
+    console.log("name value", name, value);
+
+    dispatch(checkReferCode({ name, value }));
+  };
+
+  // console.log("this is refer code", refer_code);
 
   return (
     <>
-    
       <Box marginBottom={4}>
-        <AppInput
-          type="text"
-          name="name"
-          val={name}
-          handleChange={handleAddCheckoutDetails}
-          label="Full Name"
-          placeholder=""
-        />
+        <Grid container spacing={2} alignItems={"center"}>
+          <Grid size={8}>
+            <AppInput
+              type="text"
+              name="refer_code"
+              val={refer_code}
+              handleChange={handleReferCodeCheck}
+              label="Enter Refer Code"
+              placeholder=""
+            />
+          </Grid>
+          <Grid size={4} alignSelf={"right"}>
+            <button disabled={referState} onclick={handleReferCodeCheck}>
+              Apply Refer Code
+            </button>
+          </Grid>
+        </Grid>
       </Box>
-
     </>
-  )
-
-}
+  );
+};
 
 const Checkout = () => {
-
   // const navigate = useNavigate();
   const { formatPrice, calConvenience } = usePriceHook();
   const dispatch = useDispatch();
-  const { seats, error, total, name, email, mobile, payment_session_id } =
-    useSelector(SelectBooking);
-  // const allticketdata = useSelector(SelectBooking);
+  const {
+    seats,
+    error,
+    total,
+    name,
+    email,
+    mobile,
+    payment_session_id,
+    refer_code,
+    refer_code_error,
+    discount_of,
+    refer_code_status,
+  } = useSelector(SelectBooking);
+  const allticketdata = useSelector(SelectBooking);
   const [paynowbtn, setPaynowbtn] = useState(true);
   const [formerror, setFormerror] = useState("");
 
-  // 
+  //
   const [onRedirect, setOnRedirect] = useState(false);
   const [reloadStop, setReloadStop] = useState(true);
 
+  // Refer State
+  const [referState, setReferState] = useState(true);
+  const [referInputState, setReferInputState] = useState(false);
+
+  useEffect(() => {
+    if (refer_code.length > 2) {
+      setReferState(false);
+    }
+
+    if (refer_code_status === "ACTIVE") {
+      dispatch(checkoutTotalandTickects());
+      setReferState(true);
+      setReferInputState(true);
+    }
+  }, [refer_code, refer_code_status]);
+
   // This redirect on reload if user not convinced
   useEffect(() => {
-
     if (reloadStop) {
-
       const eventAfterOnload = (e) => {
         e.preventDefault();
         e.returnValue = "";
@@ -169,9 +221,7 @@ const Checkout = () => {
         window.removeEventListener("beforeunload", eventAfterOnload);
         clearTimeout(timer);
       };
-
     }
-
   }, [total, reloadStop]);
 
   // For Input Error
@@ -188,7 +238,7 @@ const Checkout = () => {
       handleCashfreePayment();
       return;
     }
-    return () => { };
+    return () => {};
   }, [payment_session_id]);
 
   // Update react redux state to provide details
@@ -201,7 +251,6 @@ const Checkout = () => {
   };
 
   const handleProceedToPayment = () => {
-
     if (!isEmailValid(email)) {
       setFormerror("Please Enter your correct email");
       return;
@@ -226,18 +275,18 @@ const Checkout = () => {
       name: name,
       email: email,
       mobile: mobile,
+      refer_code: refer_code,
       seats: seats_order,
       total: {
         total_tickets: total.tickets,
         convenience_fee: total.convenience_fee,
-        total_amount: total.finalprice,
+        total_amount: total.finalprice.toFixed(2),
       },
     };
 
     dispatch(fetchOrder(customer_order));
     setPaynowbtn(true);
     setReloadStop(false);
-
   };
 
   const handleCashfreePayment = async () => {
@@ -261,6 +310,15 @@ const Checkout = () => {
     });
   };
 
+  const handleReferCodeCheck = () => {
+    dispatch(
+      fetchReferCode({
+        refer_code: refer_code,
+      })
+    );
+  };
+
+  console.log("allticketdata", allticketdata);
 
   return (
     <div className="Details">
@@ -394,9 +452,11 @@ const Checkout = () => {
                                   />
                                   {/* <Typo_Subtitle text="₹117.94" /> */}
                                 </Stack>
+
                                 <Stack
                                   direction={"row"}
                                   justifyContent={"space-between"}
+                                  sx={{ marginBottom: 1 }}
                                 >
                                   <Typo_Subtitle text="Convenience fee (2%)" />
                                   <Typo_Subtitle
@@ -405,6 +465,23 @@ const Checkout = () => {
                                     )}`}
                                   />
                                 </Stack>
+
+                                {total.discount_cost > 0 ? (
+                                  <Stack
+                                    direction={"row"}
+                                    justifyContent={"space-between"}
+                                    sx={{ background: "#101010" }}
+                                  >
+                                    <Typo_Subtitle text="Discount Added" />
+                                    <Typo_Subtitle
+                                      text={`- ${formatPrice(
+                                        total.discount_cost
+                                      )}`}
+                                    />
+                                  </Stack>
+                                ) : (
+                                  ""
+                                )}
                               </Box>
                             </Box>
 
@@ -430,6 +507,73 @@ const Checkout = () => {
 
                     {/* Payment Form */}
                     <Grid size={{ lg: 7, md: 7, sm: 12, xs: 12 }}>
+                      {/* Refer Box */}
+                      <Box
+                        sx={{
+                          borderBottom: 1,
+                          marginBottom: 2,
+                          borderColor: "#4f4f4f",
+                        }}
+                      >
+                        {refer_code_error ? (
+                          <>
+                            <Box
+                              sx={{
+                                padding: 0.5,
+                                background: "red",
+                                color: "ffffff",
+                                marginBottom: 1,
+                              }}
+                            >
+                              <p>{refer_code_error}</p>
+                            </Box>
+                          </>
+                        ) : (
+                          ""
+                        )}
+
+                        {refer_code_status === "ACTIVE" ? (
+                          <>
+                            <Box
+                              sx={{
+                                padding: 0.5,
+                                background: "green",
+                                color: "ffffff",
+                                marginBottom: 1,
+                              }}
+                            >
+                              <p>Congratulations ⭐🎆 Refer Code Applied!</p>
+                            </Box>
+                          </>
+                        ) : (
+                          ""
+                        )}
+
+                        <Box marginBottom={4}>
+                          <Grid container spacing={2} alignItems={"center"}>
+                            <Grid size={8}>
+                              <AppInput
+                                disabled={referInputState}
+                                type="text"
+                                name="refer_code"
+                                val={refer_code}
+                                handleChange={handleAddCheckoutDetails}
+                                label="Enter Refer Code"
+                                placeholder=""
+                              />
+                            </Grid>
+                            <Grid size={4} alignSelf={"right"}>
+                              <button
+                                disabled={referState}
+                                onClick={handleReferCodeCheck}
+                              >
+                                Apply Refer Code
+                              </button>
+                            </Grid>
+                          </Grid>
+                        </Box>
+                      </Box>
+
                       {formerror ? (
                         <>
                           <Box>{formerror}</Box>
