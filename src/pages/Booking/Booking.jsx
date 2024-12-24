@@ -443,7 +443,7 @@ const Booking = () => {
       <>
         <Box>
           {seats &&
-            seats.map((item) => (
+            seats.filter((item) => item.valid_on_30 === "VALID" && item.valid_on_31 === "VALID").map((item) => (
               <div key={item.areaID}>
                 <TicketView
                   id={item.areaID}

@@ -238,7 +238,7 @@ const Checkout = () => {
       handleCashfreePayment();
       return;
     }
-    return () => {};
+    return () => { };
   }, [payment_session_id]);
 
   // Update react redux state to provide details
@@ -453,7 +453,7 @@ const Checkout = () => {
                                   {/* <Typo_Subtitle text="₹117.94" /> */}
                                 </Stack>
 
-                                <Stack
+                                {/* <Stack
                                   direction={"row"}
                                   justifyContent={"space-between"}
                                   sx={{ marginBottom: 1 }}
@@ -464,7 +464,7 @@ const Checkout = () => {
                                       total.convenience_fee
                                     )}`}
                                   />
-                                </Stack>
+                                </Stack> */}
 
                                 {total.discount_cost > 0 ? (
                                   <Stack
@@ -482,6 +482,7 @@ const Checkout = () => {
                                 ) : (
                                   ""
                                 )}
+
                               </Box>
                             </Box>
 
@@ -500,6 +501,7 @@ const Checkout = () => {
                                 />
                               </Stack>
                             </Box>
+
                           </div>
                         </Box>
                       </Box>

@@ -138,7 +138,7 @@ export const BookingSlice = createSlice({
       // Calculate total price and total ticket
       state.total.tickets = totalTicket;
       state.total.price = totalPrice;
-      state.total.convenience_fee = totalPrice * 0.02;
+      // state.total.convenience_fee = totalPrice * 0.02;
 
       // Calculate
       if (parseInt(state.discount_of) === 0) {
