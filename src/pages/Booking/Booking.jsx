@@ -398,11 +398,10 @@ const Booking = () => {
   const dispatch = useDispatch();
   const { seats, error, total, status } = useSelector(SelectBooking);
   const appstate = useSelector(SelectBooking);
-  const [onReloadChange, setOnReloadChange] = useState(false)
-
+  const [onReloadChange, setOnReloadChange] = useState(false);
 
   useEffect(() => {
-    if (!onReloadChange) return
+    if (!onReloadChange) return;
     const eventAfterOnload = (e) => {
       e.preventDefault();
       e.returnValue = "";
@@ -443,26 +442,31 @@ const Booking = () => {
       <>
         <Box>
           {seats &&
-            seats.filter((item) => item.valid_on_30 === "VALID" && item.valid_on_31 === "VALID").map((item) => (
-              <div key={item.areaID}>
-                <TicketView
-                  id={item.areaID}
-                  state={item.count}
-                  club={item.area}
-                  quantity={item.count}
-                  price={item.price}
-                  status={item.status}
-                  details={item.details}
-                  ticketfn={() => handleSingleDispatch(item.areaID)}
-                  addTicket={() =>
-                    handleAddSubTicket("+", item.areaID, item.count)
-                  }
-                  subTicket={() =>
-                    handleAddSubTicket("-", item.areaID, item.count)
-                  }
-                />
-              </div>
-            ))}
+            seats
+              .filter(
+                (item) =>
+                  item.valid_on_30 === "VALID" && item.valid_on_31 === "VALID"
+              )
+              .map((item) => (
+                <div key={item.areaID}>
+                  <TicketView
+                    id={item.areaID}
+                    state={item.count}
+                    club={item.area}
+                    quantity={item.count}
+                    price={item.price}
+                    status={item.status}
+                    details={item.details}
+                    ticketfn={() => handleSingleDispatch(item.areaID)}
+                    addTicket={() =>
+                      handleAddSubTicket("+", item.areaID, item.count)
+                    }
+                    subTicket={() =>
+                      handleAddSubTicket("-", item.areaID, item.count)
+                    }
+                  />
+                </div>
+              ))}
         </Box>
       </>
     ),
@@ -524,8 +528,6 @@ const Booking = () => {
   } else if (status === "failed") {
     <h1>Sommthing Went Wrong Please try again later...</h1>;
   }
-
-  
 };
 
 export default Booking;

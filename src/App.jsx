@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <div>
-        <Box
+        {/* <Box
           sx={{
             padding: 2,
             background: "#ca1e6b",
@@ -24,7 +24,7 @@ function App() {
           <h5>
             Site is in maintainance mode ... ticket booking will be start soon{" "}
           </h5>
-        </Box>
+        </Box> */}
         <Landing />
       </div>
     </>
