@@ -158,7 +158,7 @@ const ReferBox = () => {
   );
 };
 
-const Checkout = () => {
+const OfferCheckout = () => {
   // const navigate = useNavigate();
   const { formatPrice, calConvenience } = usePriceHook();
   const dispatch = useDispatch();
@@ -213,7 +213,7 @@ const Checkout = () => {
 
       if (total.price === 0) {
         timer = setTimeout(() => {
-          window.location.href = "/booking";
+          window.location.href = "/offers";
         }, 0);
       }
 
@@ -238,7 +238,7 @@ const Checkout = () => {
       handleCashfreePayment();
       return;
     }
-    return () => { };
+    return () => {};
   }, [payment_session_id]);
 
   // Update react redux state to provide details
@@ -273,19 +273,36 @@ const Checkout = () => {
       return neworder;
     });
 
-    // Create Customer Order
-    let customer_order = {
-      name: name,
-      email: email,
-      mobile: mobile,
-      refer_code: refer_code,
-      seats: seats_order,
-      total: {
-        total_tickets: total.tickets,
-        convenience_fee: total.convenience_fee,
-        total_amount: total.finalprice.toFixed(2),
-      },
-    };
+    let customer_order;
+
+    if (refer_code) {
+      // Create Customer Order
+      customer_order = {
+        name: name,
+        email: email,
+        mobile: mobile,
+        refer_code: refer_code,
+        seats: seats_order,
+        total: {
+          total_tickets: total.tickets,
+          convenience_fee: total.convenience_fee,
+          total_amount: total.finalprice.toFixed(2),
+        },
+      };
+    } else {
+      customer_order = {
+        name: name,
+        email: email,
+        mobile: mobile,
+        refer_code: "NO-REFRAL",
+        seats: seats_order,
+        total: {
+          total_tickets: total.tickets,
+          convenience_fee: total.convenience_fee,
+          total_amount: total.finalprice.toFixed(2),
+        },
+      };
+    }
 
     dispatch(fetchOrder(customer_order));
     setPaynowbtn(true);
@@ -485,7 +502,6 @@ const Checkout = () => {
                                 ) : (
                                   ""
                                 )}
-
                               </Box>
                             </Box>
 
@@ -504,7 +520,6 @@ const Checkout = () => {
                                 />
                               </Stack>
                             </Box>
-
                           </div>
                         </Box>
                       </Box>
@@ -512,7 +527,7 @@ const Checkout = () => {
 
                     {/* Payment Form */}
                     <Grid size={{ lg: 7, md: 7, sm: 12, xs: 12 }}>
-                      {/* Refer Box */}
+                      {/* Refer Box 
                       <Box
                         sx={{
                           borderBottom: 1,
@@ -578,6 +593,7 @@ const Checkout = () => {
                           </Grid>
                         </Box>
                       </Box>
+                      */}
 
                       {formerror ? (
                         <>
@@ -638,53 +654,53 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default OfferCheckout;
 
 {
   /* <div className="breadcrumb">
-          <Box sx={{paddingLeft: 2}}> 
-            <Typo_Subtitle text={"Live / Event in Ajmer / Paradox & Milind"} />
-          </Box>
-        </div>
-        
-                        {/* About Event  */
+            <Box sx={{paddingLeft: 2}}> 
+              <Typo_Subtitle text={"Live / Event in Ajmer / Paradox & Milind"} />
+            </Box>
+          </div>
+          
+                          {/* About Event  */
 }
 {
   /* <Grid container>
-                  <Grid size={12}>
-                    <Box sx={{ paddingBlock: "1rem" }}>
-                      <Box sx={{ marginBottom: "1.6rem" }}>
-                        <Typo_Subheading text="About" />
+                    <Grid size={12}>
+                      <Box sx={{ paddingBlock: "1rem" }}>
+                        <Box sx={{ marginBottom: "1.6rem" }}>
+                          <Typo_Subheading text="About" />
+                        </Box>
+  
+                        <Box
+                          sx={{
+                            borderRadius: 2,
+                            background: "#141414",
+                            padding: "1.4rem",
+                            marginBottom: "2rem",
+                          }}
+                        >
+                          <Typo_Basefont
+                            text="Gather your loved ones and step into Brunch Park – a celebration of food, fun, and family, brought to you by The Daily All Day x Maushi
+  For the Foodies: Dive into a mouthwatering spread featuring culinary delights from Tsuki, Bai Mu Dan, Mad House Grill, and Juju to name a few.
+  For the Music Lovers"
+                            fw="500"
+                          />
+                        </Box>
                       </Box>
-
-                      <Box
-                        sx={{
-                          borderRadius: 2,
-                          background: "#141414",
-                          padding: "1.4rem",
-                          marginBottom: "2rem",
-                        }}
-                      >
-                        <Typo_Basefont
-                          text="Gather your loved ones and step into Brunch Park – a celebration of food, fun, and family, brought to you by The Daily All Day x Maushi
-For the Foodies: Dive into a mouthwatering spread featuring culinary delights from Tsuki, Bai Mu Dan, Mad House Grill, and Juju to name a few.
-For the Music Lovers"
-                          fw="500"
-                        />
-                      </Box>
-                    </Box>
-                  </Grid>
-                  <Grid size={6}></Grid>
-                </Grid> 
-
-
-                  let checkoutOptions = {
-      paymentSessionId: payment_session_id,
-      returnUrl: "http://localhost:5000/api/status/{order_id}",
-    };
-        
-        
-        
-        
-        */
+                    </Grid>
+                    <Grid size={6}></Grid>
+                  </Grid> 
+  
+  
+                    let checkoutOptions = {
+        paymentSessionId: payment_session_id,
+        returnUrl: "http://localhost:5000/api/status/{order_id}",
+      };
+          
+          
+          
+          
+          */
 }

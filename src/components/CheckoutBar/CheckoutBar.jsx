@@ -15,7 +15,7 @@ import { ts } from "../../theme/apptheme";
 //   g300: "#121212",
 //   p400: "#E32B7E",
 // };
-const CheckoutBar = ({ totalprice = 0, totaltickets = 0 }) => {
+const CheckoutBar = ({ totalprice = 0, totaltickets = 0, navigateTo }) => {
   const navigate = useNavigate();
 
   const { formatPrice, formatShowPrice } = usePriceHook();
@@ -45,7 +45,8 @@ const CheckoutBar = ({ totalprice = 0, totaltickets = 0 }) => {
                 <ActionButton
                   text={"Pay To Proceed"}
                   disabled={false}
-                  onclick={() => navigate("/checkout")}
+                  // onclick={() => navigate("/checkout")}
+                  onclick={() => navigate(navigateTo)}
                 />
 
                 {/* <Button

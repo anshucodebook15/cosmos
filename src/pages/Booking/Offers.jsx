@@ -394,7 +394,7 @@ const TicketView = ({
   );
 };
 
-const Booking = () => {
+const Offers = () => {
   const dispatch = useDispatch();
   const { seats, error, total, status } = useSelector(SelectBooking);
   const appstate = useSelector(SelectBooking);
@@ -417,6 +417,10 @@ const Booking = () => {
   }, [onReloadChange]);
 
   useEffect(() => {
+    // On load it will clear the app state
+    dispatch(clearAppState());
+
+    // On Load it will fetch all seats
     dispatch(fetchSeats());
   }, []);
 
@@ -445,7 +449,7 @@ const Booking = () => {
             seats
               .filter(
                 (item) =>
-                  item.valid_on_30 === "VALID" && item.valid_on_31 === "VALID"
+                  item.valid_on_30 === "INVALID" && item.valid_on_31 === "VALID"
               )
               .map((item) => (
                 <div key={item.areaID}>
@@ -472,9 +476,6 @@ const Booking = () => {
     ),
     [seats]
   );
-
-  console.log("appstate", appstate);
-  
 
   // Add Loader
   if (status === "pending") {
@@ -521,7 +522,7 @@ const Booking = () => {
             <CheckoutBar
               totalprice={total.price}
               totaltickets={total.tickets}
-              navigateTo={"/checkout"}
+              navigateTo={"/offer-checkout"}
             />
           </div>
         ) : (
@@ -534,7 +535,7 @@ const Booking = () => {
   }
 };
 
-export default Booking;
+export default Offers;
 
 /**
  * 

@@ -14,6 +14,8 @@ import PaymentFailure from "../pages/PaymentFailure/PaymentFailure";
 import NotFound from "../pages/NotFound/NotFound";
 import PaymentSuccess from "../pages/PaymentSuccess/PaymentSuccess";
 import GoldCheckout from "../pages/Checkout/Gold/GoldTicket";
+import Offers from "../pages/Booking/Offers";
+import OfferCheckout from "../pages/Checkout/OfferCheckout";
 // import Commingsoon from "../pages/Commingsoon/Commingsoon";
 
 export const NavigateTo = {
@@ -31,14 +33,15 @@ export const AppRoute = () => {
           <Route element={<Layout />}>
             {/* <Route path="detail" element={<Details />} /> */}
             <Route path="booking" element={<Booking />} />
+            <Route path="offers" element={<Offers />} />
+            <Route path="checkout" element={<Checkout />} />
+            <Route path="offer-checkout" element={<OfferCheckout />} />
+
+            {/* <Route path="gold-ticket" element={<GoldCheckout />} /> */}
             <Route path="contact" element={<Contact />} />
             <Route path="terms-and-condition" element={<Termsandcondition />} />
             <Route path="success" element={<PaymentSuccess />} />
             <Route path="failure" element={<PaymentFailure />} />
-            <Route path="checkout" element={<Checkout />} />
-            <Route path="gold-ticket" element={<GoldCheckout />} />
-
-
             <Route path="test" element={<Test />} />
           </Route>
           <Route path="*" element={<NotFound />} />

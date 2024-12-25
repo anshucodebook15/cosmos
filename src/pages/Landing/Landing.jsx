@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Landing.scss";
 import { SelectLanding } from "./LandingSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Container from "@mui/material/Container";
 import Navbar from "../../components/Navbar/Navbar";
 import Grid from "@mui/material/Grid2";
@@ -62,6 +62,7 @@ import Glassmorph from "../../components/Glassmorph/Glassmorph";
 import Footer from "../../components/Footer/Footer";
 import { InquiryModal } from "../../components/InquiryModal/InquiryModal";
 import Sponserbar from "../../components/Sponserbar/Sponserbar";
+import { clearAppState } from "../Booking/BookingSlice";
 
 const plans = [
   {
@@ -778,7 +779,7 @@ const Anshul = () => {
         }}
       >
         <Container maxWidth={"lg"}>
-          <Box sx={{ marginBottom: { lg: 4, }, textAlign: "center" }}>
+          <Box sx={{ marginBottom: { lg: 4 }, textAlign: "center" }}>
             <Typo_Heading text="Get In the Groove..." />
           </Box>
 
@@ -874,6 +875,12 @@ const Anshul = () => {
 };
 
 const Landing = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearAppState());
+  }, []);
+
   return (
     <>
       {/* <AasthaCode /> */}
