@@ -311,7 +311,7 @@ const OfferCheckout = () => {
 
   const handleCashfreePayment = async () => {
     const cashfree = await load({
-      mode: "sandbox", //or production
+      mode: "production", //or production
     });
 
     let checkoutOptions = {
