@@ -56,6 +56,8 @@ import {
   tfn,
   ticketdetails,
   ultimate,
+  nf,
+  rt
 } from "../../assets";
 import Imgbox from "../../components/Imgbox/Imgbox";
 import Glassmorph from "../../components/Glassmorph/Glassmorph";

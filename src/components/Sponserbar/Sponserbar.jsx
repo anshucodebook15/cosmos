@@ -21,6 +21,8 @@ import {
   FI_MP,
   khanikaar,
   mh,
+  nf,
+  rt,
   tfn,
   Tuborg,
 } from "../../assets";
@@ -112,6 +114,32 @@ const Sponserbar = () => {
                   }}
                 >
                   <Imgbox url={aeymann} />
+                </Box>
+                <Box
+                  sx={{
+                    width: {
+                      lg: 80,
+                      md: 80,
+                      sm: 80,
+                      xs: 80,
+                      marginInline: 2,
+                    },
+                  }}
+                >
+                  <Imgbox url={rt} />
+                </Box>
+                <Box
+                  sx={{
+                    width: {
+                      lg: 80,
+                      md: 80,
+                      sm: 80,
+                      xs: 80,
+                      marginInline: 2,
+                    },
+                  }}
+                >
+                  <Imgbox url={nf} />
                 </Box>
               </Stack>
             </Box>

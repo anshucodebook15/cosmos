@@ -3,6 +3,8 @@ import calender from "./calender.svg";
 import map from "./map.svg";
 import ticket from "./ticket.svg";
 import logo from "./DOC_svg.svg";
+import rt from "./NAP.jpg";
+import nf from "./rt.jpg";
 
 // Landing
 import concertbg from "./landingconcert.jpg";
@@ -72,4 +74,6 @@ export {
   stagenew,
   savethedate,
   PDB,
+  nf,
+  rt,
 };
