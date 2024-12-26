@@ -278,7 +278,7 @@ const Checkout = () => {
       name: name,
       email: email,
       mobile: mobile,
-      refer_code: refer_code,
+      refer_code: refer_code || "NO-REFRAL",
       seats: seats_order,
       total: {
         total_tickets: total.tickets,
