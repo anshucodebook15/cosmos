@@ -886,10 +886,8 @@ const Landing = () => {
   return (
     <>
       {/* <AasthaCode /> */}
-      {/* <Anshul /> */}
-
-      <h1>WAIT we are comming</h1>
-      {/* <Footer /> */}
+      <Anshul />
+      <Footer />
     </>
   );
 };
