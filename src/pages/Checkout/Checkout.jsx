@@ -38,7 +38,7 @@ import AppInput from "../../components/AppInput/AppInput";
 import ActionButton from "../../components/ActionButton/ActionButton";
 // import { cashfree } from "../../cashfree/cashfree";
 import { load } from "@cashfreepayments/cashfree-js";
-import { COSBaseURL } from "../../api/API";
+import { CASHFREE_LOAD, COSBaseURL } from "../../api/API";
 
 const isEmailValid = (email) => {
   let pattern = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}";
@@ -294,7 +294,7 @@ const Checkout = () => {
 
   const handleCashfreePayment = async () => {
     const cashfree = await load({
-      mode: "sandbox", //or production
+      mode: CASHFREE_LOAD, //or production
     });
 
     let checkoutOptions = {
